@@ -152,30 +152,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       ElevatedButton.icon(
                         onPressed: () {
                           Navigator.pop(context); // Close dialog
-                          // Handle Watch Ads logic here
-                          // RewardedAdHelper.showRewardedAd(
-                          //   context: context,
-                          //   onRewardEarned: () {
-                          //     setState(() {
-                          //       _isPremium = false; // Unlock wallpaper
-                          //       _isUnlocked = true;
-                          //     });
-                          //     ScaffoldMessenger.of(context).showSnackBar(
-                          //       SnackBar(
-                          //         content: Text("Wallpaper unlocked! Swipe up to apply."),
-                          //         duration: Duration(seconds: 3),
-                          //       ),
-                          //     );
-                          //   },
-                          //   onAdFailed: () {
-                          //     ScaffoldMessenger.of(context).showSnackBar(
-                          //       SnackBar(
-                          //         content: Text("Ad failed to load. Try again!"),
-                          //       ),
-                          //     );
-                          //   },
-                          // );
-
                           RewardedAdHelper.showRewardedAd(
                             context: context,
                             onRewardEarned: () {
@@ -190,6 +166,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                               );
                             },
                             onAdFailed: () {
+                              setState(() {});
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Ad failed to load. Try again!")),
                               );
