@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/core/app_export.dart';
 import 'package:wallpaper_2/screens/categories/bloc/categories_bloc.dart';
 import 'package:wallpaper_2/screens/categories/bloc/categories_event.dart';
@@ -27,9 +29,14 @@ var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await AdMobHelper.initialization();
+  await _resetUnlockedWallpapers(); // Reset unlocked wallpapers on app start
   runApp(MyApp());
 }
 
+Future<void> _resetUnlockedWallpapers() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('unlockedWallpapers'); // Clear unlocked wallpapers when app starts
+}
 
 class MyApp extends StatelessWidget{
   @override

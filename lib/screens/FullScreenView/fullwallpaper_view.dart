@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/core/app_export.dart';
 
+import '../../Ads/rewarded_ad.dart';
 import '../paywall_screen/paywall_screen.dart';
 //import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart'; // Import the svg package
 
@@ -32,7 +34,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   static const platform = MethodChannel('com.wallpaper.wallpaper_2'); // Define MethodChannel
   late int currentIndex;
   late bool _isPremium;
-
+  bool _isUnlocked = false;
 
   late AnimationController _animationController;
   late Animation<double> _positionAnimation;
@@ -71,6 +73,15 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     super.dispose();
   }
 
+  void _unlockWallpaper(String wallpaperId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> unlockedWallpapers = prefs.getStringList('unlockedWallpapers') ?? [];
+
+    if (!unlockedWallpapers.contains(wallpaperId)) {
+      unlockedWallpapers.add(wallpaperId);
+      await prefs.setStringList('unlockedWallpapers', unlockedWallpapers);
+    }
+  }
 
   void _showPremiumAlert() {
     if (_isPremium) {
@@ -142,7 +153,48 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                         onPressed: () {
                           Navigator.pop(context); // Close dialog
                           // Handle Watch Ads logic here
-                          print("Watch Ads clicked");
+                          // RewardedAdHelper.showRewardedAd(
+                          //   context: context,
+                          //   onRewardEarned: () {
+                          //     setState(() {
+                          //       _isPremium = false; // Unlock wallpaper
+                          //       _isUnlocked = true;
+                          //     });
+                          //     ScaffoldMessenger.of(context).showSnackBar(
+                          //       SnackBar(
+                          //         content: Text("Wallpaper unlocked! Swipe up to apply."),
+                          //         duration: Duration(seconds: 3),
+                          //       ),
+                          //     );
+                          //   },
+                          //   onAdFailed: () {
+                          //     ScaffoldMessenger.of(context).showSnackBar(
+                          //       SnackBar(
+                          //         content: Text("Ad failed to load. Try again!"),
+                          //       ),
+                          //     );
+                          //   },
+                          // );
+
+                          RewardedAdHelper.showRewardedAd(
+                            context: context,
+                            onRewardEarned: () {
+                              String wallpaperId = widget.wallpapers[currentIndex]['id'];
+                              _unlockWallpaper(wallpaperId);
+                              setState(() {});
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Wallpaper unlocked! Swipe up to apply."),
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
+                            },
+                            onAdFailed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Ad failed to load. Try again!")),
+                              );
+                            },
+                          );
                         },
                         //icon: Icon(Icons.play_circle_fill),
                         icon: CustomImageView(
@@ -398,6 +450,24 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     }
   }
 
+  void _checkAndShowPremiumAlert() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> unlockedWallpapers = prefs.getStringList('unlockedWallpapers') ?? [];
+
+    String wallpaperId = widget.wallpapers[currentIndex]['id'];
+
+    final bool isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
+
+    if (isCurrentWallpaperPremium && !unlockedWallpapers.contains(wallpaperId)) {
+      _showPremiumAlert();
+    } else {
+      _animationController.forward();
+      Future.delayed(const Duration(milliseconds: 300), () {
+        _showBottomSheet();
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -541,19 +611,22 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                         offset: Offset(0, _positionAnimation.value), // Animate vertical movement
                                         child: GestureDetector(
                                           onVerticalDragEnd: (details) {
-                                            if (details.primaryVelocity! < 0) {
-                                              // Determine if the current wallpaper is premium.
-                                              // (Using your logic: every 4th wallpaper is premium.)
-                                              final bool isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
-                                              if (isCurrentWallpaperPremium) {
-                                                // For premium wallpapers, show the premium alert dialog.
-                                                _showPremiumAlert();
-                                              }else{
-                                                _animationController.forward();
-                                                Future.delayed(const Duration(milliseconds: 300),(){
-                                                  _showBottomSheet();
-                                                });
-                                              }
+                                            // if (details.primaryVelocity! < 0) {
+                                            //   // Determine if the current wallpaper is premium.
+                                            //   // (Using your logic: every 4th wallpaper is premium.)
+                                            //   final bool isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
+                                            //   if (isCurrentWallpaperPremium && !_isUnlocked) {
+                                            //     // For premium wallpapers, show the premium alert dialog.
+                                            //     _showPremiumAlert();
+                                            //   }else{
+                                            //     _animationController.forward();
+                                            //     Future.delayed(const Duration(milliseconds: 300),(){
+                                            //       _showBottomSheet();
+                                            //     });
+                                            //   }
+                                            // }
+                                            if(details.primaryVelocity! < 0){
+                                              _checkAndShowPremiumAlert();
                                             }
                                           },
                                           child: Container(
@@ -611,3 +684,5 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     );
   }
 }
+
+
