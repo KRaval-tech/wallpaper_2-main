@@ -149,89 +149,145 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                   Column(
                     children: [
                       // Watch Ads Button
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.pop(context); // Close dialog
-                          RewardedAdHelper.showRewardedAd(
-                            context: context,
-                            onRewardEarned: () {
-                              String wallpaperId = widget.wallpapers[currentIndex]['id'];
-                              _unlockWallpaper(wallpaperId);
-                              setState(() {});
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Wallpaper unlocked! Swipe up to apply."),
-                                  duration: Duration(seconds: 3),
-                                ),
-                              );
-                            },
-                            onAdFailed: () {
-                              setState(() {});
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Ad failed to load. Try again!")),
-                              );
-                            },
-                          );
-                        },
-                        //icon: Icon(Icons.play_circle_fill),
-                        icon: CustomImageView(
-                          imagePath: "assets/svg/video_play.svg",
-                          height: 24.h,
-                          width: 24.h,
-                        ),
-                        label: Text("Watch ADS",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "SF Pro Display",
-                          fontSize: 18.h,
-                        ),),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          minimumSize: Size(double.infinity, 48),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFF50AAF9), Color(0xFF1972D6)],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
+                          borderRadius: BorderRadius.circular(13.h),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "or",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      const SizedBox(height: 8),
-                      // Go Premium Button
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.pop(context); // Close dialog
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PaywallScreen(),
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(context); // Close dialog
+                            RewardedAdHelper.showRewardedAd(
+                              context: context,
+                              onRewardEarned: () {
+                                String wallpaperId = widget.wallpapers[currentIndex]['id'];
+                                _unlockWallpaper(wallpaperId);
+                                setState(() {});
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Wallpaper unlocked! Swipe up to apply."),
+                                    duration: Duration(seconds: 3),
+                                  ),
+                                );
+                              },
+                              onAdFailed: () {
+                                setState(() {});
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("Ad failed to load. Try again!")),
+                                );
+                              },
+                            );
+                          },
+                          icon: CustomImageView(
+                            imagePath: "assets/svg/video_play.svg",
+                            height: 24.h,
+                            width: 24.h,
+                          ),
+                          label: Text(
+                            "Watch ADS",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "SF Pro Display",
+                              fontSize: 18.h,
                             ),
-                          );
-                        },
-                        //icon: Icon(Icons.workspace_premium),
-                        icon: CustomImageView(
-                          imagePath: "assets/images/crown.svg",
-                          height: 24.h,
-                          width: 24.h,
-                        ),
-                        label: Text("Go Premium",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.fSize,
-                          fontFamily: "SF Pro Display",
-                          fontWeight: FontWeight.w700,
-                        ),),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange,
-                          minimumSize: Size(double.infinity, 48),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent, // Must be transparent to show gradient
+                            minimumSize: Size(double.infinity, 48),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.h),
+                            ),
                           ),
                         ),
                       ),
+
+                      const SizedBox(height: 8),
+                      // Text(
+                      //   "or",
+                      //   style: TextStyle(color: Colors.black),
+                      // ),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: Colors.black, // Line color
+                              thickness: 1, // Line thickness
+                              endIndent: 7, // Space from text
+                            ),
+                          ),
+                          Text(
+                            "or",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14.fSize,
+                              fontFamily: "SF Pro Display",
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: Colors.black, // Line color
+                              thickness: 1, // Line thickness
+                              indent: 7, // Space from text
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      // Go Premium Button
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                          borderRadius: BorderRadius.circular(13.h),
+                        ),
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(context); // Close dialog
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaywallScreen(),
+                              ),
+                            );
+                          },
+                          icon: CustomImageView(
+                            imagePath: "assets/images/crown.svg",
+                            height: 24.h,
+                            width: 24.h,
+                          ),
+                          label: Text(
+                            "Go Premium",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.fSize,
+                              fontFamily: "SF Pro Display",
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent, // Must be transparent to show gradient
+                            minimumSize: Size(double.infinity, 48),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.h),
+                            ),
+                          ),
+                        ),
+                      ),
+
                     ],
                   ),
                   const SizedBox(height: 8),
