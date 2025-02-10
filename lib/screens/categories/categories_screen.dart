@@ -8,7 +8,7 @@ import '../../widgets/app_bar/appbar_trailing_button.dart';
 import '../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../categoriesDetails/category_detail_screen.dart';
-import '../choose_language_screen/choose_language.dart';
+//import '../choose_language_screen/choose_language.dart';
 import '../paywall_screen/paywall_screen.dart';
 import 'bloc/categories_bloc.dart';
 import 'bloc/categories_event.dart';
@@ -120,7 +120,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               margin: EdgeInsets.only(left: 16.h),
               onTap: () {
                 // Handle back button tap
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ChooseLanguageScreen()));
+               // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ChooseLanguageScreen()));
               },
             ),
             actions: [

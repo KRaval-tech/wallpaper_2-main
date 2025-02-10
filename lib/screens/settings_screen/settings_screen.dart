@@ -197,7 +197,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/app_export.dart';
-import '../../theme/app_decoration.dart';
+//import '../../theme/app_decoration.dart';
 import '../../widgets/app_bar/appbar_leading_image.dart';
 import '../../widgets/app_bar/appbar_trailing_button.dart';
 import '../../widgets/app_bar/appbar_trailing_image.dart';
@@ -330,10 +330,10 @@ class _SettingsPageState extends State<SettingsPage> {
               margin: EdgeInsets.only(left: 16.h),
               onTap: () {
                 // Handle back button tap
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ChooseLanguageScreen()));
+                // Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => ChooseLanguageScreen()));
               },
             ),
             actions: [
