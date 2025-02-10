@@ -6,3 +6,5 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class LoadSettings extends SettingsEvent {}
+
+//class NavigateToLanguageScreen extends SettingsEvent {} // New Event

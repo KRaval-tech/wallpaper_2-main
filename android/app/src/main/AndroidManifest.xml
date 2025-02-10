@@ -8,6 +8,11 @@
         android:label="Wallpaper"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- For Impeller Rendering Engine Disable -->
+        <meta-data
+            android:name="io.flutter.embedding.android.SurfaceView"
+            android:value="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

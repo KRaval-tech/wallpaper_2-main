@@ -78,6 +78,7 @@ flutter:
     - assets/images/
     - assets/images2/
     - assets/svg/
+    - assets/setting_svg/
     - assets/paywall_design.json
 
 

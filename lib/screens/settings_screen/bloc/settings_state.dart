@@ -25,3 +25,6 @@ class SettingsError extends SettingsState {
   @override
   List<Object> get props => [message];
 }
+
+
+//class NavigateToLanguage extends SettingsState {} // New State for Navigation
