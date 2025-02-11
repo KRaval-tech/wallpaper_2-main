@@ -35,6 +35,8 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   late int currentIndex;
   late bool _isPremium;
   bool _isUnlocked = false;
+  bool _isAdLoading = false;
+
 
   late AnimationController _animationController;
   late Animation<double> _positionAnimation;
@@ -69,6 +71,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
 
   @override
   void dispose() {
+    RewardedAdHelper.onScreenExit();
     _animationController.dispose();
     super.dispose();
   }
@@ -148,6 +151,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                   // Buttons
                   Column(
                     children: [
+                      //Watch Ads Button
                       // Watch Ads Button
                       Container(
                         decoration: BoxDecoration(
@@ -158,15 +162,22 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                           ),
                           borderRadius: BorderRadius.circular(13.h),
                         ),
-                        child: ElevatedButton.icon(
+                        child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // Close dialog
+                            //Navigator.pop(context);
+                            setState(() {
+                              _isAdLoading = true; // Start loader
+                            });
+
                             RewardedAdHelper.showRewardedAd(
                               context: context,
                               onRewardEarned: () {
+                                setState(() {
+                                  _isAdLoading = false; // Stop loader
+                                });
+                                Navigator.pop(context); // Dialog close
                                 String wallpaperId = widget.wallpapers[currentIndex]['id'];
                                 _unlockWallpaper(wallpaperId);
-                                setState(() {});
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text("Wallpaper unlocked! Swipe up to apply."),
@@ -175,27 +186,16 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 );
                               },
                               onAdFailed: () {
-                                setState(() {});
+                                setState(() {
+                                  _isAdLoading = false; // Stop loader
+                                });
+                                Navigator.pop(context); // Dialog close on ad fail
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text("Ad failed to load. Try again!")),
                                 );
                               },
                             );
                           },
-                          icon: CustomImageView(
-                            imagePath: "assets/svg/video_play.svg",
-                            height: 24.h,
-                            width: 24.h,
-                          ),
-                          label: Text(
-                            "Watch ADS",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "SF Pro Display",
-                              fontSize: 18.h,
-                            ),
-                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent, // Must be transparent to show gradient
                             minimumSize: Size(double.infinity, 48),
@@ -204,15 +204,39 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                               borderRadius: BorderRadius.circular(13.h),
                             ),
                           ),
+                          child: _isAdLoading
+                              ? SizedBox(
+                            width: 24.h,
+                            height: 24.h,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 3,
+                            ),
+                          )
+                              : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomImageView(
+                                imagePath: "assets/svg/video_play.svg",
+                                height: 24.h,
+                                width: 24.h,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                "Watch ADS",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "SF Pro Display",
+                                  fontSize: 18.h,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 
                       const SizedBox(height: 8),
-                      // Text(
-                      //   "or",
-                      //   style: TextStyle(color: Colors.black),
-                      // ),
-
                       Row(
                         children: [
                           Expanded(
