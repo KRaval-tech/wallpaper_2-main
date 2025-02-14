@@ -239,7 +239,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                           ),
                         ),
                       ),
-
                       const SizedBox(height: 8),
                       Row(
                         children: [
@@ -268,9 +267,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 8),
-
                       // Go Premium Button
                       Container(
                         decoration: BoxDecoration(
@@ -569,8 +566,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
             width: double.infinity,
             height: double.infinity,
           ),
-
-
             // Premium icon if the wallpaper is premium
             if (isCurrentWallpaperPremium)
               Positioned(
@@ -696,20 +691,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                         offset: Offset(0, _positionAnimation.value), // Animate vertical movement
                                         child: GestureDetector(
                                           onVerticalDragEnd: (details) {
-                                            // if (details.primaryVelocity! < 0) {
-                                            //   // Determine if the current wallpaper is premium.
-                                            //   // (Using your logic: every 4th wallpaper is premium.)
-                                            //   final bool isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
-                                            //   if (isCurrentWallpaperPremium && !_isUnlocked) {
-                                            //     // For premium wallpapers, show the premium alert dialog.
-                                            //     _showPremiumAlert();
-                                            //   }else{
-                                            //     _animationController.forward();
-                                            //     Future.delayed(const Duration(milliseconds: 300),(){
-                                            //       _showBottomSheet();
-                                            //     });
-                                            //   }
-                                            // }
                                             if(details.primaryVelocity! < 0){
                                               _checkAndShowPremiumAlert();
                                             }
@@ -745,8 +726,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                             ),
                           ],
                         ),
-
-
                         // Right SVG Image (replace with your own SVG file path)
                         Padding(
                           padding: EdgeInsets.only(),
@@ -772,3 +751,266 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
 
 
 
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:wallpaper_2/Ads/interstitial_ad_helper.dart';
+// import 'package:wallpaper_2/core/app_export.dart';
+// import 'package:wallpaper_2/screens/FullScreenView/widgets/bottom_controller.dart';
+// import 'package:wallpaper_2/screens/FullScreenView/widgets/bottomsheet_content.dart';
+// import 'package:wallpaper_2/screens/FullScreenView/widgets/premium_alert.dart';
+// import 'package:wallpaper_2/screens/FullScreenView/widgets/premium_icon.dart';
+// import '../../Ads/rewarded_ad.dart';
+// import '../paywall_screen/paywall_screen.dart';
+//
+// class FullScreenWallpaperPage extends StatefulWidget {
+//   final List<dynamic> wallpapers;
+//   final int initialIndex;
+//   final bool isPremium;
+//
+//   const FullScreenWallpaperPage({
+//     Key? key,
+//     required this.wallpapers,
+//     required this.initialIndex,
+//     required this.isPremium,
+//   }) : super(key: key);
+//
+//   @override
+//   _FullScreenWallpaperPageState createState() => _FullScreenWallpaperPageState();
+// }
+//
+// class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with SingleTickerProviderStateMixin {
+//   static const platform = MethodChannel('com.wallpaper.wallpaper_2');
+//   late int currentIndex;
+//   late bool _isPremium;
+//   bool _isUnlocked = false;
+//   bool _isAdLoading = false;
+//   final InterstitialAdHelper _adHelper = InterstitialAdHelper();
+//   bool _hasAppliedOrReported = false;
+//
+//   late AnimationController _animationController;
+//   late Animation<double> _positionAnimation;
+//   late Animation<double> _opacityAnimation;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _adHelper.loadAd();
+//     _isPremium = widget.isPremium;
+//     currentIndex = widget.initialIndex;
+//
+//     _animationController = AnimationController(
+//       vsync: this,
+//       duration: const Duration(milliseconds: 500),
+//     );
+//
+//     _positionAnimation = Tween<double>(begin: 0.0, end: -75.0).animate(CurvedAnimation(
+//       parent: _animationController,
+//       curve: Curves.easeOut,
+//     ));
+//
+//     _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+//       parent: _animationController,
+//       curve: Curves.easeOut,
+//     ));
+//   }
+//
+//   @override
+//   void dispose() {
+//     RewardedAdHelper.onScreenExit();
+//     _animationController.dispose();
+//     super.dispose();
+//   }
+//
+//   void _unlockWallpaper(String wallpaperId) async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     List<String> unlockedWallpapers = prefs.getStringList('unlockedWallpapers') ?? [];
+//
+//     if (!unlockedWallpapers.contains(wallpaperId)) {
+//       unlockedWallpapers.add(wallpaperId);
+//       await prefs.setStringList('unlockedWallpapers', unlockedWallpapers);
+//     }
+//   }
+//
+//   void _showPremiumAlert() {
+//     if (_isPremium) {
+//       showDialog(
+//         context: context,
+//         barrierDismissible: false,
+//         builder: (context) {
+//           return PremiumAlertDialog(
+//             wallpaperUrl: widget.wallpapers[currentIndex]['download_url'],
+//             onWatchAd: () => _watchAdForUnlock(),
+//             onGoPremium: () => _goToPremiumScreen(),
+//           );
+//         },
+//       );
+//     }
+//   }
+//
+//   void _watchAdForUnlock() {
+//     setState(() {
+//       _isAdLoading = true;
+//     });
+//
+//     RewardedAdHelper.showRewardedAd(
+//       context: context,
+//       onRewardEarned: () {
+//         setState(() {
+//           _isAdLoading = false;
+//         });
+//         Navigator.pop(context);
+//         String wallpaperId = widget.wallpapers[currentIndex]['id'];
+//         _unlockWallpaper(wallpaperId);
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text("Wallpaper unlocked! Swipe up to apply.")),
+//         );
+//       },
+//       onAdFailed: () {
+//         setState(() {
+//           _isAdLoading = false;
+//         });
+//         Navigator.pop(context);
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text("Ad failed to load. Try again!")),
+//         );
+//       },
+//     );
+//   }
+//
+//   void _goToPremiumScreen() {
+//     Navigator.pop(context);
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => PaywallScreen()),
+//     );
+//   }
+//
+//   void goToNextImage() {
+//     if (currentIndex + 1 < widget.wallpapers.length) {
+//       setState(() {
+//         currentIndex++;
+//         _isPremium = (widget.wallpapers.indexOf(widget.wallpapers[currentIndex]) + 1) % 4 == 0;
+//       });
+//     }
+//   }
+//
+//   void goToPreviousImage() {
+//     if (currentIndex - 1 >= 0) {
+//       setState(() {
+//         currentIndex--;
+//         _isPremium = (widget.wallpapers.indexOf(widget.wallpapers[currentIndex]) + 1) % 4 == 0;
+//       });
+//     }
+//   }
+//
+//   void _showBottomSheet() {
+//     showModalBottomSheet(
+//       context: context,
+//       builder: (BuildContext context) {
+//         final wallpaper = widget.wallpapers[currentIndex];
+//         return BottomSheetContent(
+//           wallpaper: wallpaper,
+//           onSetAsLockScreen: () => _setWallpaper('lock', wallpaper['download_url']),
+//           onSetAsHomeScreen: () => _setWallpaper('home', wallpaper['download_url']),
+//           onSetAsBoth: () => _setWallpaper('both', wallpaper['download_url']),
+//           onReport: () => _reportWallpaper(wallpaper['download_url']),
+//         );
+//       },
+//     ).whenComplete(() {
+//       _animationController.reverse();
+//     });
+//   }
+//
+//   Future<void> _setWallpaper(String type, String imageUrl) async {
+//     try {
+//       final String result = await platform.invokeMethod('setWallpaper', {'type': type, 'imageUrl': imageUrl});
+//       _hasAppliedOrReported = true;
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Wallpaper set successfully for $type screen')));
+//       print(result);
+//     } on PlatformException catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to set wallpaper: '${e.message}'")));
+//       print("Failed to set wallpaper: '${e.message}'.");
+//     }
+//   }
+//
+//   Future<void> _reportWallpaper(String imageUrl) async {
+//     try {
+//       final String result = await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
+//       _hasAppliedOrReported = true;
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Wallpaper reported successfully')));
+//       print(result);
+//     } on PlatformException catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")));
+//       print("Failed to report wallpaper: '${e.message}'.");
+//     }
+//   }
+//
+//   void _handleBackPress() {
+//     if (_hasAppliedOrReported && (currentIndex + 1) % 4 != 0) {
+//       _adHelper.showAd(context, () {
+//         Navigator.pop(context);
+//       });
+//     } else {
+//       Navigator.pop(context);
+//     }
+//   }
+//
+//   void _checkAndShowPremiumAlert() async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     List<String> unlockedWallpapers = prefs.getStringList('unlockedWallpapers') ?? [];
+//     String wallpaperId = widget.wallpapers[currentIndex]['id'];
+//     final bool isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
+//
+//     if (isCurrentWallpaperPremium && !unlockedWallpapers.contains(wallpaperId)) {
+//       _showPremiumAlert();
+//     } else {
+//       _animationController.forward();
+//       Future.delayed(const Duration(milliseconds: 300), () {
+//         _showBottomSheet();
+//       });
+//     }
+//   }
+//
+//   @override
+//   void didChangeDependencies() {
+//     super.didChangeDependencies();
+//     ModalRoute.of(context)!.addScopedWillPopCallback(() async {
+//       _handleBackPress();
+//       return false;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final wallpaper = widget.wallpapers[currentIndex];
+//     final isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
+//     return Scaffold(
+//       body: Container(
+//         color: Colors.black,
+//         child: Stack(
+//           children: [
+//             Image.network(
+//               wallpaper['download_url'],
+//               fit: BoxFit.cover,
+//               width: double.infinity,
+//               height: double.infinity,
+//             ),
+//             if (isCurrentWallpaperPremium) PremiumIcon(),
+//             BackButton(onPressed: _handleBackPress),
+//             BottomControlBar(
+//               onPrevious: goToPreviousImage,
+//               onNext: goToNextImage,
+//               onSwipeUp: _checkAndShowPremiumAlert,
+//               animationController: _animationController,
+//               positionAnimation: _positionAnimation,
+//               opacityAnimation: _opacityAnimation,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
