@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/screens/choose_language_screen/choose_language.dart';
 import '../../core/app_export.dart';
 import 'bloc/home_bloc.dart';
@@ -76,16 +77,27 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _navigateToChooseLanguageScreen() {
+  Future<void> _navigateToChooseLanguageScreen() async{
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? selectedLanguage = prefs.getString('language');
+
     if (!_isNavigated) {
       setState(() {
         _isNavigated = true; // Mark as navigated
       });
 
-      Navigator.pushReplacementNamed(
-        context,
-        AppRoutes.chooseLanguage
-      );
+      // Navigator.pushReplacementNamed(
+      //   context,
+      //   AppRoutes.chooseLanguage
+      // );
+      if(selectedLanguage != null && selectedLanguage.isNotEmpty){
+        //If language is set , go to home screen
+        Navigator.pushReplacementNamed(context, AppRoutes.custombottombar);
+      }else{
+        // Otherwise, go to language selection screen
+        Navigator.pushReplacementNamed(context, AppRoutes.chooseLanguage);
+      }
       //AppRoutes.chooseLanguage;
     }
   }

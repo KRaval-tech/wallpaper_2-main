@@ -33,14 +33,11 @@ class ChooseLanguageScreen extends StatefulWidget {
 
 class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
 
-  // late NativeAd _nativeAd;
-  // bool _isAdLoaded = false;
-  // late SharedPreferences _prefs;
+   //late SharedPreferences _prefs;
   bool _isLoading = false; // Variable to track loading state
   @override
   void initState() {
     super.initState();
-    //_loadNativeAd();
     //_initializePreferences();
   }
 
@@ -54,9 +51,9 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
 //       _prefs.setBool('isFirstLaunch', false);
 //     } else {
 //       // App was already launched before, skip to Home screen
-//       Navigator.pushReplacement(
+//       Navigator.pushReplacementNamed(
 //         context,
-//         MaterialPageRoute(builder: (_) => HomeOneScreen()),
+//         AppRoutes.custombottombar
 //       );
 //     }
 //   }
@@ -70,6 +67,10 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
     // Simulate some delay (this can be replaced with actual async logic if needed)
     //await Future.delayed(Duration(seconds: 1)); // You can adjust the duration as needed
 
+    //Save the selected language in SharedPreferences
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.setString('selected_language', locale.languageCode);
+    //
     // Proceed to the next screen after delay
     Navigator.pushNamed(context, AppRoutes.custombottombar);
 
@@ -99,22 +100,6 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                   SizedBox(height: 20.h),
                   _buildLanguageOptionsColumn(context),
                   SizedBox(height: 15.h),
-                  // CustomElevatedButton(
-                  //   height: 44.h,
-                  //   text: S.current.lbl_choose,
-                  //   margin: EdgeInsets.symmetric(horizontal: 50.h),
-                  //   buttonStyle: CustomButtonStyles.none,
-                  //   decoration: CustomButtonStyles.gradientBlueToBlueDecoration,
-                  //   buttonTextStyle: CustomTextStyles.titleMediumBold,
-                  //   onPressed: () {
-                  //     //BlocProvider.of<LocalizationBloc>(context).add(LoadLocalization(Locale(item.languageCode)));
-                  //     // Navigate to the new page after language change
-                  //     Navigator.pushReplacement(
-                  //       context,
-                  //       MaterialPageRoute(builder: (_) => HomeOneScreen()), // Replace with the new screen
-                  //     );
-                  //   },
-                  // ),
                   BlocBuilder<LocalizationBloc, LocalizationState>(
                     builder: (context, state) {
                       // Enable the button only if a language is selected
@@ -126,20 +111,9 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                         margin: EdgeInsets.symmetric(horizontal: 50.h),
                         buttonStyle: CustomButtonStyles.none,
                         decoration: CustomButtonStyles.gradientBlueToBlueDecoration,
-                            // ? CustomButtonStyles.gradientBlueToBlueDecoration
-                            // : CustomButtonStyles.disabledButtonDecoration,
                         buttonTextStyle: CustomTextStyles.titleMediumBold,
                         onPressed: isButtonEnabled
                             ? () {
-                          // // Navigate to the next screen
-                          // Navigator.pushReplacementNamed(
-                          //   context,
-                          //   // MaterialPageRoute(
-                          //   //   builder: (_) => CustomBottomBarApp(),
-                          //   // ),
-                          //   AppRoutes.custombottombar
-                          // );
-                          // Call the method to show loader and navigate after delay
                           _onChooseButtonPressed(context);
                         }
                             : null,
@@ -170,14 +144,6 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
             BlocProvider.of<LocalizationBloc>(context).add(
               LoadLocalization(Locale('en')), // Ensure the app is set to English
             );
-
-            // Navigate to the HomeOneScreen
-            // Navigator.pushReplacementNamed(
-            //   context,
-            //   AppRoutes.custombottombar
-            //   //MaterialPageRoute(builder: (_) =>  CustomBottomBarApp(),)//HomeOneScreen()),
-            // );
-            // Call the method to show loader and navigate after delay
             _onChooseButtonPressed(context);
           },
         ),
@@ -197,11 +163,6 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
             height: 47.h,
             width: 47.h,
           ),
-          // Image.asset(
-          //   "assets/images/Translator.png",
-          //   height: 47.h,
-          //   width: 47.h,
-          // ),
           Padding(
               padding: EdgeInsets.only(left: 28.h),
             child: Text(
@@ -289,58 +250,5 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
       child: CircularProgressIndicator(), // You can customize the loader here
     );
   }
-
-
-  // Widget _buildNativeAd() {
-  //   // return SizedBox(
-  //   //   height: 300.h,
-  //   //   width: double.maxFinite,
-  //   //   child: AdWidget(ad: _nativeAd),
-  //   // );
-  //   if(_isAdLoaded){
-  //     //Show the ad only when loaded
-  //     return SizedBox(
-  //       height: 250.h,
-  //       width: double.maxFinite,
-  //       child: AdWidget(ad: _nativeAd),
-  //     );
-  //   }else{
-  //     return SizedBox(
-  //       height: 250.h,
-  //       width: double.maxFinite,
-  //       child: Container(),
-  //     );
-  //   }
-  // }
-
 }
-
-
-// class HomeOneScreen extends StatelessWidget {
-//   const HomeOneScreen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Container(
-//           child: Center(
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 Text(S.current.msg_help_us_know_your_preferred),
-//                 Text(S.current.lbl_galaxy),
-//                 Text(S.current.lbl_wallpaper),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-
 
