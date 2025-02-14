@@ -31,5 +31,6 @@ class ImageConstant {
   static String imgMouseSquare = '$imagePath2/mouse-square.svg';
   static String imgDanger = '$imagePath2/danger.svg';
   static String imgPremium = '$imagePath2/premium_crown.svg';
-
+  static String imgCloseCircle = '$imagePath2/close_circle.svg';
+  static String imgVideoPlay = '$imagePath2/video_play.svg';
 }

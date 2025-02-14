@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wallpaper_2/Ads/interstitial_ad_helper.dart';
 import 'package:wallpaper_2/core/app_export.dart';
 
 import '../../Ads/rewarded_ad.dart';
@@ -36,7 +38,8 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   late bool _isPremium;
   bool _isUnlocked = false;
   bool _isAdLoading = false;
-
+  final InterstitialAdHelper _adHelper = InterstitialAdHelper();
+  bool _hasAppliedOrReported = false;
 
   late AnimationController _animationController;
   late Animation<double> _positionAnimation;
@@ -45,6 +48,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   @override
   void initState() {
     super.initState();
+    _adHelper.loadAd();
     _isPremium = widget.isPremium;
     currentIndex = widget.initialIndex;  // Initialize the current index
 
@@ -477,6 +481,8 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
       final String result =
       await platform.invokeMethod('setWallpaper', {'type': type, 'imageUrl': imageUrl});
 
+      _hasAppliedOrReported = true;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Wallpaper set successfully for $type screen')),
       );
@@ -495,6 +501,8 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
       final String result =
       await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
 
+      _hasAppliedOrReported = true;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Wallpaper reported successfully')),
       );
@@ -504,6 +512,16 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
         SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")),
       );
       print("Failed to report wallpaper: '${e.message}'.");
+    }
+  }
+
+  void _handleBackPress(){
+    if(_hasAppliedOrReported && (currentIndex + 1)%4 !=0){
+      _adHelper.showAd(context, (){
+        Navigator.pop(context);
+      });
+    }else{
+      Navigator.pop(context);
     }
   }
 
@@ -525,6 +543,15 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     }
   }
 
+  // Handle device back button
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ModalRoute.of(context)!.addScopedWillPopCallback(() async {
+      _handleBackPress();
+      return false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -584,9 +611,10 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                   child: IconButton(
                     padding: EdgeInsets.zero, // Remove default padding
                     icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context); // Close the full-screen view on tap
-                    },
+                    // onPressed: () {
+                    //   Navigator.pop(context); // Close the full-screen view on tap
+                    // },
+                    onPressed: _handleBackPress,
                   ),
                 ),
               ),
@@ -741,5 +769,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     );
   }
 }
+
 
 
