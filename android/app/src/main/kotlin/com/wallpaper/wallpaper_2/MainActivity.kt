@@ -8,6 +8,7 @@ import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +34,15 @@ class MainActivity : FlutterActivity() {
                 else -> result.notImplemented()
             }
         }
+
+        GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine,"videoNativeAd", ListTileNativeAdFactory(context))
+    }
+
+    override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
+        super.cleanUpFlutterEngine(flutterEngine)
+
+        // TODO: Unregister the ListTileNativeAdFactory
+        GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "videoNativeAd")
     }
 
     private fun setWallpaper(type: String, imageUrl: String, result: MethodChannel.Result) {

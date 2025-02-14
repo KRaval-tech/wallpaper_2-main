@@ -43,6 +43,7 @@ dependencies:
   responsive_grid_list: any
   provider: any
   font_awesome_flutter: any
+  url_launcher: any
 #  geolocator: any
   in_app_purchase: any
 

@@ -58,7 +58,13 @@
 //   }
 // }
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:wallpaper_2/core/app_export.dart';
+import 'package:wallpaper_2/widgets/exit_confirmation_sheet.dart';
+import 'package:wallpaper_2/widgets/rating_bottom_sheet.dart';
 
 import '../Ads/AdmobHelper.dart';
 import '../screens/categories/categories_screen.dart';
@@ -76,6 +82,8 @@ class CustomBottomBarApp extends StatefulWidget {
 
 class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
   BottomBarEnum _selectedTab = BottomBarEnum.Home;
+  bool hasRated = false;
+  bool shouldShowExitSheet = false;
 
   // Use Widget Function(BuildContext) for pages
   final Map<BottomBarEnum, Widget Function(BuildContext)> _pages = {
@@ -103,23 +111,137 @@ class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
     });
   }
 
+  ///IMPORTANT NOTE:
+
+  // Future<bool> _onBackPressed() async {
+  //   bool shouldExit = await showModalBottomSheet(
+  //     context: context,
+  //     backgroundColor: Colors.white,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+  //     ),
+  //     builder: (context) {
+  //       return Padding(
+  //         padding: const EdgeInsets.all(16.0),
+  //         child: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             Text(
+  //               "Are you sure you want to exit?",
+  //               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //             ),
+  //             SizedBox(height: 16),
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //               children: [
+  //                 ElevatedButton(
+  //                   onPressed: () => Navigator.pop(context, false), // Stay in app
+  //                   child: Text("No"),
+  //                 ),
+  //                 ElevatedButton(
+  //                   onPressed: () => Navigator.pop(context, true), // Confirm exit
+  //                   style: ElevatedButton.styleFrom(
+  //                     backgroundColor: Colors.red,
+  //                   ),
+  //                   child: Text("Yes"),
+  //                 ),
+  //               ],
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   ) ??
+  //       false;
+  //
+  //   if (shouldExit) {
+  //     if (Platform.isAndroid) {
+  //       SystemNavigator.pop(); // Close app on Android
+  //     } else if (Platform.isIOS) {
+  //       exit(0); // Force close app on iOS (not recommended by Apple)
+  //     }
+  //   }
+  //   return false; // Prevent default back navigation
+  // }
+  //
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: _selectedTab != BottomBarEnum.Premium
-                ? _pages[_selectedTab]?.call(context) ?? Container()
-                : Container(), // Avoid rendering PaywallScreen directly
+    return WillPopScope(
+      onWillPop: () async{
+        if(!hasRated){
+          showRatingBottomSheet(context);
+          return false; // Prevent default back navigation
+        }else if(shouldShowExitSheet){
+          showExitConfirmationBottomSheet(context);
+          return false; // Prevent default back navigation
+        }
+        return true;
+      },
+      child: Scaffold(
+          body: Column(
+            children: [
+              Expanded(
+                child: _selectedTab != BottomBarEnum.Premium
+                    ? _pages[_selectedTab]?.call(context) ?? Container()
+                    : Container(), // Avoid rendering PaywallScreen directly
+              ),
+              if (_selectedTab != BottomBarEnum.Premium) AdMobHelper.getBannerAd(),
+              if (_selectedTab != BottomBarEnum.Premium)
+                CustomBottomBar(
+                  onChanged: _onTabChanged,
+                ),
+            ],
           ),
-          if (_selectedTab != BottomBarEnum.Premium) AdMobHelper.getBannerAd(),
-          if (_selectedTab != BottomBarEnum.Premium)
-            CustomBottomBar(
-              onChanged: _onTabChanged,
-            ),
-        ],
       ),
     );
   }
+
+
+  void showRatingBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      elevation: 0,
+      isDismissible: false,
+      enableDrag: false,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      builder: (context) {
+        return RatingBottomSheet(
+          onRatingDone: () {
+            setState(() {
+              hasRated = true;
+              shouldShowExitSheet = true;
+            });
+          },
+          onPlayStoreOpened: () {
+            setState(() {
+              shouldShowExitSheet = true;
+            });
+          },
+        );
+      },
+    );
+  }
+
+  void showExitConfirmationBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      elevation: 0,
+      enableDrag: false,
+      isDismissible: false,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      builder: (context) {
+        return ExitConfirmationBottomSheet();
+      },
+    );
+  }
+
+
 }
+
