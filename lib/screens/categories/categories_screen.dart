@@ -32,7 +32,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(preferredSize: Size.fromHeight(100.h),
+        appBar: PreferredSize(preferredSize: Size.fromHeight(110.h),
             child: _buildTopAppBar(context),
         ),
         body: Container(
@@ -106,7 +106,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Widget _buildTopAppBar(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 12.h),
       decoration: AppDecoration.lightThemeBackground,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -180,7 +180,12 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
             ],
           ),
           SizedBox(height: 8.h),
-          NativeVideoAdWidget(),
+          //NativeVideoAdWidget(),
+          // Ad box that shows loading text while ad is loading
+          Container(
+            height: 250.h, // Fixed height for ad box
+            child: NativeVideoAdWidget(),
+          ),
         ],
       ),
     );

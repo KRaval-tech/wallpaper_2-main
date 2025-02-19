@@ -97,17 +97,31 @@
     </FrameLayout>
 
     <!-- Install Button at Bottom -->
+<!--    <Button-->
+<!--        android:id="@+id/native_ad_install_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:backgroundTint="#007AFF"-->
+<!--        android:text="Install"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold" />-->
     <Button
         android:id="@+id/native_ad_install_button"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="45dp"
         android:layout_gravity="bottom"
         android:layout_margin="8dp"
-        android:backgroundTint="#007AFF"
+        android:backgroundTint="#0066D3"
         android:text="Install"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/rounded_button" />
+
 
 </com.google.android.gms.ads.nativead.NativeAdView>

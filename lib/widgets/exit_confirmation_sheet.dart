@@ -152,7 +152,11 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8.h),
-          NativeVideoAdWidget(),
+          //NativeVideoAdWidget(),
+          Container(
+            height: 250.h, // Fixed height for ad box
+            child: NativeVideoAdWidget(),
+          ),
           //SizedBox(height: 15),
         ],
       ),

@@ -206,21 +206,23 @@ class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
       enableDrag: false,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.h)),
       ),
       builder: (context) {
-        return RatingBottomSheet(
-          onRatingDone: () {
-            setState(() {
-              hasRated = true;
-              shouldShowExitSheet = true;
-            });
-          },
-          onPlayStoreOpened: () {
-            setState(() {
-              shouldShowExitSheet = true;
-            });
-          },
+        return SingleChildScrollView(
+          child: RatingBottomSheet(
+            onRatingDone: () {
+              setState(() {
+                hasRated = true;
+                shouldShowExitSheet = true;
+              });
+            },
+            onPlayStoreOpened: () {
+              setState(() {
+                shouldShowExitSheet = true;
+              });
+            },
+          ),
         );
       },
     );
@@ -234,10 +236,10 @@ class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
       isDismissible: false,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.h)),
       ),
       builder: (context) {
-        return ExitConfirmationBottomSheet();
+        return SingleChildScrollView(child: ExitConfirmationBottomSheet());
       },
     );
   }

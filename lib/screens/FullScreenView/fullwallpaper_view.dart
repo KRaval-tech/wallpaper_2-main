@@ -473,55 +473,172 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   }
 
   // Function to set wallpaper with Snackbar
+  // Future<void> _setWallpaper(String type, String imageUrl) async {
+  //   try {
+  //     final String result =
+  //     await platform.invokeMethod('setWallpaper', {'type': type, 'imageUrl': imageUrl});
+  //
+  //     _hasAppliedOrReported = true;
+  //
+  //     // ScaffoldMessenger.of(context).showSnackBar(
+  //     //   SnackBar(content: Text('Wallpaper set successfully for $type screen')),
+  //     // );
+  //     // Show interstitial ad after wallpaper is set
+  //     _adHelper.showAd(context, () {
+  //       // Show the success alert box after ad is closed
+  //       _showSuccessAlert('Wallpaper set successfully for $type screen');
+  //     });
+  //
+  //     print(result); // Handle the response
+  //   } on PlatformException catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text("Failed to set wallpaper: '${e.message}'")),
+  //     );
+  //     print("Failed to set wallpaper: '${e.message}'.");
+  //   }
+  // }
+  //
+  // // Function to report wallpaper with Snackbar
+  // Future<void> _reportWallpaper(String imageUrl) async {
+  //   try {
+  //     final String result =
+  //     await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
+  //
+  //     _hasAppliedOrReported = true;
+  //
+  //     // ScaffoldMessenger.of(context).showSnackBar(
+  //     //   SnackBar(content: Text('Wallpaper reported successfully')),
+  //     // );
+  //     // Show interstitial ad after wallpaper is reported
+  //     _adHelper.showAd(context, () {
+  //       // Show the success alert box after ad is closed
+  //       _showSuccessAlert('Wallpaper reported successfully');
+  //     });
+  //
+  //
+  //     print(result); // Handle the response
+  //   } on PlatformException catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")),
+  //     );
+  //     print("Failed to report wallpaper: '${e.message}'.");
+  //   }
+  // }
+
+  // Function to set wallpaper with Snackbar and show interstitial ad before starting the process
   Future<void> _setWallpaper(String type, String imageUrl) async {
-    try {
-      final String result =
-      await platform.invokeMethod('setWallpaper', {'type': type, 'imageUrl': imageUrl});
 
-      _hasAppliedOrReported = true;
+    // Show interstitial ad before starting wallpaper setting
+    _adHelper.showAd(context, () async {
+      try {
+        // Now proceed with setting wallpaper after the ad is closed
+        final String result = await platform.invokeMethod('setWallpaper', {'type': type, 'imageUrl': imageUrl});
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Wallpaper set successfully for $type screen')),
-      );
-      print(result); // Handle the response
-    } on PlatformException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to set wallpaper: '${e.message}'")),
-      );
-      print("Failed to set wallpaper: '${e.message}'.");
-    }
+        _hasAppliedOrReported = true;
+
+        // Show success message once wallpaper is set
+        _showSuccessAlert('Wallpaper set successfully for $type screen');
+        print(result); // Handle the response
+      } on PlatformException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to set wallpaper: '${e.message}'")),
+        );
+        print("Failed to set wallpaper: '${e.message}'.");
+      }
+    });
   }
 
-  // Function to report wallpaper with Snackbar
+// Function to report wallpaper with Snackbar and show interstitial ad before starting the process
   Future<void> _reportWallpaper(String imageUrl) async {
-    try {
-      final String result =
-      await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
 
-      _hasAppliedOrReported = true;
+    // Show interstitial ad before starting wallpaper report
+    _adHelper.showAd(context, () async {
+      try {
+        // Now proceed with reporting wallpaper after the ad is closed
+        final String result = await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Wallpaper reported successfully')),
-      );
-      print(result); // Handle the response
-    } on PlatformException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")),
-      );
-      print("Failed to report wallpaper: '${e.message}'.");
-    }
+        _hasAppliedOrReported = true;
+
+        // Show success message once wallpaper is reported
+        _showSuccessAlert('Wallpaper reported successfully');
+        print(result); // Handle the response
+      } on PlatformException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")),
+        );
+        print("Failed to report wallpaper: '${e.message}'.");
+      }
+    });
   }
 
-  void _handleBackPress(){
-    if(_hasAppliedOrReported && (currentIndex + 1)%4 !=0){
-      _adHelper.showAd(context, (){
-        Navigator.pop(context);
-      });
-    }else{
-      Navigator.pop(context);
-    }
+// Function to show the success alert box
+  void _showSuccessAlert(String message) {
+    // Show the alert for a few seconds
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the alert box
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+
+    // // Optionally, use a timer to automatically close the alert after a few seconds
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pop(context); // Automatically close the alert after 3 seconds
+    });
   }
 
+
+  // void _handleBackPress(){
+  //   if(_hasAppliedOrReported && (currentIndex + 1)%4 !=0){
+  //     _adHelper.showAd(context, (){
+  //       Navigator.pop(context);
+  //     });
+  //   }else{
+  //     Navigator.pop(context);
+  //   }
+  // }
+
+
+// Function to show the success alert box
+//   void _showSuccessAlert(String message) {
+//     // Show the alert for a few seconds
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           content: Text(message),
+//           actions: [
+//             TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context); // Close the alert box
+//               },
+//               child: Text('OK'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//
+//     // Optionally, use a timer to automatically close the alert after a few seconds
+//     Future.delayed(const Duration(seconds: 3), () {
+//       Navigator.pop(context); // Automatically close the alert after 3 seconds
+//     });
+//   }
+
+  // Function to show the premium alert box
   void _checkAndShowPremiumAlert() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> unlockedWallpapers = prefs.getStringList('unlockedWallpapers') ?? [];
@@ -544,10 +661,10 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ModalRoute.of(context)!.addScopedWillPopCallback(() async {
-      _handleBackPress();
-      return false;
-    });
+    // ModalRoute.of(context)!.addScopedWillPopCallback(() async {
+    //   _handleBackPress();
+    //   return false;
+    // });
   }
 
   @override
@@ -606,10 +723,10 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                   child: IconButton(
                     padding: EdgeInsets.zero, // Remove default padding
                     icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-                    // onPressed: () {
-                    //   Navigator.pop(context); // Close the full-screen view on tap
-                    // },
-                    onPressed: _handleBackPress,
+                    onPressed: () {
+                      Navigator.pop(context); // Close the full-screen view on tap
+                    },
+                    //onPressed: _handleBackPress,
                   ),
                 ),
               ),
