@@ -62,13 +62,19 @@ class MainActivity : FlutterActivity() {
                         }
                     }
                     "home" -> {
-                        wallpaperManager.setBitmap(bitmap)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+                        } else {
+                            wallpaperManager.setBitmap(bitmap) // Older devices ke liye
+                        }
                     }
                     "both" -> {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+                            wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+                        } else {
+                            wallpaperManager.setBitmap(bitmap) // Older devices ke liye
                         }
-                        wallpaperManager.setBitmap(bitmap)
                     }
                 }
                 result.success("Wallpaper set successfully")
@@ -77,6 +83,7 @@ class MainActivity : FlutterActivity() {
             }
         }
     }
+
 
 
 
