@@ -25,7 +25,7 @@ class FullScreenWallpaperPage extends StatefulWidget {
   _FullScreenWallpaperPageState createState() => _FullScreenWallpaperPageState();
 }
 
-class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> {
+class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with SingleTickerProviderStateMixin {
   static const platform = MethodChannel('com.wallpaper.wallpaper_2'); // Add this line
   late int currentIndex;
   late bool _isPremium;
@@ -34,17 +34,40 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> {
   final InterstitialAdHelper _adHelper = InterstitialAdHelper();
   bool _hasAppliedOrReported = false;
 
+  late AnimationController _animationController;
+  late Animation<double> _positionAnimation;
+  late Animation<double> _opacityAnimation;
+
   @override
   void initState() {
     super.initState();
     _adHelper.loadAd();
     _isPremium = widget.isPremium;
     currentIndex = widget.initialIndex;
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    _positionAnimation = Tween<double>(begin: 0.0, end: -75.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOut,
+      ),
+    );
+
+    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOut,
+      ),
+    );
   }
 
   @override
   void dispose() {
     RewardedAdHelper.onScreenExit();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -369,7 +392,10 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> {
     if (isCurrentWallpaperPremium && !unlockedWallpapers.contains(wallpaperId)) {
       _showPremiumAlert();
     } else {
-      _showBottomSheet();
+       _animationController.forward();
+       Future.delayed(const Duration(milliseconds: 300),(){
+         _showBottomSheet();
+       });
     }
   }
 
@@ -435,7 +461,9 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> {
           ),
         );
       },
-    );
+    ).whenComplete((){
+      _animationController.reverse();
+    });
   }
 
   @override
@@ -498,6 +526,9 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> {
                        onPrevious: goToPreviousImage,
                        onNext: goToNextImage,
                        onSwipeUp: _checkAndShowPremiumAlert,
+                       animationController: _animationController, // Pass the controller
+                       opacityAnimation: _opacityAnimation, // Pass the opacity animation
+                       positionAnimation: _positionAnimation, // Pass the position animation
                    ),
                   ],
                 ),

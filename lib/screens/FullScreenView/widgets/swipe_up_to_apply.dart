@@ -5,12 +5,18 @@ class BottomControls extends StatefulWidget {
   final VoidCallback onPrevious;
   final VoidCallback onNext;
   final VoidCallback onSwipeUp;
+  final AnimationController animationController;
+  final Animation<double> opacityAnimation;
+  final Animation<double> positionAnimation;
 
   const BottomControls({
     Key? key,
     required this.onPrevious,
     required this.onNext,
     required this.onSwipeUp,
+    required this.animationController,
+    required this.opacityAnimation,
+    required this.positionAnimation,
   }) : super(key: key);
 
   @override
@@ -18,38 +24,38 @@ class BottomControls extends StatefulWidget {
 }
 
 class _BottomControlsState extends State<BottomControls> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _positionAnimation;
-  late Animation<double> _opacityAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    _positionAnimation = Tween<double>(begin: 0.0, end: -75.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOut,
-      ),
-    );
-
-    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOut,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+  // late AnimationController _animationController;
+  // late Animation<double> _positionAnimation;
+  // late Animation<double> _opacityAnimation;
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _animationController = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(milliseconds: 500),
+  //   );
+  //
+  //   _positionAnimation = Tween<double>(begin: 0.0, end: -75.0).animate(
+  //     CurvedAnimation(
+  //       parent: _animationController,
+  //       curve: Curves.easeOut,
+  //     ),
+  //   );
+  //
+  //   _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+  //     CurvedAnimation(
+  //       parent: _animationController,
+  //       curve: Curves.easeOut,
+  //     ),
+  //   );
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   _animationController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +90,13 @@ class _BottomControlsState extends State<BottomControls> with SingleTickerProvid
                 ],
               ),
               child: AnimatedBuilder(
-                animation: _animationController,
+                animation: widget.animationController,
                 builder: (context, child) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Opacity(
-                        opacity: _opacityAnimation.value,
+                        opacity: widget.opacityAnimation.value,
                         child: Column(
                           children: [
                             Icon(Icons.keyboard_arrow_up_rounded, color: Colors.black),
@@ -100,12 +106,12 @@ class _BottomControlsState extends State<BottomControls> with SingleTickerProvid
                         ),
                       ),
                       Transform.translate(
-                        offset: Offset(0, _positionAnimation.value),
+                        offset: Offset(0, widget.positionAnimation.value),
                         child: GestureDetector(
                           onVerticalDragEnd: (details) {
                             if (details.primaryVelocity! < 0) {
                               // Start animation and trigger the callback
-                              _animationController.forward();
+                              //widget.animationController.forward();
                               widget.onSwipeUp();
                             }
                           },
