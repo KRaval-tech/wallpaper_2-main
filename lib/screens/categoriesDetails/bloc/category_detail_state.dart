@@ -9,11 +9,12 @@ class CategoryDetailLoading extends CategoryDetailState {}
 
 class CategoryDetailLoaded extends CategoryDetailState {
   final List<dynamic> wallpapers; // Now handles dynamic API data
+  final List<dynamic> wallpaper2; // Now handles dynamic API data
 
-  CategoryDetailLoaded(this.wallpapers);
+  CategoryDetailLoaded(this.wallpapers,this.wallpaper2);
 
   @override
-  List<Object?> get props => [wallpapers];
+  List<Object?> get props => [wallpapers,wallpaper2];
 }
 
 class CategoryDetailError extends CategoryDetailState {

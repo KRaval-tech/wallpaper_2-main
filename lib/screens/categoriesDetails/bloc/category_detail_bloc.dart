@@ -44,8 +44,11 @@ class CategoryDetailBloc extends Bloc<CategoryDetailEvent, CategoryDetailState> 
     emit(CategoryDetailLoading());
         try {
         // Fetch wallpapers from the API
-        final wallpapers = await apiService.fetchFeaturedWallpapers();
-        emit(CategoryDetailLoaded(wallpapers));
+        // final wallpapers = await apiService.fetchLatestWallpapers();
+        // final wallpaper2 = await apiService.fetchRandomWallpapers();
+          final wallpapers = await apiService.fetchFeaturedWallpapers();
+          final wallpaper2 = await apiService.fetchSuggestedWallpapers();
+        emit(CategoryDetailLoaded(wallpapers, wallpaper2));
         } catch (e) {
       emit(CategoryDetailError("Failed to load wallpapers: $e"));
     }

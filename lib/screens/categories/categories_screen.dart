@@ -23,6 +23,7 @@ class CategoriesPage extends StatefulWidget {
       child: CategoriesPage(),
     );
   }
+
   @override
   State<CategoriesPage> createState() => _CategoriesPageState();
 }
@@ -133,30 +134,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   );
                 },
               ),
-              // AppbarTrailingButton(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       PageRouteBuilder(
-              //         transitionDuration: Duration(milliseconds: 500), // Animation duration
-              //         reverseTransitionDuration: Duration(milliseconds: 300), // Reverse animation
-              //         pageBuilder: (context, animation, secondaryAnimation) => PaywallScreen(),
-              //         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              //           const begin = Offset(0, 1); // Start from bottom
-              //           const end = Offset(0, 0); // End at the current position
-              //           const curve = Curves.easeInOut; // Animation curve
-              //           var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              //           var offsetAnimation = animation.drive(tween);
-              //
-              //           return SlideTransition(
-              //             position: offsetAnimation,
-              //             child: child,
-              //           );
-              //         },
-              //       ),
-              //     );
-              //   },
-              // ),
               AppbarTrailingImage(
                 imagePath: ImageConstant.imgSearch,
                 height: 24.h,
@@ -178,5 +155,4 @@ class _CategoriesPageState extends State<CategoriesPage> {
       ),
     );
   }
-
 }

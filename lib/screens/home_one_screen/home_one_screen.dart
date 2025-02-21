@@ -421,6 +421,7 @@
 
 
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wallpaper_2/screens/choose_language_screen/choose_language.dart';
@@ -538,13 +539,6 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
             },
           ),
         ),
-        //bottomNavigationBar: const CustomBottomBar(),//_buildBottomNavigationBar(),
-        // CustomBottomBar( // Use your custom BottomBar here
-        //   onChanged: (selectedTab) {
-        //     // Handle bottom bar tab selection
-        //     // You can navigate or update your screen based on the selected tab
-        //   },
-        // ),
       ),
     );
   }
@@ -564,10 +558,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
             leading: AppbarLeadingImage(
               imagePath: ImageConstant.imgBack,
               margin: EdgeInsets.only(left: 16.h),
-              onTap: () {
-                // Handle back button tap
-                // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ChooseLanguageScreen()));
-              },
+              onTap: () {},
             ),
             actions: [
               AppbarTrailingButton(
@@ -579,31 +570,6 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                   );
                 },
               ),
-              // AppbarTrailingButton(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       PageRouteBuilder(
-              //         transitionDuration: Duration(milliseconds: 500), // Animation duration
-              //         reverseTransitionDuration: Duration(milliseconds: 300), // Reverse animation
-              //         pageBuilder: (context, animation, secondaryAnimation) => PaywallScreen(),
-              //         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              //           const begin = Offset(0, 1); // Start from bottom
-              //           const end = Offset(0, 0); // End at the current position
-              //           const curve = Curves.easeInOut; // Animation curve
-              //           var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              //           var offsetAnimation = animation.drive(tween);
-              //
-              //           return SlideTransition(
-              //             position: offsetAnimation,
-              //             child: child,
-              //           );
-              //         },
-              //       ),
-              //     );
-              //   },
-              // ),
-
               AppbarTrailingImage(
                 imagePath: ImageConstant.imgSearch,
                 height: 24.h,
@@ -670,15 +636,6 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
           final avatar = avatars[index];
           return GestureDetector(
             onTap: (){
-              // Navigator.push(context,
-              //     MaterialPageRoute(
-              //         builder: (context) => AvatarDetailPage(
-              //             label: avatar.label,
-              //             icon: avatar.icon,
-              //             color: avatar.color,
-              //         ),
-              //     ),
-              // );
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -777,8 +734,8 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                         children:[ ClipRRect(
                           borderRadius: BorderRadius.circular(14), // Rounded corners
                           child: imageUrl.isNotEmpty
-                              ? Image.network(
-                            imageUrl,
+                              ? CachedNetworkImage(
+                            imageUrl: imageUrl,
                             width: 98.h,
                             height: 207.h,
                             fit: BoxFit.cover,
@@ -876,8 +833,8 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                           ClipRRect(
                           borderRadius: BorderRadius.circular(14), // Rounded corners
                           child: imageUrl.isNotEmpty
-                              ? Image.network(
-                            imageUrl,
+                              ? CachedNetworkImage(
+                            imageUrl: imageUrl,
                             width: 98.h,
                             height: 207.h,
                             fit: BoxFit.cover,

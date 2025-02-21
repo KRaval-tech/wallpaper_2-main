@@ -44,6 +44,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                 if (state is CategoryDetailLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is CategoryDetailLoaded) {
+                  final allWallpapers = [...state.wallpapers, ...state.wallpaper2]; // Dono lists merge
                   return GridView.builder(
                     padding: const EdgeInsets.all(16),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -52,9 +53,11 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                       crossAxisSpacing: 12,
                       childAspectRatio: 107.h / 216.h,
                     ),
-                    itemCount: state.wallpapers.length,
+                    //itemCount: state.wallpapers.length,
+                    itemCount: allWallpapers.length,
                     itemBuilder: (context, index) {
-                      final wallpaper = state.wallpapers[index];
+                      //final wallpaper = state.wallpapers[index];
+                      final wallpaper = allWallpapers[index];
                       return GestureDetector(
                         onTap: () {
                           final isPremium = (index + 1) % 4 == 0; // Determine if the wallpaper is premium
@@ -62,7 +65,8 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => FullScreenWallpaperPage(
-                                wallpapers: state.wallpapers, // Pass all wallpapers
+                                //wallpapers: state.wallpapers, // Pass all wallpapers
+                                wallpapers: allWallpapers,
                                 initialIndex: index, // Pass the tapped wallpaper index
                                 isPremium: isPremium,
                               ),
@@ -176,44 +180,4 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
       ],
     );
   }
-
-// Widget _buildTopAppBar(BuildContext context) {
-//     return Container(
-//       width: double.maxFinite,
-//       // padding: EdgeInsets.symmetric(vertical: 50.h),
-//       padding: EdgeInsets.only(top: 16.h),
-//       decoration: AppDecoration.lightThemeBackground,
-//       child: CustomAppBar(
-//         height: 30.h,
-//         leadingWidth: 46.h,
-//         leading: IconButton(
-//             onPressed: (){
-//               Navigator.pop(context);
-//             },
-//             icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
-//         ),
-//         title: Text(
-//           widget.title,
-//           style: theme.textTheme.headlineSmall,
-//         ),
-//         actions: [
-//           AppbarTrailingButton(
-//             onTap: () {
-//               print("AppbarTrailingButton tapped!");
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (context) => PaywallScreen()),
-//               );
-//             },
-//           ),
-//           AppbarTrailingImage(
-//             imagePath: ImageConstant.imgSearch,
-//             height: 24.h,
-//             width: 24.h,
-//             margin: EdgeInsets.only(left: 12.h, right: 24.h),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
 }
