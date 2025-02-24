@@ -1,0 +1,102 @@
+--------- beginning of main
+02-24 15:33:57.455  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.456  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.456  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.457  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.457  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.457  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.457  5846  6010 I ConfigProvider: query uri:xxxxx
+02-24 15:33:57.462  5528  5528 I Telephony: TelecomAccountRegistry$AccountEntry: isRttCurrentlySupported -- regular acct,, hasVoiceAvailability: false, isRttSupported: false, alwaysAllowWhileRoaming: false, isRoaming: false, isOnWfc: false
+02-24 15:33:57.462  5528  5528 V PhoneGlobals: handleServiceStateChanged
+02-24 15:33:57.463  5528  5528 D NotificationMgr: updateNetworkSelection, Use Samsung codes instead of AOSP codes
+02-24 15:33:57.463  5528  5528 V PhoneGlobals: subId=1,mDefaultDataSubId=1,ss roaming=false
+02-24 15:33:57.463  5528  5528 V PhoneGlobals: updateDataRoamingStatus
+02-24 15:33:57.464  5528  5528 V PhoneGlobals: dataAllowed=false, reasons=Data disallowed reasons: DATA_DISABLED NOT_ATTACHED
+02-24 15:33:57.465  5846  6010 I ConfigProvider: initStorage: phone:0 get storage from configmodule
+02-24 15:33:57.465  5846  6010 I ConfigProvider: queryStorage path content://com.samsung.rcs.autoconfigurationprovider/parameter/geolocPushAuth#simslot0
+02-24 15:33:57.466  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
+02-24 15:33:57.466  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
+02-24 15:33:57.467  5846  6010 I FeatureUpdater: isEnableGls: false
+02-24 15:33:57.468  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.468  5846  6010 I CapexInfo: getFeatureTag: features = 0 []
+02-24 15:33:57.468  5846  6010 I FeatureUpdater: updateFeatures: 
+02-24 15:33:57.468  5846  6010 I ImModule: FEATURE_CHATBOT_EXTENDED_MSG enabled ver:1.3
+02-24 15:33:57.468  5846  6010 I RcsUtils: isDualRcsReg: mIsDualRcsReg false
+02-24 15:33:57.468  5846  6010 I SmsServiceModule: regInfo: null
+02-24 15:33:57.468  5846  6010 I SmsServiceModule: disallow sms Service
+02-24 15:33:57.468  5846  6010 I SmsServiceModule: Sms Service queryCapabilityStatus[0]: removeCapabilities CAPABILITY_TYPE_SMS
+02-24 15:33:57.468  5846  6010 E CmcServiceHelper: disallow Call Service
+02-24 15:33:57.468  5846  6010 E CmcServiceHelper: disallow Call Service
+02-24 15:33:57.468  5846  6010 I UtServiceModule<0>: isUtEnabled with policy : PS enabled = true
+02-24 15:33:57.468  5846  6010 I CapabilityDiscModule<0>: queryCapabilityStatus
+02-24 15:33:57.468  5846  6010 E CapabilityUtil<0>: checkModuleReady: mConfig.isAvailable == false
+02-24 15:33:57.468  5846  6010 I CapabilityDiscModule<0>: isUceServiceAvailable: not ready
+02-24 15:33:57.468  5846  6010 E CapabilityUtil<0>: checkModuleReady: mConfig.isAvailable == false
+02-24 15:33:57.468  5846  6010 I CapabilityDiscModule<0>: isUceServiceAvailable: not ready
+02-24 15:33:57.468  5846  6010 I RegiMgr-NetEvtCtr<0>: out of service.
+02-24 15:33:57.468  5846  6010 I SimManager: getRilSimOperator: ETC
+02-24 15:33:57.468  5846  6010 I SimManager<0>: hasIsim: [true]
+02-24 15:33:57.468  5846  6010 I SimManager: mSimState:LOADED, mIsimLoaded:true, hasIsim():true
+02-24 15:33:57.469  5846  6010 I RegiMgr-NetEvtCtr<0>: onNetworkEventChanged: tryRegister by phoneID
+02-24 15:33:57.469  5846  6010 I RegiMgr<0>: tryRegister:
+02-24 15:33:57.469  5846  6010 I RegiMgr<0>: RegisterTask(s): RJIL VoLTE (CONFIGURED)
+02-24 15:33:57.469  5846  6010 I RcsPolicyMgr<0>: pendingRcsRegister: mDefaultPhoneId = 0
+02-24 15:33:57.469  5846  6010 I RegisterTask: isSuspended: mSuspended(false) mSuspendByIrat(false)
+02-24 15:33:57.469  5846  6010 I RegiMgr<0>: [RJIL VoLTE|CONFIGURED] checkForTryRegister id: 623
+02-24 15:33:57.469  5846  6010 I PdnController: isConnected: No callback exists
+02-24 15:33:57.469  5846  6010 I RegiMgr : isPdnConnected: false, PdnType: 11
+02-24 15:33:57.473  5846  6010 I PdnController: getDefaultNetworkBearer:  WIFI
+02-24 15:33:57.473  5846  6010 I PdnController<0>: isNetworkAvailable: isEpdgConnected=false getDataNetworkType()=0
+02-24 15:33:57.474  5846  6010 I RegiMgr-Utils<0>: Not found best network in UNKNOWN - serviceSet empty - OOS: true
+02-24 15:33:57.475  5846  6010 I RegiGvnBase<0>: isReadyToDualRegister : true
+02-24 15:33:57.475  5846  6010 I RegiMgr<0>: [RJIL VoLTE|CONFIGURED] checkInitialRegistrationIsReady: APM ON [false], Roamimg [false]
+02-24 15:33:57.475  5846  6010 I RcsPolicyMgr<0>: pendingRcsRegister: mDefaultPhoneId = 0
+02-24 15:33:57.475  5846  6010 I ImsProfile: isRttSupportByCallApp : false ttyType : 1
+02-24 15:33:57.475  5846  6010 I RegiMgr-Utils<0>: getPriorityRegiedTask : isPriority  High? true
+02-24 15:33:57.475  5846  6010 I RegiMgr-Utils<0>: Profile is in = CONFIGURED
+02-24 15:33:57.476  5846  6010 I RegiGvnBase: checkRegiStatus: getState()=CONFIGURED mIsUpdateRegistering=false
+02-24 15:33:57.477  5846  6010 I RegiMgr<0>: getTelephonyCallStatus:
+02-24 15:33:57.480  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.480  5846  6010 I ConfigTrigger<0>: isWaitAutoConfig:
+02-24 15:33:57.481  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
+02-24 15:33:57.481  5846  6010 I RegiMgr-Utils: selectPdnType: rat=0pdn=11
+02-24 15:33:57.481  5846  6010 I RegiMgr<0>: getServiceForNetwork: network 0
+02-24 15:33:57.481  5846  6010 I RegiMgr<0>: RJIL VoLTE: no ims service for current rat0
+02-24 15:33:57.481  5846  6010 E #IMSCR  : 02-24 15:33:57 0x1101000B:0,FILTERED ALL:11
+02-24 15:33:57.481  5846  6010 I RegiMgr-Handler: handleMessage: EVENT_DO_PENDING_UPDATE_REGISTRATION
+--------- beginning of system
+02-24 15:33:57.793  4490  4490 D io_stats: !@ 179,0 r 7565601 233526361 w 948991 14962844 d 260788 14741952 f 0 0 iot 3373380 0 th 0 0 0 pt 0 inp 0 0 63592.707
+02-24 15:33:57.809  7013  7542 I SDHMS:C : SIOP:: AP:251(345,100) BAT:331(331,0) USB:0(0,0) CHG:360(360,0) BLK:0(0,0) SUBBAT:0(0,0) LRP:334(334,0) LRF:326(326) LRB:334(334) 
+02-24 15:33:59.185  5582  5749 D MobileStatusTracker(0/1): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=CellSignalStrengthWcdma: ss=-89 ber=99 rscp=-89 ecno=0 level=2,mTdscdma=Invalid,mLte=Invalid,mNr=Invalid,SignalBarInfo{ wcdmaLevel=3 },rat=3,primary=CellSignalStrengthWcdma} level=3
+02-24 15:33:59.185  5582  5749 D NetworkController.MobileSignalController(0/1): Display signal bar by emergency only[true][true]
+02-24 15:33:59.187  5582  5749 D NetworkController: SignalStrength from intent slotId=0
+02-24 15:33:59.999  5191  5359 D SamsungAlarmManager: Expired : 8
+02-24 15:34:00.000  5191  5359 V SamsungAlarmManager: Sending to uid : 1000 L=324ac0a:TIME_TICK alarm=Alarm{8c5522b type 3 origWhen 260129166 whenElapsed 260129166 android}
+02-24 15:34:00.001  5191  5359 D SamsungAlarmManager: setExact (T:3/F:9/AC:false) 20250224T153500 now=260129168 - CU:1000/CP:5191/L:324ac0a:TIME_TICK
+02-24 15:34:00.002  5191  5359 V SamsungAlarmManager: setLocked to kernel - W:261695882 / NW:260148089, now=260129169
+02-24 15:34:00.003  5582  6044 D QSClockBellTower: onReceive(android.intent.action.TIME_TICK) mTimeZoneString:null
+02-24 15:34:00.003  5582  5582 D KeyguardUpdateMonitor: received broadcast android.intent.action.TIME_TICK
+02-24 15:34:00.005  5191  5359 V SamsungAlarmManager: setLocked to kernel - W:261695882 / NW:260148089, now=260129171
+02-24 15:34:00.007  5582  5582 D QSClockBellTower: He is ready to ring the bell. (((QSClockBellSound - TimeText:3:34, TimeContentDescription:3:34 pm, DateText:Mon, 24 February, ShortDateText:Mon, 24 Feb, Demofalse)))
+02-24 15:34:00.008  5582  5582 D QSClockHomeIndicatorView: Home Indicator status_bar_clock notifyTimeChanged(QSClockBellSound - TimeText:3:34, TimeContentDescription:3:34 pm, DateText:Mon, 24 February, ShortDateText:Mon, 24 Feb, Demofalse) ClockVisibleByPolicy:true, ClockVisibleByUser:true, visible?true, parent:android.widget.LinearLayout{190f977 V.E...... ......ID 0,0-51,48 #7f0b0472 app:id/left_clock_container}
+02-24 15:34:00.009  5582  5582 D QSClockBellTower: Everyone heard the bell. run(currentTime:1740391440003,   getTime():Mon Feb 24 15:34:00 GMT+05:30 2025,   getTimeZone():libcore.util.ZoneInfo[mDstSavings=0,mUseDst=false,mDelegate=[id="Asia/Kolkata",mRawOffset=19800000,mEarliestRawOffset=21208000,transitions=7]])
+02-24 15:34:00.009  5582  5582 D KeyguardUpdateMonitor: handleTimeUpdate
+02-24 15:34:00.009  5582  5582 D FaceWidgetPagesController: onTimeChanged()
+02-24 15:34:00.025  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
+02-24 15:34:00.026  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
+02-24 15:34:00.026  5582  5582 V SecQSFragmentAnimatorBase: setQsExpansionPosition 0.0
+02-24 15:34:00.026  5582  5582 V QsExpandAnimator: setQsExpansionPosition 0.0 0
+02-24 15:34:00.026  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
+02-24 15:34:00.028  5582  5582 D IndicatorGardenInputProperty: updateRotation() prv:-1 >> new:0
+02-24 15:34:00.028  5582  5582 D DeviceState: getDeviceResolutionPixelSize - currentDensity = 280 deviceDensity = 280 initialDisplaySizeFactor = 720 currentDisplaySizeFactor = 720 initialDisplayDensity = 280 proportionalDensity = 280 proportionalPixel = 40
+02-24 15:34:00.028  5582  5582 D DeviceState: getDeviceResolutionPixelSize - currentDensity = 280 deviceDensity = 280 initialDisplaySizeFactor = 720 currentDisplaySizeFactor = 720 initialDisplayDensity = 280 proportionalDensity = 280 proportionalPixel = 18
+02-24 15:34:00.028  5582  5582 D DeviceState: getDeviceResolutionPixelSize - currentDensity = 280 deviceDensity = 280 initialDisplaySizeFactor = 720 currentDisplaySizeFactor = 720 initialDisplayDensity = 280 proportionalDensity = 280 proportionalPixel = 20
+02-24 15:34:00.029  5582  5582 V QsExpandAnimator: updateAnimators
+02-24 15:34:00.029  5582  5582 V QsExpandAnimator: clearAnimationState 
+02-24 15:34:00.030  5582  5582 V QsExpandAnimator: setQsExpansionPosition 0.0 0
+02-24 15:34:00.032 10622 10622 W NavigableAppWidgetHostView: setResizeScaleResult() 668/ 233 scaleToResize = 1.0(widget id = 2) 524fdfb 0,237-668,470
+02-24 15:34:00.032 10622 10622 W NavigableAppWidgetHostView: setResizeScaleResult() 668/ 233 scaleToResize = 1.0(widget id = 3) fa74071 0,711-668,944
+02-24 15:34:00.032 10622 10622 W NavigableAppWidgetHostView: setResizeScaleResult() 668/ 233 scaleToResize = 1.0(widget id = 5) b55b906 0,0-668,233
+02-24 15:34:00.035 10622 10622 I BadgeRenderer: Invalid count : 0
+02-24 15:34:00.047  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 15:34:01.867 11021 11021 I wpa_supplicant: Heartbeat 5301

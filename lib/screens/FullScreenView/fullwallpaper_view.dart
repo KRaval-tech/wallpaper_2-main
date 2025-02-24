@@ -406,63 +406,101 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
       builder: (BuildContext context) {
         final wallpaper = widget.wallpapers[currentIndex];
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(8.h),
           height: 355.h,
-          child: ListView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ListTile(
-                leading: CustomImageView(
-                  imagePath: ImageConstant.imgLock,
-                  height: 18.h,
-                  width: 18.h,
+              // Centered Line
+              Container(
+                width: 72, // Width of the line
+                height: 4.h,  // Thickness of the line
+                decoration: BoxDecoration(
+                  color: Color(0xFF1F1F1F),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                title: Text("Set as Lock Screen", style: TextStyle(color: Colors.black)),
-                onTap: () {
-                  _setWallpaper('lock', wallpaper['download_url']);
-                  Navigator.pop(context);
-                },
               ),
-              ListTile(
-                leading: CustomImageView(
-                  imagePath: ImageConstant.imgHome,
-                  height: 18.h,
-                  width: 18.h,
+              SizedBox(height: 16.h), // Space below the line
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    ListTile(
+                      leading: CustomImageView(
+                        imagePath: ImageConstant.imgLock,
+                        height: 18.h,
+                        width: 18.h,
+                      ),
+                      title: Text("Set as Lock Screen", style: TextStyle(
+                          color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Roboto",
+                        fontSize: 16.fSize,
+                      )),
+                      onTap: () {
+                        _setWallpaper('lock', wallpaper['download_url']);
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: CustomImageView(
+                        imagePath: ImageConstant.imgHome,
+                        height: 18.h,
+                        width: 18.h,
+                      ),
+                      title: Text("Set as Home Screen", style: TextStyle(
+                          color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Roboto",
+                        fontSize: 16.fSize,
+                      )),
+                      onTap: () {
+                        _setWallpaper('home', wallpaper['download_url']);
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: CustomImageView(
+                        imagePath: ImageConstant.imgMouseSquare,
+                        height: 18.h,
+                        width: 18.h,
+                      ),
+                      title: Text("Set as Both", style: TextStyle(
+                          color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Roboto",
+                        fontSize: 16.fSize,
+                      )),
+                      onTap: () {
+                        _setWallpaper('both', wallpaper['download_url']);
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: CustomImageView(
+                        imagePath: ImageConstant.imgDanger,
+                        height: 18.h,
+                        width: 18.h,
+                      ),
+                      title: Text("Report this Photo", style: TextStyle(
+                          color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Roboto",
+                        fontSize: 16.fSize,
+                      )),
+                      onTap: () {
+                        _reportWallpaper(wallpaper['download_url']);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
                 ),
-                title: Text("Set as Home Screen", style: TextStyle(color: Colors.black)),
-                onTap: () {
-                  _setWallpaper('home', wallpaper['download_url']);
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: CustomImageView(
-                  imagePath: ImageConstant.imgMouseSquare,
-                  height: 18.h,
-                  width: 18.h,
-                ),
-                title: Text("Set as Both", style: TextStyle(color: Colors.black)),
-                onTap: () {
-                  _setWallpaper('both', wallpaper['download_url']);
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: CustomImageView(
-                  imagePath: ImageConstant.imgDanger,
-                  height: 18.h,
-                  width: 18.h,
-                ),
-                title: Text("Report this Photo", style: TextStyle(color: Colors.black)),
-                onTap: () {
-                  _reportWallpaper(wallpaper['download_url']);
-                  Navigator.pop(context);
-                },
               ),
             ],
           ),
         );
       },
-    ).whenComplete((){
+    ).whenComplete(() {
       _animationController.reverse();
     });
   }
