@@ -1,102 +1,146 @@
 --------- beginning of main
-02-24 15:33:57.455  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.456  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.456  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.457  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.457  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.457  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.457  5846  6010 I ConfigProvider: query uri:xxxxx
-02-24 15:33:57.462  5528  5528 I Telephony: TelecomAccountRegistry$AccountEntry: isRttCurrentlySupported -- regular acct,, hasVoiceAvailability: false, isRttSupported: false, alwaysAllowWhileRoaming: false, isRoaming: false, isOnWfc: false
-02-24 15:33:57.462  5528  5528 V PhoneGlobals: handleServiceStateChanged
-02-24 15:33:57.463  5528  5528 D NotificationMgr: updateNetworkSelection, Use Samsung codes instead of AOSP codes
-02-24 15:33:57.463  5528  5528 V PhoneGlobals: subId=1,mDefaultDataSubId=1,ss roaming=false
-02-24 15:33:57.463  5528  5528 V PhoneGlobals: updateDataRoamingStatus
-02-24 15:33:57.464  5528  5528 V PhoneGlobals: dataAllowed=false, reasons=Data disallowed reasons: DATA_DISABLED NOT_ATTACHED
-02-24 15:33:57.465  5846  6010 I ConfigProvider: initStorage: phone:0 get storage from configmodule
-02-24 15:33:57.465  5846  6010 I ConfigProvider: queryStorage path content://com.samsung.rcs.autoconfigurationprovider/parameter/geolocPushAuth#simslot0
-02-24 15:33:57.466  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
-02-24 15:33:57.466  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
-02-24 15:33:57.467  5846  6010 I FeatureUpdater: isEnableGls: false
-02-24 15:33:57.468  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.468  5846  6010 I CapexInfo: getFeatureTag: features = 0 []
-02-24 15:33:57.468  5846  6010 I FeatureUpdater: updateFeatures: 
-02-24 15:33:57.468  5846  6010 I ImModule: FEATURE_CHATBOT_EXTENDED_MSG enabled ver:1.3
-02-24 15:33:57.468  5846  6010 I RcsUtils: isDualRcsReg: mIsDualRcsReg false
-02-24 15:33:57.468  5846  6010 I SmsServiceModule: regInfo: null
-02-24 15:33:57.468  5846  6010 I SmsServiceModule: disallow sms Service
-02-24 15:33:57.468  5846  6010 I SmsServiceModule: Sms Service queryCapabilityStatus[0]: removeCapabilities CAPABILITY_TYPE_SMS
-02-24 15:33:57.468  5846  6010 E CmcServiceHelper: disallow Call Service
-02-24 15:33:57.468  5846  6010 E CmcServiceHelper: disallow Call Service
-02-24 15:33:57.468  5846  6010 I UtServiceModule<0>: isUtEnabled with policy : PS enabled = true
-02-24 15:33:57.468  5846  6010 I CapabilityDiscModule<0>: queryCapabilityStatus
-02-24 15:33:57.468  5846  6010 E CapabilityUtil<0>: checkModuleReady: mConfig.isAvailable == false
-02-24 15:33:57.468  5846  6010 I CapabilityDiscModule<0>: isUceServiceAvailable: not ready
-02-24 15:33:57.468  5846  6010 E CapabilityUtil<0>: checkModuleReady: mConfig.isAvailable == false
-02-24 15:33:57.468  5846  6010 I CapabilityDiscModule<0>: isUceServiceAvailable: not ready
-02-24 15:33:57.468  5846  6010 I RegiMgr-NetEvtCtr<0>: out of service.
-02-24 15:33:57.468  5846  6010 I SimManager: getRilSimOperator: ETC
-02-24 15:33:57.468  5846  6010 I SimManager<0>: hasIsim: [true]
-02-24 15:33:57.468  5846  6010 I SimManager: mSimState:LOADED, mIsimLoaded:true, hasIsim():true
-02-24 15:33:57.469  5846  6010 I RegiMgr-NetEvtCtr<0>: onNetworkEventChanged: tryRegister by phoneID
-02-24 15:33:57.469  5846  6010 I RegiMgr<0>: tryRegister:
-02-24 15:33:57.469  5846  6010 I RegiMgr<0>: RegisterTask(s): RJIL VoLTE (CONFIGURED)
-02-24 15:33:57.469  5846  6010 I RcsPolicyMgr<0>: pendingRcsRegister: mDefaultPhoneId = 0
-02-24 15:33:57.469  5846  6010 I RegisterTask: isSuspended: mSuspended(false) mSuspendByIrat(false)
-02-24 15:33:57.469  5846  6010 I RegiMgr<0>: [RJIL VoLTE|CONFIGURED] checkForTryRegister id: 623
-02-24 15:33:57.469  5846  6010 I PdnController: isConnected: No callback exists
-02-24 15:33:57.469  5846  6010 I RegiMgr : isPdnConnected: false, PdnType: 11
-02-24 15:33:57.473  5846  6010 I PdnController: getDefaultNetworkBearer:  WIFI
-02-24 15:33:57.473  5846  6010 I PdnController<0>: isNetworkAvailable: isEpdgConnected=false getDataNetworkType()=0
-02-24 15:33:57.474  5846  6010 I RegiMgr-Utils<0>: Not found best network in UNKNOWN - serviceSet empty - OOS: true
-02-24 15:33:57.475  5846  6010 I RegiGvnBase<0>: isReadyToDualRegister : true
-02-24 15:33:57.475  5846  6010 I RegiMgr<0>: [RJIL VoLTE|CONFIGURED] checkInitialRegistrationIsReady: APM ON [false], Roamimg [false]
-02-24 15:33:57.475  5846  6010 I RcsPolicyMgr<0>: pendingRcsRegister: mDefaultPhoneId = 0
-02-24 15:33:57.475  5846  6010 I ImsProfile: isRttSupportByCallApp : false ttyType : 1
-02-24 15:33:57.475  5846  6010 I RegiMgr-Utils<0>: getPriorityRegiedTask : isPriority  High? true
-02-24 15:33:57.475  5846  6010 I RegiMgr-Utils<0>: Profile is in = CONFIGURED
-02-24 15:33:57.476  5846  6010 I RegiGvnBase: checkRegiStatus: getState()=CONFIGURED mIsUpdateRegistering=false
-02-24 15:33:57.477  5846  6010 I RegiMgr<0>: getTelephonyCallStatus:
-02-24 15:33:57.480  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.480  5846  6010 I ConfigTrigger<0>: isWaitAutoConfig:
-02-24 15:33:57.481  5846  6010 I ImsServiceSwitchEur[0]:  isRcsEnabled: true mDefaultSms true mUpsmEnabled false mEmergencyEnabled false
-02-24 15:33:57.481  5846  6010 I RegiMgr-Utils: selectPdnType: rat=0pdn=11
-02-24 15:33:57.481  5846  6010 I RegiMgr<0>: getServiceForNetwork: network 0
-02-24 15:33:57.481  5846  6010 I RegiMgr<0>: RJIL VoLTE: no ims service for current rat0
-02-24 15:33:57.481  5846  6010 E #IMSCR  : 02-24 15:33:57 0x1101000B:0,FILTERED ALL:11
-02-24 15:33:57.481  5846  6010 I RegiMgr-Handler: handleMessage: EVENT_DO_PENDING_UPDATE_REGISTRATION
+02-24 16:49:55.164  3760  3760 I DecorView: [INFO] isPopOver=false, config=false
+02-24 16:49:55.164  3760  3760 I DecorView: updateCaptionType >> DecorView@c45096c[InputMethod], isFloating=true, isApplication=false, hasWindowControllerCallback=false, hasWindowDecorCaption=false
+02-24 16:49:55.168  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.175  3567  3773 I FolderInfo: Add - AppInfo(id=691 type=APP hidden=0 container=674 screen=0 rank=4 rankOfList=-1 user=UserHandle{0} title=appOpenAds componentName=ComponentInfo{com.example.appopenads/com.example.appopenads.SplashActivity} screenType=0) rank : 4 animate : false
+02-24 16:49:55.183  3760  3760 I HBD     : a undoMinimize requested, minimized = false 
+02-24 16:49:55.185  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.185  3567  3773 I FolderInfo: Add - AppInfo(id=692 type=APP hidden=0 container=674 screen=0 rank=5 rankOfList=-1 user=UserHandle{0} title=BannerAds componentName=ComponentInfo{com.example.bannerads/com.example.bannerads.MainActivity} screenType=0) rank : 5 animate : false
+02-24 16:49:55.191  3760  3760 I HBD     : e mUsedOpenTheme = false IsRequiredDarkTypeTheme = false night mode : false mIsEnabledHighContrast = false mIsOpenThemeForHoneyBoardInstalled = true mIsWallpaperThemeInstalled = true mIsThemeParkTheme = false
+02-24 16:49:55.191  3760  3760 I HBD     : a theme : HomeThemeLastUsed  
+02-24 16:49:55.192  3760  3760 I HBD     : f update KeyboardTheme themeIndex : 0x 80000000  theme :  Home Theme <open theme>
+02-24 16:49:55.192  3760  3760 I HBD     : a set Theme convertedIndex : 1 
+02-24 16:49:55.193  3760  3760 I HBD     : a themeStyleSet :1 
+02-24 16:49:55.193  3760  3760 I HBD     : a onThemeChanged: currTheme = 2, nextTheme = 1 
+02-24 16:49:55.194  3567  3773 I FolderInfo: Add - AppInfo(id=694 type=APP hidden=0 container=673 screen=0 rank=5 rankOfList=-1 user=UserHandle{0} title=n_ads componentName=ComponentInfo{com.example.n_ads/com.example.n_ads.MainActivity} screenType=0) rank : 5 animate : false
+02-24 16:49:55.197  3760  3760 I HBD     : b color = [r : 229], [g : 225], [b : 220], [alpha : 255], rgb = -1711652, isDark = false 
+02-24 16:49:55.198  3760  3760 I HBD     : b updateBackgroundColor: keyboardBgColor = 0xffe5e1dc, isDarkTheme = false 
+02-24 16:49:55.202  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.204  3567  3773 I FolderInfo: Add - AppInfo(id=695 type=APP hidden=0 container=674 screen=0 rank=6 rankOfList=-1 user=UserHandle{0} title=AdMob Interstitial Example componentName=ComponentInfo{com.example.interstitialexample/com.example.interstitialexample.MainActivity} screenType=0) rank : 6 animate : false
+02-24 16:49:55.213  3567  3773 I FolderInfo: Add - AppInfo(id=696 type=APP hidden=0 container=674 screen=0 rank=7 rankOfList=-1 user=UserHandle{0} title=NativeAds componentName=ComponentInfo{com.example.nativeads/com.example.nativeads.MainActivity} screenType=0) rank : 7 animate : false
+02-24 16:49:55.218  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.221  3760  3760 I HBD     : a registerUpdater: size = 2 
+02-24 16:49:55.224  3567  3773 I FolderInfo: Add - AppInfo(id=697 type=APP hidden=0 container=673 screen=0 rank=6 rankOfList=-1 user=UserHandle{0} title=collap_ads componentName=ComponentInfo{com.example.collap_ads/com.example.collap_ads.MainActivity} screenType=0) rank : 6 animate : false
+02-24 16:49:55.232  3567  3773 I FolderInfo: Add - AppInfo(id=699 type=APP hidden=0 container=673 screen=0 rank=7 rankOfList=-1 user=UserHandle{0} title=native_ads_demo componentName=ComponentInfo{com.example.native_ads_demo/com.example.native_ads_demo.third_activity} screenType=0) rank : 7 animate : false
+02-24 16:49:55.235  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.243  3760  3760 E HBD     : b SVoice is not found :  
+02-24 16:49:55.243  3760  3760 E HBD     : android.content.pm.PackageManager$NameNotFoundException: com.samsung.android.svoiceime
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.app.ApplicationPackageManager.getApplicationInfoAsUser(ApplicationPackageManager.java:540)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.app.ApplicationPackageManager.getApplicationInfo(ApplicationPackageManager.java:493)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.a.c.b.b(SourceFile:91)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.a.c.b.a(SourceFile:84)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.c.i(SourceFile:47)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.c.b(SourceFile:149)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.a.f(SourceFile:86)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.a.u(SourceFile:72)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.a.s(SourceFile:59)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.a.<init>(SourceFile:49)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.l.a$a$9.a(SourceFile:82)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.l.a$a$9.invoke(Unknown Source:4)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.d.a.b(SourceFile:54)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.d.e.a(SourceFile:40)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.b.a.a(SourceFile:70)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.j.a.a(SourceFile:165)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.j.a.a(SourceFile:128)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.b$a.invoke(SourceFile:327)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at kotlin.SynchronizedLazyImpl.getValue(SourceFile:74)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.b.E(Unknown Source:2)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.b.H(SourceFile:65)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.friends.b.b.<init>(SourceFile:21)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.b.c.<init>(SourceFile:77)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.l.a$a$4.a(SourceFile:75)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.l.a$a$4.invoke(Unknown Source:4)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.d.a.b(SourceFile:54)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.d.e.a(SourceFile:40)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.b.a.a(SourceFile:70)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.j.a.a(SourceFile:165)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at org.koin.b.j.a.a(SourceFile:128)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.e.b.k_(SourceFile:173)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.common.f.a.k_(SourceFile:16)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.samsung.android.honeyboard.service.HoneyBoardService.onCreate(SourceFile:249)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.app.ActivityThread.handleCreateService(ActivityThread.java:4940)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.app.ActivityThread.access$1800(ActivityThread.java:310)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2300)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.os.Handler.dispatchMessage(Handler.java:106)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.os.Looper.loopOnce(Looper.java:226)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.os.Looper.loop(Looper.java:313)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at android.app.ActivityThread.main(ActivityThread.java:8669)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at java.lang.reflect.Method.invoke(Native Method)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:571)
+02-24 16:49:55.243  3760  3760 E HBD     : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1135)
+02-24 16:49:55.248  3567  3773 I FolderInfo: Add - AppInfo(id=700 type=APP hidden=0 container=674 screen=0 rank=8 rankOfList=-1 user=UserHandle{0} title=Food App with Native Ads componentName=ComponentInfo{com.example.foodappwithnative/com.example.foodappwithnative.HomePa} screenType=0) rank : 8 animate : false
+02-24 16:49:55.249  3760  3760 I HBD     : c getVoiceTrigger - GoogleImeTrigger 
+02-24 16:49:55.252  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.252  3760  3760 I HBD     : a registerUpdater: size = 3 
+02-24 16:49:55.253  3760  3760 I HBD     : a registerUpdater: size = 4 
+02-24 16:49:55.255  3760  3760 I HBD     : a registerUpdater: size = 5 
+02-24 16:49:55.256  3760  3760 I HBD     : a registerUpdater: size = 6 
+02-24 16:49:55.268  3760  3760 I HBD     : a registerUpdater: size = 7 
+02-24 16:49:55.268  3567  3773 I FolderInfo: Add - AppInfo(id=702 type=APP hidden=0 container=673 screen=0 rank=8 rankOfList=-1 user=UserHandle{0} title=fruit_recycler componentName=ComponentInfo{com.example.fruit_recycler/com.example.fruit_recycler.MainActivity} screenType=0) rank : 8 animate : false
+02-24 16:49:55.268  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.269  3760  3760 I HBD     : a registerUpdater: size = 8 
+02-24 16:49:55.271  3760  3760 I HBD     : a registerUpdater: size = 9 
+02-24 16:49:55.273  3760  3760 I HBD     : a [UpdatePolicy] [post] a: 21 cl: 65555 kit: [0/0] vt: 0 ir: 1 
+02-24 16:49:55.273  3760  3760 I HBD     : a New slots have been added [0~3] 
 --------- beginning of system
-02-24 15:33:57.793  4490  4490 D io_stats: !@ 179,0 r 7565601 233526361 w 948991 14962844 d 260788 14741952 f 0 0 iot 3373380 0 th 0 0 0 pt 0 inp 0 0 63592.707
-02-24 15:33:57.809  7013  7542 I SDHMS:C : SIOP:: AP:251(345,100) BAT:331(331,0) USB:0(0,0) CHG:360(360,0) BLK:0(0,0) SUBBAT:0(0,0) LRP:334(334,0) LRF:326(326) LRB:334(334) 
-02-24 15:33:59.185  5582  5749 D MobileStatusTracker(0/1): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=CellSignalStrengthWcdma: ss=-89 ber=99 rscp=-89 ecno=0 level=2,mTdscdma=Invalid,mLte=Invalid,mNr=Invalid,SignalBarInfo{ wcdmaLevel=3 },rat=3,primary=CellSignalStrengthWcdma} level=3
-02-24 15:33:59.185  5582  5749 D NetworkController.MobileSignalController(0/1): Display signal bar by emergency only[true][true]
-02-24 15:33:59.187  5582  5749 D NetworkController: SignalStrength from intent slotId=0
-02-24 15:33:59.999  5191  5359 D SamsungAlarmManager: Expired : 8
-02-24 15:34:00.000  5191  5359 V SamsungAlarmManager: Sending to uid : 1000 L=324ac0a:TIME_TICK alarm=Alarm{8c5522b type 3 origWhen 260129166 whenElapsed 260129166 android}
-02-24 15:34:00.001  5191  5359 D SamsungAlarmManager: setExact (T:3/F:9/AC:false) 20250224T153500 now=260129168 - CU:1000/CP:5191/L:324ac0a:TIME_TICK
-02-24 15:34:00.002  5191  5359 V SamsungAlarmManager: setLocked to kernel - W:261695882 / NW:260148089, now=260129169
-02-24 15:34:00.003  5582  6044 D QSClockBellTower: onReceive(android.intent.action.TIME_TICK) mTimeZoneString:null
-02-24 15:34:00.003  5582  5582 D KeyguardUpdateMonitor: received broadcast android.intent.action.TIME_TICK
-02-24 15:34:00.005  5191  5359 V SamsungAlarmManager: setLocked to kernel - W:261695882 / NW:260148089, now=260129171
-02-24 15:34:00.007  5582  5582 D QSClockBellTower: He is ready to ring the bell. (((QSClockBellSound - TimeText:3:34, TimeContentDescription:3:34 pm, DateText:Mon, 24 February, ShortDateText:Mon, 24 Feb, Demofalse)))
-02-24 15:34:00.008  5582  5582 D QSClockHomeIndicatorView: Home Indicator status_bar_clock notifyTimeChanged(QSClockBellSound - TimeText:3:34, TimeContentDescription:3:34 pm, DateText:Mon, 24 February, ShortDateText:Mon, 24 Feb, Demofalse) ClockVisibleByPolicy:true, ClockVisibleByUser:true, visible?true, parent:android.widget.LinearLayout{190f977 V.E...... ......ID 0,0-51,48 #7f0b0472 app:id/left_clock_container}
-02-24 15:34:00.009  5582  5582 D QSClockBellTower: Everyone heard the bell. run(currentTime:1740391440003,   getTime():Mon Feb 24 15:34:00 GMT+05:30 2025,   getTimeZone():libcore.util.ZoneInfo[mDstSavings=0,mUseDst=false,mDelegate=[id="Asia/Kolkata",mRawOffset=19800000,mEarliestRawOffset=21208000,transitions=7]])
-02-24 15:34:00.009  5582  5582 D KeyguardUpdateMonitor: handleTimeUpdate
-02-24 15:34:00.009  5582  5582 D FaceWidgetPagesController: onTimeChanged()
-02-24 15:34:00.025  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
-02-24 15:34:00.026  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
-02-24 15:34:00.026  5582  5582 V SecQSFragmentAnimatorBase: setQsExpansionPosition 0.0
-02-24 15:34:00.026  5582  5582 V QsExpandAnimator: setQsExpansionPosition 0.0 0
-02-24 15:34:00.026  5582  5582 D QS      : setQSExpansion 0.0 -79.975006
-02-24 15:34:00.028  5582  5582 D IndicatorGardenInputProperty: updateRotation() prv:-1 >> new:0
-02-24 15:34:00.028  5582  5582 D DeviceState: getDeviceResolutionPixelSize - currentDensity = 280 deviceDensity = 280 initialDisplaySizeFactor = 720 currentDisplaySizeFactor = 720 initialDisplayDensity = 280 proportionalDensity = 280 proportionalPixel = 40
-02-24 15:34:00.028  5582  5582 D DeviceState: getDeviceResolutionPixelSize - currentDensity = 280 deviceDensity = 280 initialDisplaySizeFactor = 720 currentDisplaySizeFactor = 720 initialDisplayDensity = 280 proportionalDensity = 280 proportionalPixel = 18
-02-24 15:34:00.028  5582  5582 D DeviceState: getDeviceResolutionPixelSize - currentDensity = 280 deviceDensity = 280 initialDisplaySizeFactor = 720 currentDisplaySizeFactor = 720 initialDisplayDensity = 280 proportionalDensity = 280 proportionalPixel = 20
-02-24 15:34:00.029  5582  5582 V QsExpandAnimator: updateAnimators
-02-24 15:34:00.029  5582  5582 V QsExpandAnimator: clearAnimationState 
-02-24 15:34:00.030  5582  5582 V QsExpandAnimator: setQsExpansionPosition 0.0 0
-02-24 15:34:00.032 10622 10622 W NavigableAppWidgetHostView: setResizeScaleResult() 668/ 233 scaleToResize = 1.0(widget id = 2) 524fdfb 0,237-668,470
-02-24 15:34:00.032 10622 10622 W NavigableAppWidgetHostView: setResizeScaleResult() 668/ 233 scaleToResize = 1.0(widget id = 3) fa74071 0,711-668,944
-02-24 15:34:00.032 10622 10622 W NavigableAppWidgetHostView: setResizeScaleResult() 668/ 233 scaleToResize = 1.0(widget id = 5) b55b906 0,0-668,233
-02-24 15:34:00.035 10622 10622 I BadgeRenderer: Invalid count : 0
-02-24 15:34:00.047  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
-02-24 15:34:01.867 11021 11021 I wpa_supplicant: Heartbeat 5301
+02-24 16:49:55.282  5191  7071 D SettingsProvider: isChangeAllowed() : name = enabled_input_methods
+02-24 16:49:55.282  5191  7071 D SettingsProvider: edmUri: content://com.sec.knox.provider/RestrictionPolicy3
+02-24 16:49:55.282  5191  7071 D SettingsProvider: projectionArgs: isSettingsChangesAllowed
+02-24 16:49:55.282  5191  7071 D SettingsProvider: selectionArgs: false
+02-24 16:49:55.282  5191  7071 D SettingsProvider: selectionArgs: 10173
+02-24 16:49:55.282  5191  7071 D SecContentProvider: query(), uri = 17 selection = isSettingsChangesAllowed
+02-24 16:49:55.283  5191  7071 D SecContentProvider: called from android.uid.honeyboard:10173
+02-24 16:49:55.283  5191  7071 D RestrictionPolicy: isSettingsChangesAllowedAsUser, userId 0 : true
+02-24 16:49:55.283  5191  7071 D SettingsProvider: ret = 1
+02-24 16:49:55.285  5191  5845 D SettingsProvider: isChangeAllowed() : name = default_input_method
+02-24 16:49:55.285  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.285  5191  5845 D SettingsProvider: edmUri: content://com.sec.knox.provider/RestrictionPolicy3
+02-24 16:49:55.285  5191  5845 D SettingsProvider: projectionArgs: isSettingsChangesAllowed
+02-24 16:49:55.285  5191  5845 D SettingsProvider: selectionArgs: false
+02-24 16:49:55.285  5191  5845 D SettingsProvider: selectionArgs: 10173
+02-24 16:49:55.285  5191  5845 D SecContentProvider: query(), uri = 17 selection = isSettingsChangesAllowed
+02-24 16:49:55.285  5191  5845 D SecContentProvider: called from android.uid.honeyboard:10173
+02-24 16:49:55.286  5191  5845 D RestrictionPolicy: isSettingsChangesAllowedAsUser, userId 0 : true
+02-24 16:49:55.286  5191  5845 D SettingsProvider: ret = 1
+02-24 16:49:55.288  3567  3773 I FolderInfo: Add - AppInfo(id=705 type=APP hidden=0 container=674 screen=0 rank=11 rankOfList=-1 user=UserHandle{0} title=ContentNative componentName=ComponentInfo{com.example.contentnative/com.example.contentnative.MainActivity} screenType=0) rank : 9 animate : false
+02-24 16:49:55.291  3760  3787 I HBD     : m updated Sub Types. English(India) 
+02-24 16:49:55.296  3567  3773 I FolderInfo: Add - AppInfo(id=706 type=APP hidden=0 container=673 screen=0 rank=9 rankOfList=-1 user=UserHandle{0} title=rewarded_ads componentName=ComponentInfo{com.example.rewarded_ads/com.example.rewarded_ads.splash_screen} screenType=0) rank : 9 animate : false
+02-24 16:49:55.297  3760  3760 I HBD     : a registerUpdater: size = 10 
+02-24 16:49:55.302  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.305  3567  3773 I FolderInfo: Add - AppInfo(id=707 type=APP hidden=0 container=674 screen=0 rank=10 rankOfList=-1 user=UserHandle{0} title=nativeVideo componentName=ComponentInfo{com.example.nativevideo/com.example.nativevideo.MainActivity} screenType=0) rank : 10 animate : false
+02-24 16:49:55.313  3760  3806 I HBD     : a InputMethodSubtype is set as local:en_IN 
+02-24 16:49:55.315  3567  3773 I FolderInfo: Add - AppInfo(id=709 type=APP hidden=0 container=674 screen=0 rank=9 rankOfList=-1 user=UserHandle{0} title=nativeFullScreen componentName=ComponentInfo{com.example.nativefullscreen/com.example.nativefullscreen.MainActivity} screenType=0) rank : 11 animate : false
+02-24 16:49:55.318  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.324  3567  3773 I FolderInfo: Add - AppInfo(id=711 type=APP hidden=0 container=674 screen=0 rank=12 rankOfList=-1 user=UserHandle{0} title=RewardedAds componentName=ComponentInfo{com.example.rewardedadreference/com.example.rewardedadreference.QuizeApp} screenType=0) rank : 12 animate : false
+02-24 16:49:55.333  3567  3773 I FolderInfo: Add - AppInfo(id=712 type=APP hidden=0 container=674 screen=0 rank=13 rankOfList=-1 user=UserHandle{0} title=RewardedInterstitialAd componentName=ComponentInfo{com.example.rewardedinterstitialad/com.example.rewardedinterstitialad.quize} screenType=0) rank : 13 animate : false
+02-24 16:49:55.335  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.343  3567  3773 I FolderInfo: Add - AppInfo(id=716 type=APP hidden=0 container=674 screen=0 rank=14 rankOfList=-1 user=UserHandle{0} title=MetaAudienceNetworkBannerAds componentName=ComponentInfo{com.example.metaaudiencenetworkbannerads/com.example.metaaudiencenetworkbannerads.MainActivity} screenType=0) rank : 14 animate : false
+02-24 16:49:55.352  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.355  3567  3773 I FolderInfo: Add - AppInfo(id=717 type=APP hidden=0 container=674 screen=0 rank=18 rankOfList=-1 user=UserHandle{0} title=AudienceNetworkInterstitial Ads componentName=ComponentInfo{com.example.audiencenetworkinterstitialads/com.example.audiencenetworkinterstitialads.MainActivity} screenType=0) rank : 15 animate : false
+02-24 16:49:55.361  3760  3760 E IceCone : a updateBeeInfo failed 
+02-24 16:49:55.365  3567  3773 I FolderInfo: Add - AppInfo(id=718 type=APP hidden=0 container=674 screen=0 rank=15 rankOfList=-1 user=UserHandle{0} title=MetaAudienceNetworkNativeAd componentName=ComponentInfo{com.example.metaaudiencenetworknativead/com.example.metaaudiencenetworknativead.MainActivity} screenType=0) rank : 16 animate : false
+02-24 16:49:55.366  3760  3760 I IceCone : a [SM] register 
+02-24 16:49:55.369  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.371  3760  3760 I IceCone : c [SB] register 
+02-24 16:49:55.376  3567  3773 I FolderInfo: Add - AppInfo(id=720 type=APP hidden=0 container=674 screen=0 rank=16 rankOfList=-1 user=UserHandle{0} title=MetaAudienceRewardedVideoAds componentName=ComponentInfo{com.example.metaaudiencerewardedvideoads/com.example.metaaudiencerewardedvideoads.MainActivity} screenType=0) rank : 17 animate : false
+02-24 16:49:55.385  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.386  3567  3773 I FolderInfo: Add - AppInfo(id=721 type=APP hidden=0 container=674 screen=0 rank=17 rankOfList=-1 user=UserHandle{0} title=MetaRewardedInterstitialAds componentName=ComponentInfo{com.example.metarewardedinterstitialads/com.example.metarewardedinterstitialads.MainActivity} screenType=0) rank : 18 animate : false
+02-24 16:49:55.390  3760  3760 I IceCone : a java.lang.SecurityException: Failed to find provider com.bitstrips.imoji.provider for user 0; expected to find a valid ContentProvider for this authority, bitmoji provider register failed 
+02-24 16:49:55.397  3760  3760 I HBD     : a setPortHeightToSetting value:500 
+02-24 16:49:55.398  5191  6241 D SettingsProvider: isChangeAllowed() : name = com.sec.android.inputmethod.height
+02-24 16:49:55.398  5191  6241 D SettingsProvider: edmUri: content://com.sec.knox.provider/RestrictionPolicy3
+02-24 16:49:55.398  5191  6241 D SettingsProvider: projectionArgs: isSettingsChangesAllowed
+02-24 16:49:55.398  5191  6241 D SettingsProvider: selectionArgs: false
+02-24 16:49:55.398  5191  6241 D SettingsProvider: selectionArgs: 10173
+02-24 16:49:55.398  5191  6241 D SecContentProvider: query(), uri = 17 selection = isSettingsChangesAllowed
+02-24 16:49:55.398  5191  6241 D SecContentProvider: called from android.uid.honeyboard:10173
+02-24 16:49:55.398  5191  6241 D RestrictionPolicy: isSettingsChangesAllowedAsUser, userId 0 : true
+02-24 16:49:55.398  5191  6241 D SettingsProvider: ret = 1
+02-24 16:49:55.402  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.418  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.435  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.452  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.465  3562  3696 E ChimeraPrvdrProxy: Provider proxy missing implementation
+02-24 16:49:55.469  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.485  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER
+02-24 16:49:55.502  4903  4903 E SurfaceFlinger: Attempt to update InputPolicyFlags without permission ACCESS_SURFACE_FLINGER

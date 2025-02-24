@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -514,8 +515,14 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
         color: Colors.black,
         child: Stack(
           children: [
-            Image.network(
-              wallpaper['download_url'],
+            // Image.network(
+            //   wallpaper['download_url'],
+            //   fit: BoxFit.cover,
+            //   width: double.infinity,
+            //   height: double.infinity,
+            // ),
+            CachedNetworkImage(
+                imageUrl: wallpaper['download_url'],
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,

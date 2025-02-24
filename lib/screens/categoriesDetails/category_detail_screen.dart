@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_2/screens/categoriesDetails/bloc/category_detail_bloc.dart';
@@ -112,11 +113,22 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                         },
                         child: Stack(
                           children: [
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(6),
+                            //     image: DecorationImage(
+                            //       image: NetworkImage(wallpaper["download_url"]),
+                            //       fit: BoxFit.cover,
+                            //     ),
+                            //   ),
+                            // ),
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
                                 image: DecorationImage(
-                                  image: NetworkImage(wallpaper["download_url"]),
+                                  image: CachedNetworkImageProvider(
+                                    wallpaper["download_url"],
+                                  ),
                                   fit: BoxFit.cover,
                                 ),
                               ),
