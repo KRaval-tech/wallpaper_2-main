@@ -46,6 +46,8 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                 } else if (state is CategoryDetailLoaded) {
                   final allWallpapers = [...state.wallpapers, ...state.wallpaper2]; // Dono lists merge
                   return GridView.builder(
+                    shrinkWrap: true,
+                    cacheExtent: 1000,
                     padding: const EdgeInsets.all(16),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,

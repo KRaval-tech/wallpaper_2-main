@@ -67,6 +67,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   @override
   void dispose() {
     RewardedAdHelper.onScreenExit();
+    _adHelper.dispose();
     _animationController.dispose();
     super.dispose();
   }

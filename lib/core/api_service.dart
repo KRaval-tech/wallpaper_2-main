@@ -31,7 +31,7 @@ class ApiService {
   static const String baseUrl = "https://picsum.photos/v2/list"; // Picsum API
 
   // Fetch Featured Wallpapers (e.g., first 10 images)
-  Future<List<dynamic>> fetchFeaturedWallpapers({int page = 2, int limit = 10}) async {
+  Future<List<dynamic>> fetchFeaturedWallpapers({int page = 4, int limit = 10}) async {
     final response = await http.get(Uri.parse("$baseUrl?page=$page&limit=$limit"));
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
@@ -41,7 +41,7 @@ class ApiService {
   }
 
   // Fetch Suggested Wallpapers (e.g., different page for variety)
-  Future<List<dynamic>> fetchSuggestedWallpapers({int page = 3, int limit = 10}) async {
+  Future<List<dynamic>> fetchSuggestedWallpapers({int page = 5, int limit = 10}) async {
     final response = await http.get(Uri.parse("$baseUrl?page=$page&limit=$limit"));
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
