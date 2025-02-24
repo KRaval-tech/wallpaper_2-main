@@ -38,7 +38,7 @@ dependencies:
   flutter_svg: any
   flutter_bloc: any
   equatable: any
-  shared_preferences: any
+  shared_preferences: ^2.5.2
   connectivity_plus: any
   responsive_grid_list: any
   provider: any
