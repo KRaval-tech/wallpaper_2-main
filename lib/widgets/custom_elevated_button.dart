@@ -12,31 +12,22 @@ class CustomElevatedButton extends BaseButton{
 
   final Alignment? alignment;
 
-  CustomElevatedButton(
-      {Key? key,
+  const CustomElevatedButton(
+      {super.key,
         this.decoration,
         this.leftIcon,
         this.rightIcon,
-        EdgeInsets? margin,
-        VoidCallback? onPressed,
-        ButtonStyle? buttonStyle,
-        TextStyle? buttonTextStyle,
-        bool? isDisabled,
-        double? height,
-        double? width,
+        super.margin,
+        super.onPressed,
+        super.buttonStyle,
+        super.buttonTextStyle,
+        super.isDisabled,
+        super.height,
+        super.width,
         this.alignment,
-        required String text})
+        required super.text})
       : super(
-      text: text,
-      onPressed: onPressed,
-      buttonStyle: buttonStyle,
-      isDisabled: isDisabled,
-      buttonTextStyle: buttonTextStyle,
-      height: height,
-      width: width,
-      alignment: alignment,
-      margin: margin,
-      key: key
+      alignment: alignment
   );
 
   @override

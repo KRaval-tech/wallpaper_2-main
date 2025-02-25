@@ -129,7 +129,7 @@ import 'package:wallpaper_2/core/app_export.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
-    Key? key,
+    super.key,
     this.height,
     this.shape,
     this.leadingWidth,
@@ -138,7 +138,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.actions,
     this.backgroundColor = Colors.transparent,
-  }) : super(key: key);
+  });
 
   final double? height;
   final ShapeBorder? shape;

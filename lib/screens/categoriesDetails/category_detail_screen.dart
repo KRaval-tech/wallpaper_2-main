@@ -21,9 +21,9 @@ class CategoryDetailScreen extends StatefulWidget {
   }
 
   const CategoryDetailScreen({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
@@ -132,14 +132,13 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                             ),
                             if ((index + 1) % 4 == 0)
                               Positioned(
+                                top: 5.h,
+                                left: 76.h,
                                 child: CustomImageView(
                                   imagePath: ImageConstant.imgPremium,
                                   height: 26.h,
                                   width: 26.h,
                                 ),
-                                //Icon(Icons.workspace_premium,color: Colors.amber,),
-                                top: 5.h,
-                                left: 76.h,
                               ),
                           ],
                         ),

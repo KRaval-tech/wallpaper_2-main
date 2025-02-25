@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/core/app_export.dart';
@@ -13,12 +11,9 @@ import 'package:wallpaper_2/screens/categoriesDetails/bloc/category_detail_event
 import 'package:wallpaper_2/screens/choose_language_screen/bloc/localization_bloc.dart';
 import 'package:wallpaper_2/screens/home_one_screen/bloc/home_one_bloc.dart';
 import 'package:wallpaper_2/screens/home_screen/bloc/home_bloc.dart';
-import 'package:wallpaper_2/screens/home_screen/home_screen.dart';
 import 'package:wallpaper_2/screens/paywall_screen/bloc/pricing_bloc.dart';
 //import 'package:wallpaper_2/screens/premium_screen/bloc/pricing_bloc.dart';
 //import 'package:wallpaper_2/screens/premium_screen/premium_screen.dart';
-import 'package:wallpaper_2/screens/settings_screen/bloc/settings_bloc.dart';
-import 'package:wallpaper_2/screens/settings_screen/bloc/settings_event.dart';
 
 import 'Ads/AdmobHelper.dart';
 
@@ -30,7 +25,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await AdMobHelper.initialization();
   await _resetUnlockedWallpapers(); // Reset unlocked wallpapers on app start
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 Future<void> _resetUnlockedWallpapers() async {
@@ -39,6 +34,8 @@ Future<void> _resetUnlockedWallpapers() async {
 }
 
 class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context){
     return Sizer(
@@ -83,7 +80,7 @@ class MyApp extends StatelessWidget{
                       title: 'wallpaper_2',
                       builder: (context, child){
                         return MediaQuery(data: MediaQuery.of(context).copyWith(
-                          textScaler: TextScaler.linear(1.0),
+                          textScaler: const TextScaler.linear(1.0),
                         ),
                             child: child!,
                         );

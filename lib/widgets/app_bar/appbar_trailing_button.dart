@@ -11,7 +11,7 @@ class AppbarTrailingButton extends StatelessWidget {
 
   final EdgeInsetsGeometry? margin;
 
-  AppbarTrailingButton(
+  const AppbarTrailingButton(
       {super.key,this.onTap,
         this.margin,});
 

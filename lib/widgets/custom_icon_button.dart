@@ -11,7 +11,7 @@ extension IconButtonStyleHelper on CustomIconButton{
         color: appTheme.black900.withOpacity(0.15),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(0, 4),
+        offset: const Offset(0, 4),
       )
     ],
   );
@@ -24,7 +24,7 @@ extension IconButtonStyleHelper on CustomIconButton{
         color: appTheme.black900.withOpacity(0.15),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(0, 4),
+        offset: const Offset(0, 4),
       )
     ],
   );
@@ -37,7 +37,7 @@ extension IconButtonStyleHelper on CustomIconButton{
         color: appTheme.black900.withOpacity(0.15),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(0, 4),
+        offset: const Offset(0, 4),
       )
     ],
   );
@@ -50,7 +50,7 @@ extension IconButtonStyleHelper on CustomIconButton{
         color: appTheme.black900.withOpacity(0.15),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(0, 4),
+        offset: const Offset(0, 4),
       )
     ],
   );
@@ -68,23 +68,23 @@ extension IconButtonStyleHelper on CustomIconButton{
     ],
     gradient: LinearGradient(
       colors: [appTheme.orange300,appTheme.yellow900],
-      begin: Alignment(0.87, 0),
-      end: Alignment(0.5, 0),
+      begin: const Alignment(0.87, 0),
+      end: const Alignment(0.5, 0),
     ),
   );
 
-  static BoxDecoration get none => BoxDecoration();
+  static BoxDecoration get none => const BoxDecoration();
 }
 
 class CustomIconButton extends StatelessWidget {
-  CustomIconButton({Key? key,
+  const CustomIconButton({super.key,
     this.alignment,
     this.height,
     this.width,
     this.decoration,
     this.padding,
     this.onTap,
-    this.child}) : super(key: key);
+    this.child});
 
 
   final Alignment? alignment;
@@ -95,6 +95,7 @@ class CustomIconButton extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget? child;
 
+  @override
   Widget build(BuildContext context) {
     return alignment != null
         ? Align(
@@ -115,7 +116,7 @@ class CustomIconButton extends StatelessWidget {
                   color: appTheme.black900.withOpacity(0.15),
                   spreadRadius: 2.h,
                   blurRadius: 2.h,
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),

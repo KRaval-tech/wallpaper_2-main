@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Center(
           child: _isAdShown
-              ? CircularProgressIndicator() // Show loader while ad is loading
+              ? const CircularProgressIndicator() // Show loader while ad is loading
               : Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

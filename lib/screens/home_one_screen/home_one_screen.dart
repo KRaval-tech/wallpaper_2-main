@@ -425,7 +425,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wallpaper_2/screens/choose_language_screen/choose_language.dart';
-import 'package:wallpaper_2/screens/home_one_screen/wallpaper_views/avatar_details.dart';
 import 'package:wallpaper_2/screens/FullScreenView/fullwallpaper_view.dart';
 //import 'package:wallpaper_2/screens/premium_screen/premium_screen.dart';
 import '../../core/app_export.dart';
@@ -450,7 +449,7 @@ class AvatarData {
 
 
 class HomeOneScreen extends StatefulWidget {
-  const HomeOneScreen({Key? key}) : super(key: key);
+  const HomeOneScreen({super.key});
 
   static Widget builder(BuildContext context) {
     return BlocProvider(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_2/core/app_export.dart';
 //import 'package:wallpaper_2/screens/premium_screen/premium_screen.dart';
 //import 'package:wallpaper_2/core/utils/progress_dialog.dart';
@@ -16,6 +15,8 @@ import 'bloc/categories_state.dart';
 
 
 class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({super.key});
+
 
   static Widget builder(BuildContext context){
     return BlocProvider(
@@ -45,8 +46,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 return Center(child: CircularProgressIndicator());
               } else if (state is CategoriesLoaded) {
                 return GridView.builder(
-                  padding: EdgeInsets.all(16.0),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  padding: EdgeInsets.all(16.h),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
@@ -84,7 +85,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           category.name,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 18.fSize,
                             fontWeight: FontWeight.bold,
                             shadows: [Shadow(blurRadius: 5, color: Colors.black)],
                           ),

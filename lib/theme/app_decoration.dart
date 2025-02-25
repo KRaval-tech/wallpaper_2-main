@@ -20,7 +20,7 @@ class AppDecoration{
         color: appTheme.black900.withOpacity(0.15),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(0, 4),
+        offset: const Offset(0, 4),
       ),
     ],
   );

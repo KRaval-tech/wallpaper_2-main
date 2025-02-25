@@ -15,32 +15,23 @@ class CustomOutlinedButton extends BaseButton{
 
   final Widget? label;
 
-  CustomOutlinedButton(
-      {Key? key,
+  const CustomOutlinedButton(
+      {super.key,
         this.decoration,
         this.leftIcon,
         this.rightIcon,
         this.label,
         this.alignment,
-        EdgeInsets? margin,
-        VoidCallback? onPressed,
-        ButtonStyle? buttonStyle,
-        TextStyle? buttonTextStyle,
-        bool? isDisabled,
-        double? height,
-        double? width,
-        required String text})
+        super.margin,
+        super.onPressed,
+        super.buttonStyle,
+        super.buttonTextStyle,
+        super.isDisabled,
+        super.height,
+        super.width,
+        required super.text})
       : super(
-      text: text,
-      onPressed: onPressed,
-      buttonStyle: buttonStyle,
-      isDisabled: isDisabled,
-      buttonTextStyle: buttonTextStyle,
-      height: height,
-      width: width,
-      alignment: alignment,
-      margin: margin,
-      key: key
+      alignment: alignment
   );
 
   @override

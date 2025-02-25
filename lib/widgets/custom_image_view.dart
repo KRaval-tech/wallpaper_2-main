@@ -23,7 +23,7 @@ enum ImageType{ svg, png , network, file, unknown}
 
 class CustomImageView extends StatelessWidget {
   const CustomImageView(
-      {this.imagePath,
+      {super.key, this.imagePath,
         this.height,
         this.width,
         this.color,
@@ -148,7 +148,7 @@ class CustomImageView extends StatelessWidget {
           );
       }
     }
-    return SizedBox();
+    return const SizedBox();
   }
 
 }

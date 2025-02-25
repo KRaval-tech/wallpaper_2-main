@@ -7,10 +7,12 @@ import 'dart:ui';
 import '../Ads/native_video.dart';
 
 class ExitConfirmationBottomSheet extends StatelessWidget {
+  const ExitConfirmationBottomSheet({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
       ),
@@ -62,7 +64,7 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
             "Are you sure you want to leave this app?",
             style: TextStyle(
                 fontSize: 18.fSize,
-                color: Color(0xFF848484),
+                color: const Color(0xFF848484),
               fontFamily: "SF Pro Display",
               fontWeight: FontWeight.w500
             ),
@@ -77,7 +79,7 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(width: 2,color: Colors.transparent),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Color(0xFF50AAF9), Color(0xFF1972D6)],
@@ -106,7 +108,7 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                          color: Color(0xFF848484),
+                          color: const Color(0xFF848484),
                           fontSize: 18.fSize,
                           fontWeight: FontWeight.w700,
                           fontFamily: "SF Pro Display",
@@ -121,7 +123,7 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
                 height: 46.h,
                 width: 201.h,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Color(0xFF50AAF9), Color(0xFF1972D6)], // Full gradient background
@@ -166,7 +168,7 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
   void _exitApp(BuildContext context) {
     if (Theme.of(context).platform == TargetPlatform.android) {
       Navigator.of(context).pop();
-      Future.delayed(Duration(milliseconds: 300), () {
+      Future.delayed(const Duration(milliseconds: 300), () {
         SystemNavigator.pop();
       });
     } else {

@@ -10,7 +10,7 @@ class RatingBottomSheet extends StatefulWidget {
   final VoidCallback onRatingDone;
   final VoidCallback onPlayStoreOpened;
 
-  RatingBottomSheet({required this.onRatingDone, required this.onPlayStoreOpened});
+  const RatingBottomSheet({super.key, required this.onRatingDone, required this.onPlayStoreOpened});
 
   @override
   State<RatingBottomSheet> createState() => _RatingBottomSheetState();
@@ -21,8 +21,8 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
 
   Future<void> _openPlayStore() async {
     const url = "https://play.google.com/store/apps";
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrl(url as Uri)) {
+      await launchUrl(url as Uri);
     }
     widget.onPlayStoreOpened();
   }
@@ -115,7 +115,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.h),
                   border: Border.all(width: 2, color: Colors.transparent), // Set transparent border
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Color(0xFF50AAF9), Color(0xFF1972D6)], // Gradient Border Colors
@@ -152,7 +152,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                 width: 201.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.h),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Color(0xFF50AAF9), Color(0xFF1972D6)], // Full gradient background

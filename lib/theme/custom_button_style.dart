@@ -14,8 +14,8 @@ class CustomButtonStyles {
   static BoxDecoration get gradientBlueToBlueDecoration => BoxDecoration(
     borderRadius: BorderRadius.circular(12.h),
     gradient: LinearGradient(
-      begin: Alignment(0.5, 0),
-      end: Alignment(0.5, 0),
+      begin: const Alignment(0.5, 0),
+      end: const Alignment(0.5, 0),
       colors: [appTheme.blue400, appTheme.blue700],
     ),
   );
@@ -29,13 +29,13 @@ class CustomButtonStyles {
     ),
     boxShadow: [
       BoxShadow(
-        color: Color(0x47FEC714),//appTheme.amber50047,
+        color: const Color(0x47FEC714),//appTheme.amber50047,
         spreadRadius: 1.h,
         blurRadius: 25.h,
-        offset: Offset(0, 4),
+        offset: const Offset(0, 4),
       ),
     ],
-    gradient: LinearGradient(
+    gradient: const LinearGradient(
       // begin: Alignment(0.87, 0),
       // end: Alignment(0.5, 0),
       begin: Alignment.topCenter,  // Gradient starts at the top
@@ -48,7 +48,7 @@ class CustomButtonStyles {
     backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
     elevation: WidgetStateProperty.all<double>(0),
     padding: WidgetStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.zero),
-    side: WidgetStateProperty.all<BorderSide>(BorderSide(color: Colors.transparent)),
+    side: WidgetStateProperty.all<BorderSide>(const BorderSide(color: Colors.transparent)),
   );
 
 }
