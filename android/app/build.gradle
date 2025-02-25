@@ -45,6 +45,8 @@ flutter {
 
 dependencies {
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation 'com.google.android.gms:play-services-ads:23.6.0' // Make sure the version matches with the SDK you are using.
+    implementation 'com.google.android.gms:play-services-ads:23.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+// Make sure the version matches with the SDK you are using.
 //    implementation 'com.google.gms:google-services:4.4.2'
 }

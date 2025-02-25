@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +9,7 @@ import 'package:wallpaper_2/Ads/rewarded_ad.dart';
 import 'package:wallpaper_2/screens/FullScreenView/widgets/premium_icon.dart';
 import 'package:wallpaper_2/screens/FullScreenView/widgets/swipe_up_to_apply.dart';
 
+import '../../Ads/fullscreen_native_ad.dart';
 import '../../core/app_export.dart';
 import '../paywall_screen/paywall_screen.dart';
 
@@ -35,6 +38,9 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   final InterstitialAdHelper _adHelper = InterstitialAdHelper();
   bool _hasAppliedOrReported = false;
 
+  late int _wallpaperViewCount = 0; // Track wallpaper views
+  int _nextAdViewCount = 3; // Initial random threshold
+
   late AnimationController _animationController;
   late Animation<double> _positionAnimation;
   late Animation<double> _opacityAnimation;
@@ -45,6 +51,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     _adHelper.loadAd();
     _isPremium = widget.isPremium;
     currentIndex = widget.initialIndex;
+    _setNextAdThreshold(); // Set the first random ad trigger
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -63,6 +70,23 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
         curve: Curves.easeOut,
       ),
     );
+  }
+
+  void _setNextAdThreshold() {
+    _nextAdViewCount = Random().nextInt(4) + 3; // Random between 3-6 views
+  }
+
+  void _showAdIfNeeded() {
+    _wallpaperViewCount++;
+
+    if (_wallpaperViewCount >= _nextAdViewCount) {
+      _wallpaperViewCount = 0; // Reset count after showing ad
+      _setNextAdThreshold(); // Set new random threshold
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const FullScreenNativeAd()),
+      );
+    }
   }
 
   @override
@@ -111,8 +135,8 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
-                    child: Image.network(
-                      widget.wallpapers[currentIndex]['download_url'],
+                    child: CachedNetworkImage(
+                      imageUrl: widget.wallpapers[currentIndex]['download_url'],
                       height: 256.h,
                       width: 154.h,
                       fit: BoxFit.cover,
@@ -311,6 +335,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     if (currentIndex + 1 < widget.wallpapers.length) {
       setState(() {
         currentIndex++;
+        _showAdIfNeeded();
         _isPremium = (widget.wallpapers.indexOf(widget.wallpapers[currentIndex]) + 1) % 4 == 0;
       });
     }
@@ -511,76 +536,88 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     final wallpaper = widget.wallpapers[currentIndex];
     final isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
     return Scaffold(
-      body: Container(
-        color: Colors.black,
-        child: Stack(
-          children: [
-            // Image.network(
-            //   wallpaper['download_url'],
-            //   fit: BoxFit.cover,
-            //   width: double.infinity,
-            //   height: double.infinity,
-            // ),
-            CachedNetworkImage(
-                imageUrl: wallpaper['download_url'],
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-            PremiumIcon(isPremium: isCurrentWallpaperPremium),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 70.0, left: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+      body: GestureDetector(
+        onHorizontalDragEnd: (details) {
+          // Detect swipe direction
+          if (details.primaryVelocity! > 0) {
+            // Swiped Right -> go to the previous image
+            goToPreviousImage();
+          } else if (details.primaryVelocity! < 0) {
+            // Swiped Left -> go to the next image
+            goToNextImage();
+          }
+        },
+        child: Container(
+          color: Colors.black,
+          child: Stack(
+            children: [
+              // Image.network(
+              //   wallpaper['download_url'],
+              //   fit: BoxFit.cover,
+              //   width: double.infinity,
+              //   height: double.infinity,
+              // ),
+              CachedNetworkImage(
+                  imageUrl: wallpaper['download_url'],
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+              PremiumIcon(isPremium: isCurrentWallpaperPremium),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 70.0, left: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 210,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.2),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 210,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withOpacity(0.2),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     BottomControls(
+                         onPrevious: goToPreviousImage,
+                         onNext: goToNextImage,
+                         onSwipeUp: _checkAndShowPremiumAlert,
+                         animationController: _animationController, // Pass the controller
+                         opacityAnimation: _opacityAnimation, // Pass the opacity animation
+                         positionAnimation: _positionAnimation, // Pass the position animation
+                     ),
                     ],
                   ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                   BottomControls(
-                       onPrevious: goToPreviousImage,
-                       onNext: goToNextImage,
-                       onSwipeUp: _checkAndShowPremiumAlert,
-                       animationController: _animationController, // Pass the controller
-                       opacityAnimation: _opacityAnimation, // Pass the opacity animation
-                       positionAnimation: _positionAnimation, // Pass the position animation
-                   ),
-                  ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

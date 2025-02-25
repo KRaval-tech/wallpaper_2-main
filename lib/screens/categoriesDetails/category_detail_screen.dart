@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_2/screens/categoriesDetails/bloc/category_detail_bloc.dart';
 import '../../core/app_export.dart';
-import '../../widgets/app_bar/appbar_leading_image.dart';
 import '../../widgets/app_bar/appbar_trailing_button.dart';
 import '../../widgets/app_bar/appbar_trailing_image.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
 import '../FullScreenView/fullwallpaper_view.dart';
 import '../paywall_screen/paywall_screen.dart';
 import 'bloc/category_detail_event.dart';
@@ -48,7 +46,6 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                   final allWallpapers = [...state.wallpapers, ...state.wallpaper2]; // Dono lists merge
                   return GridView.builder(
                     shrinkWrap: true,
-                    cacheExtent: 1000,
                     padding: const EdgeInsets.all(16),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,

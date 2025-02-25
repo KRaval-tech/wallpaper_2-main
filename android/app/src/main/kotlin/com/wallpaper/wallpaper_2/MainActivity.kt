@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.annotation.NonNull
+import com.google.android.gms.ads.MediaAspectRatio
+import com.google.android.gms.ads.nativead.NativeAdOptions
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.KeyData.CHANNEL
 import io.flutter.embedding.engine.FlutterEngine
@@ -37,6 +39,12 @@ class MainActivity : FlutterActivity() {
         }
 
         GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine,"videoNativeAd", ListTileNativeAdFactory(context))
+        GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "full_native", CustomNativeAdFactory(context))
+
+        // Configure NativeAdOptions with portrait aspect ratio
+        val adOptions = NativeAdOptions.Builder()
+            .setMediaAspectRatio(MediaAspectRatio.PORTRAIT)
+            .build()
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
@@ -44,6 +52,8 @@ class MainActivity : FlutterActivity() {
 
         // TODO: Unregister the ListTileNativeAdFactory
         GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "videoNativeAd")
+        GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "full_native")
+
     }
 
     private fun setWallpaper(type: String, imageUrl: String, result: MethodChannel.Result) {
