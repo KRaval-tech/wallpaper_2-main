@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/Ads/interstitial_ad_helper.dart';
 import 'package:wallpaper_2/Ads/rewarded_ad.dart';
@@ -355,7 +356,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
       try {
         final String result = await platform.invokeMethod('setWallpaper', {'type': type, 'imageUrl': imageUrl});
         _hasAppliedOrReported = true;
-        _showSuccessAlert('Wallpaper set successfully for $type screen');
+        _showSuccessAlert('Wallpaper set successfully for $type screen','assets/svg/success.svg');
         print(result);
       } on PlatformException catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -371,7 +372,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
       try {
         final String result = await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
         _hasAppliedOrReported = true;
-        _showSuccessAlert('Wallpaper reported successfully');
+        _showSuccessAlert('Wallpaper reported successfully','assets/svg/report_issue.svg');
         print(result);
       } on PlatformException catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -382,31 +383,107 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     });
   }
 
-  void _showSuccessAlert(String message) {
+  // void _showSuccessAlert(String message) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(20.0),
+  //         ),
+  //         content: Text(message),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.pop(context);
+  //             },
+  //             child: Text('OK'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  //
+  //   Future.delayed(const Duration(seconds: 3), () {
+  //     Navigator.pop(context);
+  //   });
+  // }
+
+  void _showSuccessAlert(String message, String imagePath) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          content: Text(message),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('OK'),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Colors.white,
             ),
-          ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: CustomImageView(
+                      imagePath: "assets/svg/close_circle.svg",
+                    ),
+                  ),
+                ),
+                SvgPicture.asset(
+                  imagePath,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(height: 15),
+                Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'OK',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
 
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pop(context);
+    Future.delayed(const Duration(seconds: 5), () {
+      if (Navigator.canPop(context)) {
+        Navigator.pop(context);
+      }
     });
   }
+
 
   void _checkAndShowPremiumAlert() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
