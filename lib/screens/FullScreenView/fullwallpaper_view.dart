@@ -383,32 +383,6 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     });
   }
 
-  // void _showSuccessAlert(String message) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(20.0),
-  //         ),
-  //         content: Text(message),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.pop(context);
-  //             },
-  //             child: Text('OK'),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  //
-  //   Future.delayed(const Duration(seconds: 3), () {
-  //     Navigator.pop(context);
-  //   });
-  // }
-
   void _showSuccessAlert(String message, String imagePath) {
     showDialog(
       context: context,
