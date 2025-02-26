@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_2/screens/categoriesDetails/bloc/category_detail_bloc.dart';
 import '../../core/app_export.dart';
 import '../../widgets/app_bar/appbar_trailing_button.dart';
@@ -13,9 +12,17 @@ import 'bloc/category_detail_state.dart';
 class CategoryDetailScreen extends StatefulWidget {
   final String title;
 
+  // static Widget builder(BuildContext context, dynamic category) {
+  //   return BlocProvider(
+  //     create: (context) => CategoryDetailBloc(ApiService())..add(FetchCategoryWallpapers('')),
+  //     child: CategoryDetailScreen(title: category.name),
+  //   );
+  // }
+
   static Widget builder(BuildContext context, dynamic category) {
-    return BlocProvider(
-      create: (context) => CategoryDetailBloc(ApiService())..add(FetchCategoryWallpapers('')),
+    final bloc = CategoryDetailBloc(ApiService());
+    return BlocProvider.value(
+      value: bloc,
       child: CategoryDetailScreen(title: category.name),
     );
   }
@@ -124,7 +131,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                                 borderRadius: BorderRadius.circular(6),
                                 image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    wallpaper["download_url"],
+                                    wallpaper["download_url"] ?? "assets/images/placeholder.jpg",
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -175,9 +182,15 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
         AppbarTrailingButton(
           onTap: () {
             print("AppbarTrailingButton tapped!");
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PaywallScreen()),
+            Navigator.of(context).push(
+              // context,
+              // MaterialPageRoute(builder: (context) => PaywallScreen()),
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => PaywallScreen(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+              ),
             );
           },
         ),

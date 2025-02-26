@@ -49,7 +49,8 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   @override
   void initState() {
     super.initState();
-    _adHelper.loadAd();
+    Future.microtask(() => loadAdInBackground());
+    //_adHelper.loadAd();
     _isPremium = widget.isPremium;
     currentIndex = widget.initialIndex;
     _setNextAdThreshold(); // Set the first random ad trigger
@@ -72,6 +73,11 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
       ),
     );
   }
+  Future<void> loadAdInBackground() async {
+    await Future.delayed(Duration(milliseconds: 200)); // Reduce UI block
+    _adHelper.loadAd();
+  }
+
 
   void _setNextAdThreshold() {
     _nextAdViewCount = Random().nextInt(4) + 3; // Random between 3-6 views
