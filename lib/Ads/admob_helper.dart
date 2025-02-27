@@ -7,9 +7,7 @@ class AdMobHelper{
   static String get bannerUnit => 'ca-app-pub-3940256099942544/9214589741';
 
   static initialization(){
-      if(MobileAds.instance == null){
-        MobileAds.instance.initialize();
-      }
+    MobileAds.instance.initialize();
   }
 
   static BannerAdWidget getBannerAd(){

@@ -3,7 +3,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:wallpaper_2/core/app_export.dart';
 
 class ResponsiveNativeAd extends StatefulWidget {
-  const ResponsiveNativeAd({Key? key}) : super(key: key);
+  const ResponsiveNativeAd({super.key});
 
   @override
   _ResponsiveNativeAdState createState() => _ResponsiveNativeAdState();

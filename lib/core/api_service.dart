@@ -24,67 +24,72 @@
 //   }
 // }
 
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-class ApiService {
-  static const String baseUrl = "https://picsum.photos/v2/list"; // Picsum API
-
-  // Fetch Featured Wallpapers (e.g., first 10 images)
-  Future<List<dynamic>> fetchFeaturedWallpapers({int page = 2, int limit = 10}) async {
-    final response = await http.get(Uri.parse("$baseUrl?page=$page&limit=$limit"));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception("Failed to load featured wallpapers");
-    }
-  }
-
-  // Fetch Suggested Wallpapers (e.g., different page for variety)
-  Future<List<dynamic>> fetchSuggestedWallpapers({int page = 3, int limit = 10}) async {
-    final response = await http.get(Uri.parse("$baseUrl?page=$page&limit=$limit"));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception("Failed to load suggested wallpapers");
-    }
-  }
-}
-
-
 // import 'dart:convert';
 // import 'package:http/http.dart' as http;
 //
 // class ApiService {
 //   static const String baseUrl = "https://picsum.photos/v2/list"; // Picsum API
 //
-//   // Fetch all wallpapers with pagination
-//   Future<List<dynamic>> fetchWallpapers({int page = 1}) async {
-//     final response = await http.get(Uri.parse("$baseUrl?page=$page"));
+//   // Fetch Featured Wallpapers (e.g., first 10 images)
+//   Future<List<dynamic>> fetchFeaturedWallpapers({int page = 2, int limit = 10}) async {
+//     final response = await http.get(Uri.parse("$baseUrl?page=$page&limit=$limit"));
 //     if (response.statusCode == 200) {
 //       return jsonDecode(response.body);
 //     } else {
-//       throw Exception("Failed to load wallpapers");
+//       throw Exception("Failed to load featured wallpapers");
 //     }
 //   }
 //
-//   // Fetch Featured Wallpapers (first page)
-//   Future<List<dynamic>> fetchFeaturedWallpapers() async {
-//     return fetchWallpapers(page: 2);
-//   }
-//
-//   // Fetch Suggested Wallpapers (different page for variety)
-//   Future<List<dynamic>> fetchSuggestedWallpapers() async {
-//     return fetchWallpapers(page: 3);
-//   }
-//
-//   // Fetch Latest Wallpapers (third page)
-//   Future<List<dynamic>> fetchLatestWallpapers() async {
-//     return fetchWallpapers(page: 4);
-//   }
-//
-//   // Fetch Random Wallpapers (fourth page)
-//   Future<List<dynamic>> fetchRandomWallpapers() async {
-//     return fetchWallpapers(page: 5);
+//   // Fetch Suggested Wallpapers (e.g., different page for variety)
+//   Future<List<dynamic>> fetchSuggestedWallpapers({int page = 3, int limit = 10}) async {
+//     final response = await http.get(Uri.parse("$baseUrl?page=$page&limit=$limit"));
+//     if (response.statusCode == 200) {
+//       return jsonDecode(response.body);
+//     } else {
+//       throw Exception("Failed to load suggested wallpapers");
+//     }
 //   }
 // }
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class ApiService {
+  static const String baseUrl = "https://picsum.photos";
+
+  // Fetch Featured Wallpapers with Lower Resolution
+  Future<List<dynamic>> fetchFeaturedWallpapers({int page = 2, int limit = 10}) async {
+    final response = await http.get(Uri.parse("$baseUrl/v2/list?page=$page&limit=$limit"));
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+
+      // ✅ Reduce Resolution of Each Image (300x500)
+      return data.map((item) {
+        return {
+          ...item,
+          "download_url": "$baseUrl/400/800?image=${item['id']}"
+        };
+      }).toList();
+    } else {
+      throw Exception("Failed to load featured wallpapers");
+    }
+  }
+
+  // Fetch Suggested Wallpapers (Low Resolution)
+  Future<List<dynamic>> fetchSuggestedWallpapers({int page = 3, int limit = 10}) async {
+    final response = await http.get(Uri.parse("$baseUrl/v2/list?page=$page&limit=$limit"));
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+
+      // ✅ Reduce Resolution of Each Image (300x500)
+      return data.map((item) {
+        return {
+          ...item,
+          "download_url": "$baseUrl/400/700?image=${item['id']}"
+        };
+      }).toList();
+    } else {
+      throw Exception("Failed to load suggested wallpapers");
+    }
+  }
+}

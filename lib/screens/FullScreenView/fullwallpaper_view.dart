@@ -20,11 +20,11 @@ class FullScreenWallpaperPage extends StatefulWidget {
   final bool isPremium;
 
   const FullScreenWallpaperPage({
-    Key? key,
+    super.key,
     required this.wallpapers,
     required this.initialIndex,
     required this.isPremium,
-  }) : super(key: key);
+  });
 
   @override
   _FullScreenWallpaperPageState createState() => _FullScreenWallpaperPageState();
@@ -74,7 +74,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     );
   }
   Future<void> loadAdInBackground() async {
-    await Future.delayed(Duration(milliseconds: 200)); // Reduce UI block
+    await Future.delayed(const Duration(milliseconds: 200)); // Reduce UI block
     _adHelper.loadAd();
   }
 
@@ -89,7 +89,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     if (_wallpaperViewCount >= _nextAdViewCount) {
       _wallpaperViewCount = 0; // Reset count after showing ad
       _setNextAdThreshold(); // Set new random threshold
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const FullScreenNativeAd()),
       );
@@ -135,7 +135,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: CustomImageView(
+                      icon: const CustomImageView(
                         imagePath: "assets/svg/close_circle.svg",
                       ),
                     ),
@@ -175,7 +175,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [Color(0xFF50AAF9), Color(0xFF1972D6)],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -198,7 +198,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 String wallpaperId = widget.wallpapers[currentIndex]['id'];
                                 _unlockWallpaper(wallpaperId);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                     content: Text("Wallpaper unlocked! Swipe up to apply."),
                                     duration: Duration(seconds: 3),
                                   ),
@@ -210,14 +210,14 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 });
                                 Navigator.pop(context);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("Ad failed to load. Try again!")),
+                                  const SnackBar(content: Text("Ad failed to load. Try again!")),
                                 );
                               },
                             );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
-                            minimumSize: Size(double.infinity, 48),
+                            minimumSize: const Size(double.infinity, 48),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(13.h),
@@ -227,7 +227,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                               ? SizedBox(
                             width: 24.h,
                             height: 24.h,
-                            child: CircularProgressIndicator(
+                            child: const CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               strokeWidth: 3,
                             ),
@@ -240,7 +240,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 height: 24.h,
                                 width: 24.h,
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "Watch ADS",
                                 style: TextStyle(
@@ -257,7 +257,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Divider(
                               color: Colors.black,
                               thickness: 1,
@@ -273,7 +273,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             child: Divider(
                               color: Colors.black,
                               thickness: 1,
@@ -285,7 +285,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       const SizedBox(height: 8),
                       Container(
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -298,7 +298,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PaywallScreen(),
+                                builder: (context) => const PaywallScreen(),
                               ),
                             );
                           },
@@ -318,7 +318,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
-                            minimumSize: Size(double.infinity, 48),
+                            minimumSize: const Size(double.infinity, 48),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(13.h),
@@ -389,6 +389,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     });
   }
 
+
   void _showSuccessAlert(String message, String imagePath) {
     showDialog(
       context: context,
@@ -399,7 +400,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
             borderRadius: BorderRadius.circular(20.0),
           ),
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: Colors.white,
@@ -413,7 +414,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: CustomImageView(
+                    icon: const CustomImageView(
                       imagePath: "assets/svg/close_circle.svg",
                     ),
                   ),
@@ -423,29 +424,29 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                   height: 100,
                   fit: BoxFit.contain,
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                     backgroundColor: Colors.blue,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     'OK',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
@@ -499,7 +500,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                 width: 72, // Width of the line
                 height: 4.h,  // Thickness of the line
                 decoration: BoxDecoration(
-                  color: Color(0xFF1F1F1F),
+                  color: const Color(0xFF1F1F1F),
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
@@ -632,7 +633,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                     ),
                     child: IconButton(
                       padding: EdgeInsets.zero,
-                      icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -653,7 +654,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                         Colors.black.withOpacity(0.2),
                       ],
                     ),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),

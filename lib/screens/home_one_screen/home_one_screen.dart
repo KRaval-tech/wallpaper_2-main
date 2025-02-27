@@ -454,7 +454,7 @@ class HomeOneScreen extends StatefulWidget {
   static Widget builder(BuildContext context) {
     return BlocProvider(
       create: (context) => HomeOneBloc(ApiService())..add(FetchWallpapersEvent()),
-      child: HomeOneScreen(),
+      child: const HomeOneScreen(),
     );
   }
 
@@ -471,8 +471,14 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
 
   // Function to fetch data only if not cached
   void fetchDataOnce() {
-    if (cachedFeaturedWallpapers == null || cachedSuggestedWallpapers == null) {
-      // Your API call or BLoC event goes here
+    // if (cachedFeaturedWallpapers == null || cachedSuggestedWallpapers == null) {
+    //   // Your API call or BLoC event goes here
+    //   context.read<HomeOneBloc>().add(FetchWallpapersEvent());
+    // }
+    if (cachedFeaturedWallpapers == null || cachedFeaturedWallpapers!.isEmpty) {
+      context.read<HomeOneBloc>().add(FetchWallpapersEvent());
+    }
+    if (cachedSuggestedWallpapers == null || cachedSuggestedWallpapers!.isEmpty) {
       context.read<HomeOneBloc>().add(FetchWallpapersEvent());
     }
   }
@@ -506,11 +512,11 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
               // }
               // Handle loading state
               if (state.isLoading && cachedFeaturedWallpapers == null) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
               // Handle error message
-              if (state.errorMessage != null) {
+              if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
                 return Center(child: Text('Error: ${state.errorMessage}'));
               }
 
@@ -565,7 +571,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                   print("AppbarTrailingButton tapped!");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PaywallScreen()),
+                    MaterialPageRoute(builder: (context) => const PaywallScreen()),
                   );
                 },
               ),
@@ -603,7 +609,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
     } else if (hexColor.length == 8) {
       buffer.write(hexColor.replaceFirst('#', ''));
     } else {
-      throw FormatException("Invalid hex color format");
+      throw const FormatException("Invalid hex color format");
     }
     return Color(int.parse('0x${buffer.toString()}'));
   }
@@ -659,13 +665,11 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                     ),
                   ),
                   SizedBox(height: 2.h),
-                  Expanded(
-                    child: Text(
-                      avatar.label, // Use the label from the AvatarData
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.labelLarge,
-                      textAlign: TextAlign.center, // Center the text
-                    ),
+                  Text(
+                    avatar.label, // Use the label from the AvatarData
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.labelLarge,
+                    textAlign: TextAlign.center, // Center the text
                   ),
                 ],
               ),
@@ -679,7 +683,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
 
   Widget _buildFeaturedWallpapers(List<dynamic> wallpapers) {
     if (wallpapers.isEmpty) {
-      return Padding(
+      return const Padding(
         padding: EdgeInsets.all(16),
         child: Text('No featured wallpapers available.',
             style: TextStyle(fontSize: 16)),
@@ -739,9 +743,9 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                             height: 207.h,
                             fit: BoxFit.cover,
                           )
-                              : Placeholder(
-                            fallbackHeight: 200,
-                            fallbackWidth: 150,
+                              : const Placeholder(
+                            fallbackHeight: 207,
+                            fallbackWidth: 98,
                           ),
                         ),
                           if(isPremium) Positioned(
@@ -759,7 +763,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                       SizedBox(height: 8.h), // Space between image and text
                       Text(
                         imageTitle,
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -777,7 +781,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
 
   Widget _buildSuggestedWallpapers(List<dynamic> wallpapers) {
     if (wallpapers.isEmpty) {
-      return Padding(
+      return const Padding(
         padding: EdgeInsets.all(16),
         child: Text(
           'No suggested wallpapers available.',
@@ -858,7 +862,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                       SizedBox(height: 8.h), // Space between image and text
                       Text(
                         imageTitle,
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       ),
                     ],

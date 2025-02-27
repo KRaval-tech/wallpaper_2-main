@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpaper_2/screens/categoriesDetails/bloc/category_detail_bloc.dart';
 import '../../core/app_export.dart';
@@ -12,17 +13,9 @@ import 'bloc/category_detail_state.dart';
 class CategoryDetailScreen extends StatefulWidget {
   final String title;
 
-  // static Widget builder(BuildContext context, dynamic category) {
-  //   return BlocProvider(
-  //     create: (context) => CategoryDetailBloc(ApiService())..add(FetchCategoryWallpapers('')),
-  //     child: CategoryDetailScreen(title: category.name),
-  //   );
-  // }
-
   static Widget builder(BuildContext context, dynamic category) {
-    final bloc = CategoryDetailBloc(ApiService());
-    return BlocProvider.value(
-      value: bloc,
+    return BlocProvider(
+      create: (context) => CategoryDetailBloc(ApiService())..add(FetchCategoryWallpapers('')),
       child: CategoryDetailScreen(title: category.name),
     );
   }
@@ -48,7 +41,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
             child: BlocBuilder<CategoryDetailBloc, CategoryDetailState>(
               builder: (context, state) {
                 if (state is CategoryDetailLoading) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is CategoryDetailLoaded) {
                   final allWallpapers = [...state.wallpapers, ...state.wallpaper2]; // Dono lists merge
                   return GridView.builder(
@@ -155,7 +148,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                 } else if (state is CategoryDetailError) {
                   return Center(child: Text(state.message));
                 }
-                return Center(child: Text('No wallpapers available.'));
+                return const Center(child: Text('No wallpapers available.'));
               },
             ),
           ),
@@ -169,7 +162,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -181,16 +174,22 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
       actions: [
         AppbarTrailingButton(
           onTap: () {
-            print("AppbarTrailingButton tapped!");
-            Navigator.of(context).push(
-              // context,
-              // MaterialPageRoute(builder: (context) => PaywallScreen()),
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => PaywallScreen(),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
-              ),
+            if (kDebugMode) {
+              print("AppbarTrailingButton tapped!");
+            }
+            // Navigator.of(context).push(
+            //   // context,
+            //   // MaterialPageRoute(builder: (context) => PaywallScreen()),
+            //   PageRouteBuilder(
+            //     pageBuilder: (context, animation, secondaryAnimation) => PaywallScreen(),
+            //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //       return FadeTransition(opacity: animation, child: child);
+            //     },
+            //   ),
+            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PaywallScreen()),
             );
           },
         ),

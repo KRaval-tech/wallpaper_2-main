@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:wallpaper_2/Ads/AdmobHelper.dart';
+// import 'package:wallpaper_2/Ads/admob_helper.dart';
 // import 'package:wallpaper_2/Ads/banner_ad.dart';
 // import 'package:wallpaper_2/screens/categories/categories_screen.dart';
 // import 'package:wallpaper_2/screens/home_one_screen/home_one_screen.dart';
@@ -66,7 +66,7 @@ import 'package:wallpaper_2/core/app_export.dart';
 import 'package:wallpaper_2/widgets/exit_confirmation_sheet.dart';
 import 'package:wallpaper_2/widgets/rating_bottom_sheet.dart';
 
-import '../Ads/AdmobHelper.dart';
+import '../Ads/admob_helper.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/home_one_screen/home_one_screen.dart';
 import '../screens/paywall_screen/paywall_screen.dart';

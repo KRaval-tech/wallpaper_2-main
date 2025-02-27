@@ -1,17 +1,17 @@
 import 'dart:async';
-import 'dart:ui';
+
 
 //import 'package:ads/ads/admob_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/core/app_export.dart';
 import 'package:wallpaper_2/widgets/custom_bar_app.dart';
-import '../../Ads/AdmobHelper.dart';
+import '../../Ads/admob_helper.dart';
 import 'bloc/pricing_bloc.dart';
 
 import 'dart:convert';
@@ -20,7 +20,7 @@ import 'package:flutter/services.dart';
 class PaywallScreen extends StatefulWidget {
   final bool fromBottomBar; // Flag to check origin
 
-  PaywallScreen({Key? key, this.fromBottomBar = false}) : super(key: key);
+  const PaywallScreen({super.key, this.fromBottomBar = false});
 
   //  final Function(bool) onTrialStarted; // Callback to update subscription status
   //
@@ -30,7 +30,7 @@ class PaywallScreen extends StatefulWidget {
   static Widget builder(BuildContext context) {
     return BlocProvider(
       create: (context) => PricingBloc(),
-      child: PaywallScreen(
+      child: const PaywallScreen(
         //onTrialStarted: (bool){},
       ),
     );
@@ -54,13 +54,13 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
 
     // Initialize animation controller
     _animationController = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 1), // Start from bottom
-      end: Offset(0, 0), // End at the normal position
+      begin: const Offset(0, 1), // Start from bottom
+      end: const Offset(0, 0), // End at the normal position
     ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
 
     // Start the animation when the screen appears
@@ -111,7 +111,7 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
             BlocBuilder<PricingBloc, PricingState>(
               builder: (context, state) {
                 if (state is PricingLoading) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is PricingLoaded) {
                   return _buildContent(paywallData!, state.prices);
                 } else if (state is PricingError) {
@@ -243,7 +243,7 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
                   borderRadius: BorderRadius.circular(
                       data['header']['title']['proText']['style']['borderRadius'].toDouble()),
                   border: Border.all(
-                    color: Color(0xFFFFD700), // Gold color for border
+                    color: const Color(0xFFFFD700), // Gold color for border
                   ),
                 ),
                 child: Text(
@@ -258,7 +258,7 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
             ],
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             data['header']['subtitle']['text'],
             textAlign: TextAlign.center,
@@ -267,25 +267,25 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
               color: Colors.white70,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildFeatureCards(data['features']),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(child: _buildPriceCard(
                     data['pricing']['cards'][0], prices['android.test.purchased'])),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Expanded(child: _buildPriceCard(
                     data['pricing']['cards'][1], prices['android.test.canceled'])),
               ],
             ),
           ),
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -396,15 +396,15 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
                   .of(context)
                   .size
                   .width * 0.3, // Responsive width
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.network(card['icon'], height: 24, width: 24, color: Colors.white,),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     card['text'],
-                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                    style: const TextStyle(color: Colors.white70, fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -445,18 +445,18 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
             children: [
               Text(
                 card['label'],
-                style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.bold),
               ),
               //SizedBox(height: 2),  // Reduced padding between label and price
               if (price != null)
                 Text(
                   price,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
               Text(
                 card['billingPeriod'],
-                style: TextStyle(color: Colors.white70, fontSize: 14),
+                style: const TextStyle(color: Colors.white70, fontSize: 14),
               ),
             ],
           ),
@@ -535,7 +535,7 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
 
   Widget _buildTopButtons(List<dynamic> buttonsData) {
     return Padding(
-      padding: EdgeInsets.only(top: 60.0), // Adjust this to space everything down
+      padding: const EdgeInsets.only(top: 60.0), // Adjust this to space everything down
       child: Stack(
         children: [
           // Handling the Leading Icon (Cancel) Button
@@ -562,7 +562,7 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
                   }
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10.0), // Adjust space from the left
+                  padding: const EdgeInsets.only(left: 10.0), // Adjust space from the left
                   child: SvgPicture.network(
                     buttonsData.firstWhere((button) => button['onPress'] == 'cancelAction')['icon'],
                     height: 32,
@@ -585,7 +585,7 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
                   print("Restore purchases triggered");
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(right: 10.0), // Adjust space for trailing icon
+                  padding: const EdgeInsets.only(right: 10.0), // Adjust space for trailing icon
                   child: Image.network(
                     buttonsData.firstWhere((button) => button['onPress'] == 'restoreAction')['icon'],
                     height: 32,
