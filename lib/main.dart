@@ -140,7 +140,7 @@ Future<void> _resetUnlockedWallpapers() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await Future.delayed(Duration(milliseconds: 200)); // Ye background me chalega
   await prefs.remove('unlockedWallpapers');
-  debugPrint("🔄 Unlocked Wallpapers Reset!");
+  debugPrint("Unlocked Wallpapers Reset!");
 }
 
 class MyApp extends StatefulWidget {
@@ -158,26 +158,23 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    // ✅ Periodic Cache Clear Every 1 Minute
     _cacheClearTimer = Timer.periodic(const Duration(minutes: 1), (timer) {
       _clearCache();
     });
   }
 
-  /// ✅ Memory Optimize Function
   Future<void> _clearCache() async {
     await Future.delayed(const Duration(milliseconds: 100)); // Background me execute hoga
     imageCache.clear();
     imageCache.clearLiveImages();
-    debugPrint("🔄 App Memory Optimized: Cache Cleared!");
+    debugPrint("App Memory Optimized: Cache Cleared!");
   }
 
-  /// ✅ Clear Memory on Background
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
       _clearCache();
-      debugPrint("🟡 App went to Background: Cache Cleared!");
+      debugPrint(" App went to Background: Cache Cleared!");
     }
   }
 
@@ -185,7 +182,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void dispose() {
     imageCache.clear();
     imageCache.clearLiveImages();
-    debugPrint("🔄 Cache Cleared!");
+    debugPrint("Cache Cleared!");
     WidgetsBinding.instance.removeObserver(this);
     _cacheClearTimer?.cancel();
     super.dispose();
