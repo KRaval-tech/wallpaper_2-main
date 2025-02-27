@@ -89,7 +89,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     if (_wallpaperViewCount >= _nextAdViewCount) {
       _wallpaperViewCount = 0; // Reset count after showing ad
       _setNextAdThreshold(); // Set new random threshold
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const FullScreenNativeAd()),
       );
