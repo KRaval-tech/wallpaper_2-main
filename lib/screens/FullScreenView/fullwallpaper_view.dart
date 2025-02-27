@@ -283,45 +283,47 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                         ],
                       ),
                       const SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.circular(13.h),
-                        ),
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const PaywallScreen(),
-                              ),
-                            );
-                          },
-                          icon: CustomImageView(
-                            imagePath: "assets/images/crown.svg",
-                            height: 24.h,
-                            width: 24.h,
-                          ),
-                          label: Text(
-                            "Go Premium",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.fSize,
-                              fontFamily: "SF Pro Display",
-                              fontWeight: FontWeight.w700,
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
+                            borderRadius: BorderRadius.circular(13.h),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            minimumSize: const Size(double.infinity, 48),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.h),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PaywallScreen(),
+                                ),
+                              );
+                            },
+                            icon: CustomImageView(
+                              imagePath: "assets/images/crown.svg",
+                              height: 24.h,
+                              width: 24.h,
+                            ),
+                            label: Text(
+                              "Go Premium",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.fSize,
+                                fontFamily: "SF Pro Display",
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              minimumSize: const Size(double.infinity, 48),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13.h),
+                              ),
                             ),
                           ),
                         ),
