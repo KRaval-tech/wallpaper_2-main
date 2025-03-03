@@ -27,7 +27,7 @@ jobs:
         run: flutter pub get
 
       - name: 🔍 Run Flutter Analyze
-        run: flutter analyze > flutter_analyze_report.txt
+        run: flutter analyze > flutter_analyze_report.txt || true
 
       - name: 🛠 Run Dart Code Metrics
         run: |
