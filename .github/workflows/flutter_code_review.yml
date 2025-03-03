@@ -1,0 +1,55 @@
+name: Flutter Code Review
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code_review:
+    name: Run Flutter Code Review
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛠 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🚀 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.x
+          cache: true
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 🔍 Run Flutter Analyze
+        run: flutter analyze > flutter_analyze_report.txt
+
+      - name: 🛠 Run Dart Code Metrics
+        run: |
+          dart pub global activate dart_code_metrics
+          dart run dart_code_metrics:metrics analyze lib > dart_metrics_report.txt
+
+      - name: 📊 Run Flutter Code Metrics (Cyclomatic Complexity)
+        run: |
+          dart pub global activate flutter_metrics
+          flutter_metrics analyze lib > flutter_metrics_report.txt
+
+      - name: ⚡ Check for Performance & Security Issues
+        run: |
+          dart run dart_code_metrics:metrics check-unused-code lib > unused_code_report.txt
+          dart run dart_code_metrics:metrics check-unnecessary-nullable lib > unnecessary_nullable_report.txt
+
+      - name: 📜 Merge Reports into One
+        run: |
+          cat flutter_analyze_report.txt dart_metrics_report.txt flutter_metrics_report.txt unused_code_report.txt unnecessary_nullable_report.txt > code_review_report.txt
+
+      - name: 📂 Upload Code Review Report as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Code Review Report
+          path: code_review_report.txt
