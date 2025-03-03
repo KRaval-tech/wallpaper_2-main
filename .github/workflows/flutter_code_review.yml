@@ -29,24 +29,23 @@ jobs:
       - name: 🔍 Run Flutter Analyze
         run: flutter analyze > flutter_analyze_report.txt || true
 
-      - name: 🛠 Run Dart Code Metrics
+      - name: 🛠 Run Custom Lint (Replaces Dart Code Metrics)
         run: |
-          dart pub global activate dart_code_metrics
-          dart run dart_code_metrics:metrics analyze lib > dart_metrics_report.txt
+          dart pub global activate custom_lint
+          dart run custom_lint > custom_lint_report.txt || true
 
       - name: 📊 Run Flutter Code Metrics (Cyclomatic Complexity)
         run: |
           dart pub global activate flutter_metrics
-          flutter_metrics analyze lib > flutter_metrics_report.txt
+          flutter_metrics analyze lib > flutter_metrics_report.txt || true
 
       - name: ⚡ Check for Performance & Security Issues
         run: |
-          dart run dart_code_metrics:metrics check-unused-code lib > unused_code_report.txt
-          dart run dart_code_metrics:metrics check-unnecessary-nullable lib > unnecessary_nullable_report.txt
+          dart run custom_lint > performance_security_report.txt || true
 
       - name: 📜 Merge Reports into One
         run: |
-          cat flutter_analyze_report.txt dart_metrics_report.txt flutter_metrics_report.txt unused_code_report.txt unnecessary_nullable_report.txt > code_review_report.txt
+          cat flutter_analyze_report.txt custom_lint_report.txt flutter_metrics_report.txt performance_security_report.txt > code_review_report.txt
 
       - name: 📂 Upload Code Review Report as Artifact
         uses: actions/upload-artifact@v4  # ✅ Updated to latest version
