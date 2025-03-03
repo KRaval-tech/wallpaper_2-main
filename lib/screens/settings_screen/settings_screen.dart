@@ -227,6 +227,18 @@ class _SettingsPageState extends State<SettingsPage> {
     // Mock settings data
     settings = [
       SettingItem(
+        iconPath: 'assets/setting_svg/language.svg',
+        title: 'Language',
+        onTap: () {
+          print('Language Clicked');
+          // Navigate to language selection screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChooseLanguageScreen()),
+          );
+        },
+      ),
+      SettingItem(
         iconPath: 'assets/setting_svg/terms.svg',
         title: 'Terms & Conditions',
         onTap: () {
@@ -256,18 +268,6 @@ class _SettingsPageState extends State<SettingsPage> {
         onTap: () {
           print('About Clicked');
           // Navigate to About screen
-        },
-      ),
-      SettingItem(
-        iconPath: 'assets/setting_svg/language.svg',
-        title: 'Language',
-        onTap: () {
-          print('Language Clicked');
-          // Navigate to language selection screen
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ChooseLanguageScreen()),
-          );
         },
       ),
     ];
@@ -303,12 +303,12 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Handle action
-          },
-          child: Icon(Icons.add),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     // Handle action
+        //   },
+        //   child: Icon(Icons.add),
+        // ),
       ),
     );
   }

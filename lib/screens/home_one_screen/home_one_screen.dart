@@ -665,11 +665,13 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                     ),
                   ),
                   SizedBox(height: 2.h),
-                  Text(
-                    avatar.label, // Use the label from the AvatarData
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.labelLarge,
-                    textAlign: TextAlign.center, // Center the text
+                  Expanded(
+                    child: Text(
+                      avatar.label, // Use the label from the AvatarData
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.labelLarge,
+                      textAlign: TextAlign.center, // Center the text
+                    ),
                   ),
                 ],
               ),

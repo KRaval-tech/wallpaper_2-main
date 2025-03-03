@@ -37,9 +37,15 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
   // }
 
   void changeLanguage(LoadLocalization event, Emitter<LocalizationState> emit) {
-    if (event.locale == state.locale) return;
-    saveLocale(event.locale);
-    emit(LocalizationState(event.locale));
+    // if (event.locale == state.locale) return;
+    // saveLocale(event.locale);
+    // emit(LocalizationState(event.locale));
+
+    // If language is already selected, don't update
+    if (event.locale != state.locale) {
+      saveLocale(event.locale);  // Save the selected language
+      emit(LocalizationState(event.locale));  // Update the app state
+    }
   }
 
   Future<void> getLanguage(
@@ -48,7 +54,7 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
     emit(LocalizationState(saveLocale));
   }
 
-  saveLocale(Locale locale) async {
+  Future<void> saveLocale(Locale locale) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('language', locale.languageCode);
   }

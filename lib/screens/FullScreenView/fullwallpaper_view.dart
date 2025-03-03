@@ -125,7 +125,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
               borderRadius: BorderRadius.circular(27.h),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -135,7 +135,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const CustomImageView(
+                      icon: CustomImageView(
                         imagePath: "assets/svg/close_circle.svg",
                       ),
                     ),
@@ -149,7 +149,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     "Unlock this wallpaper",
                     style: TextStyle(
@@ -159,7 +159,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       fontSize: 18.fSize,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     "Watch an ad to download this wallpaper for free, or subscribe to enjoy unlimited downloads.",
                     textAlign: TextAlign.center,
@@ -170,12 +170,12 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Column(
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
+                          gradient: LinearGradient(
                             colors: [Color(0xFF50AAF9), Color(0xFF1972D6)],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -198,7 +198,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 String wallpaperId = widget.wallpapers[currentIndex]['id'];
                                 _unlockWallpaper(wallpaperId);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
                                     content: Text("Wallpaper unlocked! Swipe up to apply."),
                                     duration: Duration(seconds: 3),
                                   ),
@@ -210,14 +210,14 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 });
                                 Navigator.pop(context);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("Ad failed to load. Try again!")),
+                                  SnackBar(content: Text("Ad failed to load. Try again!")),
                                 );
                               },
                             );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
-                            minimumSize: const Size(double.infinity, 48),
+                            minimumSize: Size(double.infinity, 48),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(13.h),
@@ -227,7 +227,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                               ? SizedBox(
                             width: 24.h,
                             height: 24.h,
-                            child: const CircularProgressIndicator(
+                            child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               strokeWidth: 3,
                             ),
@@ -240,7 +240,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                                 height: 24.h,
                                 width: 24.h,
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Text(
                                 "Watch ADS",
                                 style: TextStyle(
@@ -254,10 +254,10 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Divider(
                               color: Colors.black,
                               thickness: 1,
@@ -273,7 +273,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: Divider(
                               color: Colors.black,
                               thickness: 1,
@@ -282,55 +282,53 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                            borderRadius: BorderRadius.circular(13.h),
+                      SizedBox(height: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const PaywallScreen(),
-                                ),
-                              );
-                            },
-                            icon: CustomImageView(
-                              imagePath: "assets/images/crown.svg",
-                              height: 24.h,
-                              width: 24.h,
-                            ),
-                            label: Text(
-                              "Go Premium",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.fSize,
-                                fontFamily: "SF Pro Display",
-                                fontWeight: FontWeight.w700,
+                          borderRadius: BorderRadius.circular(13.h),
+                        ),
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PaywallScreen(),
                               ),
+                            );
+                          },
+                          icon: CustomImageView(
+                            imagePath: "assets/images/crown.svg",
+                            height: 24.h,
+                            width: 24.h,
+                          ),
+                          label: Text(
+                            "Go Premium",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.fSize,
+                              fontFamily: "SF Pro Display",
+                              fontWeight: FontWeight.w700,
                             ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              minimumSize: const Size(double.infinity, 48),
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(13.h),
-                              ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            minimumSize: Size(double.infinity, 48),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.h),
                             ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                 ],
               ),
             ),
@@ -354,6 +352,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     if (currentIndex - 1 >= 0) {
       setState(() {
         currentIndex--;
+        _showAdIfNeeded();
         _isPremium = (widget.wallpapers.indexOf(widget.wallpapers[currentIndex]) + 1) % 4 == 0;
       });
     }
@@ -376,20 +375,19 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   }
 
   Future<void> _reportWallpaper(String imageUrl) async {
-    _adHelper.showAd(context, () async {
-      try {
-        final String result = await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
-        _hasAppliedOrReported = true;
-        _showSuccessAlert('Wallpaper reported successfully','assets/svg/report_issue.svg');
-        print(result);
-      } on PlatformException catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")),
-        );
-        print("Failed to report wallpaper: '${e.message}'.");
-      }
-    });
+    try {
+      final String result = await platform.invokeMethod('reportWallpaper', {'imageUrl': imageUrl});
+      _hasAppliedOrReported = true;
+      _showSuccessAlert('Wallpaper reported successfully', 'assets/svg/report_issue.svg');
+      print(result);
+    } on PlatformException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to report wallpaper: '${e.message}'")),
+      );
+      print("Failed to report wallpaper: '${e.message}'.");
+    }
   }
+
 
 
   void _showSuccessAlert(String message, String imagePath) {

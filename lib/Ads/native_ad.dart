@@ -71,12 +71,16 @@ class _ResponsiveNativeAdState extends State<ResponsiveNativeAd> {
 
   @override
   Widget build(BuildContext context) {
-    return _isAdLoaded
-        ? Container(
+    return Container(
       width: double.infinity, // Flexible width
-      height: 350, //MediaQuery.of(context).size.width * 0.5, // Adjust height based on screen width
-      child: AdWidget(ad: _nativeAd),
-    )
-        : Center(child: CircularProgressIndicator());
+      height: 350, // Adjust height based on screen width
+      alignment: Alignment.center, // Center align content
+      child: _isAdLoaded
+          ? AdWidget(ad: _nativeAd)
+          : Text(
+        "Ad is Loading",
+        style: TextStyle(fontSize: 18,color: Colors.grey),
+      ),
+    );
   }
 }
