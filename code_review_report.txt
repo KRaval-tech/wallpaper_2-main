@@ -1,0 +1,189 @@
+Analyzing wallpaper_2-main...                                   
+
+   info • Constructors for public widgets should have a named 'key' parameter • lib/Ads/banner_ad.dart:5:7 • use_key_in_widget_constructors
+   info • Invalid use of a private type in a public API • lib/Ads/banner_ad.dart:7:3 • library_private_types_in_public_api
+   info • Don't invoke 'print' in production code • lib/Ads/banner_ad.dart:38:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/fullscreen_native_ad.dart:34:11 • avoid_print
+warning • The value of the field '_isLoading' isn't used • lib/Ads/interstitial_ad_helper.dart:143:8 • unused_field
+   info • Don't invoke 'print' in production code • lib/Ads/interstitial_ad_helper.dart:152:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/interstitial_ad_helper.dart:157:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/interstitial_ad_helper.dart:173:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/interstitial_ad_helper.dart:178:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/interstitial_ad_helper.dart:191:7 • avoid_print
+warning • Unused import: 'package:wallpaper_2/core/app_export.dart' • lib/Ads/native_ad.dart:3:8 • unused_import
+   info • Invalid use of a private type in a public API • lib/Ads/native_ad.dart:9:3 • library_private_types_in_public_api
+   info • Don't invoke 'print' in production code • lib/Ads/native_ad.dart:32:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/native_ad.dart:36:11 • avoid_print
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/Ads/native_ad.dart:75:11 • sized_box_for_whitespace
+   info • Constructors for public widgets should have a named 'key' parameter • lib/Ads/native_video.dart:57:7 • use_key_in_widget_constructors
+   info • Invalid use of a private type in a public API • lib/Ads/native_video.dart:59:3 • library_private_types_in_public_api
+   info • Don't invoke 'print' in production code • lib/Ads/native_video.dart:80:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/Ads/native_video.dart:83:11 • avoid_print
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/Ads/native_video.dart:102:11 • sized_box_for_whitespace
+   info • Don't invoke 'print' in production code • lib/Ads/rewarded_ad.dart:140:11 • avoid_print
+   info • The imported package 'http' isn't a dependency of the importing package • lib/core/api_service.dart:3:8 • depend_on_referenced_packages
+   info • Unnecessary 'this.' qualifier • lib/core/network/network_info.dart:20:20 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/core/network/network_info.dart:56:5 • unnecessary_this
+   info • Don't invoke 'print' in production code • lib/core/utils/logger.dart:10:7 • avoid_print
+warning • Unused import: 'package:wallpaper_2/core/app_export.dart' • lib/core/utils/pref_utils.dart:2:8 • unused_import
+   info • Don't invoke 'print' in production code • lib/core/utils/pref_utils.dart:15:5 • avoid_print
+   info • The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/core/utils/progress_dialog.dart:1:8 • unnecessary_import
+   info • Statements in an if should be enclosed in a block • lib/core/utils/progress_dialog.dart:29:7 • curly_braces_in_flow_control_structures
+   info • The constant name 'FIGMA_DESIGN_WIDTH' isn't a lowerCamelCase identifier • lib/core/utils/size_utils.dart:3:11 • constant_identifier_names
+   info • The constant name 'FIGMA_DESIGN_HEIGHT' isn't a lowerCamelCase identifier • lib/core/utils/size_utils.dart:4:11 • constant_identifier_names
+   info • The constant name 'FIGMA_DESIGN_STATUS_BAR' isn't a lowerCamelCase identifier • lib/core/utils/size_utils.dart:5:11 • constant_identifier_names
+   info • Unnecessary 'this.' qualifier • lib/core/utils/size_utils.dart:15:25 • unnecessary_this
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_all.dart:15:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_all.dart:16:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_all.dart:17:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_bn.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_bn.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_en.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_en.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_gu.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_gu.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_hi.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_hi.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_lo.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_lo.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_mr.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_mr.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_ur.dart:13:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/intl/messages_ur.dart:14:8 • depend_on_referenced_packages
+   info • The imported package 'intl' isn't a dependency of the importing package • lib/generated/l10n.dart:3:8 • depend_on_referenced_packages
+warning • Unused import: 'package:wallpaper_2/widgets/custom_bottom_bar.dart' • lib/routes/app_routes.dart:10:8 • unused_import
+   info • The referenced identifier is a wildcard • lib/routes/app_routes.dart:26:68 • no_wildcard_variable_uses
+   info • The referenced identifier is a wildcard • lib/routes/app_routes.dart:30:72 • no_wildcard_variable_uses
+   info • The referenced identifier is a wildcard • lib/routes/app_routes.dart:36:71 • no_wildcard_variable_uses
+   info • The referenced identifier is a wildcard • lib/routes/app_routes.dart:40:69 • no_wildcard_variable_uses
+   info • Invalid use of a private type in a public API • lib/screens/FullScreenView/fullwallpaper_view.dart:30:3 • library_private_types_in_public_api
+   info • The private field _isUnlocked could be 'final' • lib/screens/FullScreenView/fullwallpaper_view.dart:37:8 • prefer_final_fields
+warning • The value of the field '_isUnlocked' isn't used • lib/screens/FullScreenView/fullwallpaper_view.dart:37:8 • unused_field
+warning • The value of the field '_hasAppliedOrReported' isn't used • lib/screens/FullScreenView/fullwallpaper_view.dart:40:8 • unused_field
+   info • Don't invoke 'print' in production code • lib/screens/FullScreenView/fullwallpaper_view.dart:368:9 • avoid_print
+   info • Don't use 'BuildContext's across async gaps • lib/screens/FullScreenView/fullwallpaper_view.dart:370:30 • use_build_context_synchronously
+   info • Don't invoke 'print' in production code • lib/screens/FullScreenView/fullwallpaper_view.dart:373:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/FullScreenView/fullwallpaper_view.dart:384:9 • avoid_print
+   info • Don't use 'BuildContext's across async gaps • lib/screens/FullScreenView/fullwallpaper_view.dart:386:30 • use_build_context_synchronously
+   info • Don't invoke 'print' in production code • lib/screens/FullScreenView/fullwallpaper_view.dart:389:9 • avoid_print
+   info • Don't use 'BuildContext's across async gaps • lib/screens/FullScreenView/fullwallpaper_view.dart:464:28 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/screens/FullScreenView/fullwallpaper_view.dart:465:23 • use_build_context_synchronously
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/FullScreenView/fullwallpaper_view.dart:633:43 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/FullScreenView/fullwallpaper_view.dart:656:38 • deprecated_member_use
+   info • Parameter 'key' could be a super parameter • lib/screens/FullScreenView/widgets/premium_icon.dart:8:9 • use_super_parameters
+   info • Parameter 'key' could be a super parameter • lib/screens/FullScreenView/widgets/swipe_up_to_apply.dart:12:9 • use_super_parameters
+   info • Invalid use of a private type in a public API • lib/screens/FullScreenView/widgets/swipe_up_to_apply.dart:23:3 • library_private_types_in_public_api
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/FullScreenView/widgets/swipe_up_to_apply.dart:85:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/FullScreenView/widgets/swipe_up_to_apply.dart:103:87 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/FullScreenView/widgets/swipe_up_to_apply.dart:104:87 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/FullScreenView/widgets/swipe_up_to_apply.dart:127:55 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/categories/categories_screen.dart:78:44 • deprecated_member_use
+   info • Don't invoke 'print' in production code • lib/screens/categories/categories_screen.dart:131:19 • avoid_print
+   info • The imported package 'bloc' isn't a dependency of the importing package • lib/screens/choose_language_screen/bloc/localization_bloc.dart:16:8 • depend_on_referenced_packages
+   info • Don't invoke 'print' in production code • lib/screens/choose_language_screen/bloc/localization_bloc.dart:59:5 • avoid_print
+warning • Unused import: 'package:google_mobile_ads/google_mobile_ads.dart' • lib/screens/choose_language_screen/choose_language.dart:2:8 • unused_import
+warning • Unused import: 'package:shared_preferences/shared_preferences.dart' • lib/screens/choose_language_screen/choose_language.dart:3:8 • unused_import
+warning • Unused import: 'package:wallpaper_2/widgets/custom_bottom_bar.dart' • lib/screens/choose_language_screen/choose_language.dart:9:8 • unused_import
+warning • Unused import: '../home_one_screen/home_one_screen.dart' • lib/screens/choose_language_screen/choose_language.dart:15:8 • unused_import
+warning • The value of the field '_isLoading' isn't used • lib/screens/choose_language_screen/choose_language.dart:37:8 • unused_field
+   info • Don't invoke 'print' in production code • lib/screens/choose_language_screen/choose_language.dart:208:21 • avoid_print
+warning • The declaration '_buildLoadingIndicator' isn't referenced • lib/screens/choose_language_screen/choose_language.dart:248:10 • unused_element
+   info • The imported package 'bloc' isn't a dependency of the importing package • lib/screens/home_one_screen/bloc/home_one_bloc.dart:1:8 • depend_on_referenced_packages
+   info • The imported package 'meta' isn't a dependency of the importing package • lib/screens/home_one_screen/bloc/home_one_bloc.dart:2:8 • depend_on_referenced_packages
+warning • Unused import: 'package:meta/meta.dart' • lib/screens/home_one_screen/bloc/home_one_bloc.dart:2:8 • unused_import
+warning • Unused import: 'package:wallpaper_2/screens/choose_language_screen/choose_language.dart' • lib/screens/home_one_screen/home_one_screen.dart:427:8 • unused_import
+warning • Unused import: '../../widgets/custom_bottom_bar.dart' • lib/screens/home_one_screen/home_one_screen.dart:435:8 • unused_import
+   info • Don't invoke 'print' in production code • lib/screens/home_one_screen/home_one_screen.dart:571:19 • avoid_print
+   info • 'random' is deprecated and shouldn't be used. Use "shuffle" instead • lib/screens/home_one_screen/home_one_screen.dart:622:71 • deprecated_member_use
+   info • 'stream' is deprecated and shouldn't be used. Use "barsStaggered" instead • lib/screens/home_one_screen/home_one_screen.dart:623:71 • deprecated_member_use
+   info • The 'child' argument should be last in widget constructor invocations • lib/screens/home_one_screen/home_one_screen.dart:752:29 • sort_child_properties_last
+   info • The 'child' argument should be last in widget constructor invocations • lib/screens/home_one_screen/home_one_screen.dart:851:29 • sort_child_properties_last
+   info • Parameter 'initialState' could be a super parameter • lib/screens/home_screen/bloc/home_bloc.dart:12:3 • use_super_parameters
+   info • Constructors in '@immutable' classes should be declared as 'const' • lib/screens/home_screen/bloc/home_state.dart:6:3 • prefer_const_constructors_in_immutables
+warning • Unused import: 'package:wallpaper_2/screens/choose_language_screen/choose_language.dart' • lib/screens/home_screen/home_screen.dart:4:8 • unused_import
+   info • Parameter 'key' could be a super parameter • lib/screens/home_screen/home_screen.dart:10:9 • use_super_parameters
+   info • Invalid use of a private type in a public API • lib/screens/home_screen/home_screen.dart:24:3 • library_private_types_in_public_api
+   info • Don't use 'BuildContext's across async gaps • lib/screens/home_screen/home_screen.dart:96:40 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/screens/home_screen/home_screen.dart:99:40 • use_build_context_synchronously
+   info • Constructors in '@immutable' classes should be declared as 'const' • lib/screens/home_screen/models/home_model.dart:4:3 • prefer_const_constructors_in_immutables
+   info • The imported package 'bloc' isn't a dependency of the importing package • lib/screens/paywall_screen/bloc/pricing_bloc.dart:1:8 • depend_on_referenced_packages
+   info • The imported package 'meta' isn't a dependency of the importing package • lib/screens/paywall_screen/bloc/pricing_bloc.dart:2:8 • depend_on_referenced_packages
+warning • Unused import: 'package:meta/meta.dart' • lib/screens/paywall_screen/bloc/pricing_bloc.dart:2:8 • unused_import
+warning • Unused import: 'package:cached_network_image/cached_network_image.dart' • lib/screens/paywall_screen/paywall_screen.dart:5:8 • unused_import
+warning • Unused import: 'package:shared_preferences/shared_preferences.dart' • lib/screens/paywall_screen/paywall_screen.dart:11:8 • unused_import
+warning • Unused import: '../../Ads/admob_helper.dart' • lib/screens/paywall_screen/paywall_screen.dart:14:8 • unused_import
+   info • Invalid use of a private type in a public API • lib/screens/paywall_screen/paywall_screen.dart:40:3 • library_private_types_in_public_api
+   info • Don't use 'BuildContext's across async gaps • lib/screens/paywall_screen/paywall_screen.dart:71:7 • use_build_context_synchronously
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:80:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:82:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:84:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:297:32 • avoid_print
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/screens/paywall_screen/paywall_screen.dart:299:22 • sized_box_for_whitespace
+   info • 'color' is deprecated and shouldn't be used. Use colorFilter instead • lib/screens/paywall_screen/paywall_screen.dart:403:75 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/paywall_screen/paywall_screen.dart:439:43 • deprecated_member_use
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:489:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:504:17 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/paywall_screen/paywall_screen.dart:585:19 • avoid_print
+warning • Unused import: '../../choose_language_screen/choose_language.dart' • lib/screens/settings_screen/bloc/settings_bloc.dart:3:8 • unused_import
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/bloc/settings_bloc.dart:19:15 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/bloc/settings_bloc.dart:27:15 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/bloc/settings_bloc.dart:35:15 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/bloc/settings_bloc.dart:43:15 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/bloc/settings_bloc.dart:51:15 • avoid_print
+   info • Constructors for public widgets should have a named 'key' parameter • lib/screens/settings_screen/settings_screen.dart:208:7 • use_key_in_widget_constructors
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/settings_screen.dart:233:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/settings_screen.dart:241:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/settings_screen.dart:249:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/settings_screen.dart:257:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/settings_screen.dart:265:11 • avoid_print
+   info • Don't invoke 'print' in production code • lib/screens/settings_screen/settings_screen.dart:342:19 • avoid_print
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/theme/app_decoration.dart:20:34 • deprecated_member_use
+   info • The import of 'package:flutter_bloc/flutter_bloc.dart' is unnecessary because all of the used elements are also provided by the import of 'package:wallpaper_2/core/app_export.dart' • lib/theme/bloc/theme_bloc.dart:22:8 • unnecessary_import
+   info • Constructors in '@immutable' classes should be declared as 'const' • lib/theme/bloc/theme_state.dart:6:3 • prefer_const_constructors_in_immutables
+   info • The private field _appTheme could be 'final' • lib/theme/theme_helper.dart:8:7 • prefer_final_fields
+   info • The private field _supportedCustomColor could be 'final' • lib/theme/theme_helper.dart:10:32 • prefer_final_fields
+   info • The private field _supportedColorScheme could be 'final' • lib/theme/theme_helper.dart:14:28 • prefer_final_fields
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/theme/theme_helper.dart:31:46 • deprecated_member_use
+   info • The import of '../../generated/l10n.dart' is unnecessary because all of the used elements are also provided by the import of 'package:wallpaper_2/core/app_export.dart' • lib/widgets/app_bar/appbar_trailing_button.dart:6:8 • unnecessary_import
+warning • Unused import: '../../screens/paywall_screen/paywall_screen.dart' • lib/widgets/app_bar/appbar_trailing_button.dart:7:8 • unused_import
+   info • Don't invoke 'print' in production code • lib/widgets/app_bar/appbar_trailing_button.dart:50:14 • avoid_print
+warning • Unused import: 'dart:io' • lib/widgets/custom_bar_app.dart:61:8 • unused_import
+warning • Unused import: 'package:flutter/services.dart' • lib/widgets/custom_bar_app.dart:64:8 • unused_import
+   info • 'WillPopScope' is deprecated and shouldn't be used. Use PopScope instead. The Android predictive back feature will not work with WillPopScope. This feature was deprecated after v3.12.0-1.0.pre • lib/widgets/custom_bar_app.dart:170:12 • deprecated_member_use
+   info • The import of '../generated/l10n.dart' is unnecessary because all of the used elements are also provided by the import of 'package:wallpaper_2/core/app_export.dart' • lib/widgets/custom_bottom_bar.dart:4:8 • unnecessary_import
+   info • The constant name 'Home' isn't a lowerCamelCase identifier • lib/widgets/custom_bottom_bar.dart:6:21 • constant_identifier_names
+   info • The constant name 'Categories' isn't a lowerCamelCase identifier • lib/widgets/custom_bottom_bar.dart:6:27 • constant_identifier_names
+   info • The constant name 'Premium' isn't a lowerCamelCase identifier • lib/widgets/custom_bottom_bar.dart:6:39 • constant_identifier_names
+   info • The constant name 'Settings' isn't a lowerCamelCase identifier • lib/widgets/custom_bottom_bar.dart:6:48 • constant_identifier_names
+   info • The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/custom_elevated_button.dart:1:8 • unnecessary_import
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_elevated_button.dart:41:13 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_elevated_button.dart:42:12 • unnecessary_this
+   info • The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/custom_icon_button.dart:1:8 • unnecessary_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/custom_icon_button.dart:11:34 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/custom_icon_button.dart:24:34 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/custom_icon_button.dart:37:34 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/custom_icon_button.dart:50:34 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/custom_icon_button.dart:116:44 • deprecated_member_use
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_image_view.dart:10:8 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_image_view.dart:10:34 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_image_view.dart:12:15 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_image_view.dart:14:14 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_image_view.dart:101:28 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_image_view.dart:102:38 • unnecessary_this
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/widgets/custom_image_view.dart:124:44 • sized_box_for_whitespace
+warning • This default clause is covered by the previous cases • lib/widgets/custom_image_view.dart:141:9 • unreachable_switch_default
+   info • The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/custom_outlined_button.dart:1:8 • unnecessary_import
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_outlined_button.dart:45:13 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/widgets/custom_outlined_button.dart:46:12 • unnecessary_this
+   info • The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/custom_radio_button.dart:1:8 • unnecessary_import
+warning • Unused import: 'package:flutter_svg/flutter_svg.dart' • lib/widgets/exit_confirmation_sheet.dart:3:8 • unused_import
+   info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/exit_confirmation_sheet.dart:5:8 • unnecessary_import
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/widgets/exit_confirmation_sheet.dart:158:11 • sized_box_for_whitespace
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/widgets/rating_bottom_sheet.dart:185:11 • sized_box_for_whitespace
+
+Analyzing...
+
+No issues found!
+Analyzing...
+
+No issues found!
