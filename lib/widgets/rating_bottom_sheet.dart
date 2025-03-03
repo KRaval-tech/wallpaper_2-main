@@ -21,8 +21,8 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
 
   Future<void> _openPlayStore() async {
     const url = "https://play.google.com/store/apps";
-    if (await canLaunchUrl(url as Uri)) {
-      await launchUrl(url as Uri);
+    if (await canLaunch(url)) {
+      await launch(url);
     }
     widget.onPlayStoreOpened();
   }

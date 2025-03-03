@@ -111,59 +111,7 @@ class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
     });
   }
 
-  ///IMPORTANT NOTE:
 
-  // Future<bool> _onBackPressed() async {
-  //   bool shouldExit = await showModalBottomSheet(
-  //     context: context,
-  //     backgroundColor: Colors.white,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-  //     ),
-  //     builder: (context) {
-  //       return Padding(
-  //         padding: const EdgeInsets.all(16.0),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Text(
-  //               "Are you sure you want to exit?",
-  //               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-  //             ),
-  //             SizedBox(height: 16),
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //               children: [
-  //                 ElevatedButton(
-  //                   onPressed: () => Navigator.pop(context, false), // Stay in app
-  //                   child: Text("No"),
-  //                 ),
-  //                 ElevatedButton(
-  //                   onPressed: () => Navigator.pop(context, true), // Confirm exit
-  //                   style: ElevatedButton.styleFrom(
-  //                     backgroundColor: Colors.red,
-  //                   ),
-  //                   child: Text("Yes"),
-  //                 ),
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   ) ??
-  //       false;
-  //
-  //   if (shouldExit) {
-  //     if (Platform.isAndroid) {
-  //       SystemNavigator.pop(); // Close app on Android
-  //     } else if (Platform.isIOS) {
-  //       exit(0); // Force close app on iOS (not recommended by Apple)
-  //     }
-  //   }
-  //   return false; // Prevent default back navigation
-  // }
-  //
 
   @override
   Widget build(BuildContext context) {
@@ -244,6 +192,60 @@ class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
     );
   }
 
-
 }
 
+
+
+///IMPORTANT NOTE:
+
+// Future<bool> _onBackPressed() async {
+//   bool shouldExit = await showModalBottomSheet(
+//     context: context,
+//     backgroundColor: Colors.white,
+//     shape: RoundedRectangleBorder(
+//       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+//     ),
+//     builder: (context) {
+//       return Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             Text(
+//               "Are you sure you want to exit?",
+//               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//             ),
+//             SizedBox(height: 16),
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               children: [
+//                 ElevatedButton(
+//                   onPressed: () => Navigator.pop(context, false), // Stay in app
+//                   child: Text("No"),
+//                 ),
+//                 ElevatedButton(
+//                   onPressed: () => Navigator.pop(context, true), // Confirm exit
+//                   style: ElevatedButton.styleFrom(
+//                     backgroundColor: Colors.red,
+//                   ),
+//                   child: Text("Yes"),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       );
+//     },
+//   ) ??
+//       false;
+//
+//   if (shouldExit) {
+//     if (Platform.isAndroid) {
+//       SystemNavigator.pop(); // Close app on Android
+//     } else if (Platform.isIOS) {
+//       exit(0); // Force close app on iOS (not recommended by Apple)
+//     }
+//   }
+//   return false; // Prevent default back navigation
+// }
+//
