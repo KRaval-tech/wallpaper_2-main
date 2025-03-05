@@ -135,80 +135,12 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(data['image']), // Load image from URL
+          image: CachedNetworkImageProvider(data['image']), // Load image from URL
           fit: BoxFit.cover, // Ensures the image covers the container
         ),
       ),
     );
   }
-
-  // Widget _buildBackground(Map<String, dynamic> data) {
-  //   final String imageUrl = data['image'];
-  //
-  //   // Check if the image is an SVG
-  //   if (imageUrl.endsWith('.svg')) {
-  //     return SvgPicture.network(
-  //       imageUrl,
-  //       fit: BoxFit.cover,
-  //       width: double.infinity,
-  //       height: double.infinity,
-  //     );
-  //   }
-  //
-  //   // Fallback to a regular image
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       image: DecorationImage(
-  //         image: NetworkImage(imageUrl),
-  //         fit: BoxFit.cover,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-
-
-
-
-  // Widget _buildBackground(Map<String, dynamic> data) {
-  //   final String? imageUrl = data['image'];
-  //
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       image: imageUrl != null
-  //           ? DecorationImage(
-  //               image: NetworkImage(imageUrl),
-  //               fit: BoxFit.cover,
-  //             )
-  //           : null, // No decoration if imageUrl is null
-  //     ),
-  //     child: imageUrl == null
-  //         ? Center(
-  //             child: Text(
-  //               "Image not available",
-  //               style: TextStyle(color: Colors.white, fontSize: 16),
-  //             ),
-  //           )
-  //         : CachedNetworkImage(
-  //             imageUrl: imageUrl,
-  //             fit: BoxFit.cover,
-  //             placeholder: (context, url) => Center(
-  //               child: CircularProgressIndicator(), // Show loader while loading
-  //             ),
-  //             errorWidget: (context, url, error) => Center(
-  //               child: Icon(
-  //                 Icons.error,
-  //                 color: Colors.red,
-  //                 size: 40,
-  //               ), // Show error icon on failure
-  //             ),
-  //           ),
-  //   );
-  // }
-
-
-
-
 
 
   Widget _buildContent(Map<String, dynamic> data, Map<String, String> prices) {
@@ -383,7 +315,6 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
 
 
 
-
   Widget _buildFeatureCards(List<dynamic> featureCardsData) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -528,10 +459,6 @@ class _PaywallScreenState extends State<PaywallScreen> with TickerProviderStateM
       ],
     );
   }
-
-
-
-
 
   Widget _buildTopButtons(List<dynamic> buttonsData) {
     return Padding(

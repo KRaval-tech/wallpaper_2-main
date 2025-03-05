@@ -167,8 +167,8 @@ class ExitConfirmationBottomSheet extends StatelessWidget {
 
   void _exitApp(BuildContext context) {
     if (Theme.of(context).platform == TargetPlatform.android) {
-      Navigator.of(context).pop();
-      Future.delayed(const Duration(milliseconds: 300), () {
+      // Navigator.of(context).pop();
+      Future.delayed(const Duration(milliseconds: 200), () {
         SystemNavigator.pop();
       });
     } else {

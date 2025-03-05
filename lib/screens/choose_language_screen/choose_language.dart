@@ -320,11 +320,12 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                   SizedBox(height: 15.h),
                   BlocBuilder<LocalizationBloc, LocalizationState>(
                     builder: (context, state) {
-                      bool isButtonEnabled = state.locale.languageCode.isNotEmpty;
-
+                      //bool isButtonEnabled = state.locale.languageCode.isNotEmpty;
+                      bool isButtonEnabled = selectedLanguage.isNotEmpty;
                       return CustomElevatedButton(
                         height: 44.h,
                         text: S.current.lbl_choose,
+                        //text: "${S.current.lbl_choose} / ${getLanguageLabel(selectedLanguage)}",  // Concatenate Choose + dynamic subLanguage
                         margin: EdgeInsets.symmetric(horizontal: 50.h),
                         buttonStyle: CustomButtonStyles.none,
                         decoration: CustomButtonStyles.gradientBlueToBlueDecoration,
@@ -442,6 +443,11 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                 setState(() {
                   selectedLanguage = value;
                 });
+                // // Yahan pe Bloc me bhi event fire karo
+                // BlocProvider.of<LocalizationBloc>(context).add(
+                //   LoadLocalization(Locale(value)),
+                // );
+
               },
               title: item.language,
             );

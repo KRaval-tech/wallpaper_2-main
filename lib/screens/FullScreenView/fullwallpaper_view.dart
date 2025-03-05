@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallpaper_2/Ads/interstitial_ad_helper.dart';
 import 'package:wallpaper_2/Ads/rewarded_ad.dart';
@@ -17,13 +18,16 @@ import '../paywall_screen/paywall_screen.dart';
 class FullScreenWallpaperPage extends StatefulWidget {
   final List<dynamic> wallpapers;
   final int initialIndex;
-  final bool isPremium;
+  //final bool isPremium;
+  final List<bool> isPremiumList; // ✅ Receive isPremium status from HomeOneScreen
+
 
   const FullScreenWallpaperPage({
     super.key,
     required this.wallpapers,
     required this.initialIndex,
-    required this.isPremium,
+    required this.isPremiumList,
+    //required this.isPremium,
   });
 
   @override
@@ -38,9 +42,12 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   bool _isAdLoading = false;
   final InterstitialAdHelper _adHelper = InterstitialAdHelper();
   bool _hasAppliedOrReported = false;
-
-  late int _wallpaperViewCount = 0; // Track wallpaper views
-  int _nextAdViewCount = 3; // Initial random threshold
+  bool _isAdLoaded = false;
+  late List<int> _adPositions; // Multiple ads ke positions
+  late List<NativeAd?> _nativeAds;
+  bool _isAdDismissed = false; // Track karega ki ad dismiss hui ya nahi
+  List<dynamic> modifiedWallpapers=[]; // ✅ New list for wallpapers + ads
+  late List<bool> modifiedPremiumList; // ✅ Maintain modified isPremium list
 
   late AnimationController _animationController;
   late Animation<double> _positionAnimation;
@@ -51,9 +58,12 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     super.initState();
     Future.microtask(() => loadAdInBackground());
     //_adHelper.loadAd();
-    _isPremium = widget.isPremium;
     currentIndex = widget.initialIndex;
-    _setNextAdThreshold(); // Set the first random ad trigger
+    _insertAdPositions();
+    _preloadAds();
+    //_isPremium = widget.isPremium;
+    _generateModifiedWallpaperList(); // ✅ Adjust wallpapers list with ads
+    //_setNextAdThreshold(); // Set the first random ad trigger
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -78,24 +88,58 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     _adHelper.loadAd();
   }
 
+  /// **Preload multiple ads**
+  void _preloadAds() {
+    _nativeAds = List.filled(_adPositions.length, null); // Placeholder for ads
 
-  void _setNextAdThreshold() {
-    _nextAdViewCount = Random().nextInt(4) + 3; // Random between 3-6 views
+    for (int i = 0; i < _adPositions.length; i++) {
+      _nativeAds[i] = NativeAd(
+        adUnitId: "ca-app-pub-3940256099942544/1044960115",
+        factoryId: "full_native",
+        request: const AdRequest(),
+        listener: NativeAdListener(
+          onAdLoaded: (Ad ad) {
+            setState(() {
+              _isAdLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            ad.dispose();
+          },
+        ),
+      )..load();
+    }
   }
+  /// **Random positions select karo ads ke liye**
+  void _insertAdPositions() {
+    _adPositions = []; // Ensure list is empty before adding new values
+    if (widget.wallpapers.length > 5) {
+      int totalAds = min(3, widget.wallpapers.length ~/ 3); // Max 3 ads, 1 ad per 3 wallpapers
+      Set<int> uniquePositions = {}; // Unique positions ensure karne ke liye
 
-  void _showAdIfNeeded() {
-    _wallpaperViewCount++;
-
-    if (_wallpaperViewCount >= _nextAdViewCount) {
-      _wallpaperViewCount = 0; // Reset count after showing ad
-      _setNextAdThreshold(); // Set new random threshold
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const FullScreenNativeAd()),
-      );
+      while (uniquePositions.length < totalAds) {
+        int pos = Random().nextInt(widget.wallpapers.length);
+        uniquePositions.add(pos);
+      }
+      _adPositions = uniquePositions.toList();
     }
   }
 
+  /// **Modified list generate karo jo ads bhi include kare**
+  void _generateModifiedWallpaperList() {
+    modifiedWallpapers = List.from(widget.wallpapers);
+    modifiedPremiumList = List.from(widget.isPremiumList); // ✅ Copy original premium list
+
+    int adsInserted = 0;
+    for (int pos in _adPositions) {
+      int adjustedPos = pos + adsInserted;
+      if (adjustedPos < modifiedWallpapers.length) {
+        modifiedWallpapers.insert(adjustedPos, {"isAd": true});
+        modifiedPremiumList.insert(adjustedPos, false); // ✅ Ads are never premium
+        adsInserted++;
+      }
+    }
+  }
   @override
   void dispose() {
     RewardedAdHelper.onScreenExit();
@@ -124,212 +168,214 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(27.h),
             ),
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: CustomImageView(
-                        imagePath: "assets/svg/close_circle.svg",
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(16.h),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: CustomImageView(
+                          imagePath: "assets/svg/close_circle.svg",
+                        ),
                       ),
                     ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.wallpapers[currentIndex]['download_url'],
-                      height: 256.h,
-                      width: 154.h,
-                      fit: BoxFit.cover,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.wallpapers[currentIndex]['download_url'],
+                        height: 256.h,
+                        width: 154.h,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Unlock this wallpaper",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: "SF Pro Display",
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18.fSize,
+                    SizedBox(height: 16),
+                    Text(
+                      "Unlock this wallpaper",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: "SF Pro Display",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18.fSize,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    "Watch an ad to download this wallpaper for free, or subscribe to enjoy unlimited downloads.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14.fSize,
-                      color: Colors.black,
-                      fontFamily: "SF Pro Display",
-                      fontWeight: FontWeight.w400,
+                    SizedBox(height: 8),
+                    Text(
+                      "Watch an ad to download this wallpaper for free, or subscribe to enjoy unlimited downloads.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14.fSize,
+                        color: Colors.black,
+                        fontFamily: "SF Pro Display",
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFF50AAF9), Color(0xFF1972D6)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.circular(13.h),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _isAdLoading = true;
-                            });
-
-                            RewardedAdHelper.showRewardedAd(
-                              context: context,
-                              onRewardEarned: () {
-                                setState(() {
-                                  _isAdLoading = false;
-                                });
-                                Navigator.pop(context);
-                                String wallpaperId = widget.wallpapers[currentIndex]['id'];
-                                _unlockWallpaper(wallpaperId);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Wallpaper unlocked! Swipe up to apply."),
-                                    duration: Duration(seconds: 3),
-                                  ),
-                                );
-                              },
-                              onAdFailed: () {
-                                setState(() {
-                                  _isAdLoading = false;
-                                });
-                                Navigator.pop(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("Ad failed to load. Try again!")),
-                                );
-                              },
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            minimumSize: Size(double.infinity, 48),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.h),
+                    SizedBox(height: 16),
+                    Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF50AAF9), Color(0xFF1972D6)],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
+                            borderRadius: BorderRadius.circular(13.h),
                           ),
-                          child: _isAdLoading
-                              ? SizedBox(
-                            width: 24.h,
-                            height: 24.h,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                              strokeWidth: 3,
-                            ),
-                          )
-                              : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomImageView(
-                                imagePath: "assets/svg/video_play.svg",
-                                height: 24.h,
-                                width: 24.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _isAdLoading = true;
+                              });
+              
+                              RewardedAdHelper.showRewardedAd(
+                                context: context,
+                                onRewardEarned: () {
+                                  setState(() {
+                                    _isAdLoading = false;
+                                  });
+                                  Navigator.pop(context);
+                                  String wallpaperId = widget.wallpapers[currentIndex]['id'];
+                                  _unlockWallpaper(wallpaperId);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Wallpaper unlocked! Swipe up to apply."),
+                                      duration: Duration(seconds: 3),
+                                    ),
+                                  );
+                                },
+                                onAdFailed: () {
+                                  setState(() {
+                                    _isAdLoading = false;
+                                  });
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Ad failed to load. Try again!")),
+                                  );
+                                },
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              minimumSize: Size(double.infinity, 48),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13.h),
                               ),
-                              SizedBox(width: 8),
-                              Text(
-                                "Watch ADS",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "SF Pro Display",
-                                  fontSize: 18.h,
+                            ),
+                            child: _isAdLoading
+                                ? SizedBox(
+                              width: 24.h,
+                              height: 24.h,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                strokeWidth: 3,
+                              ),
+                            )
+                                : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomImageView(
+                                  imagePath: "assets/svg/video_play.svg",
+                                  height: 24.h,
+                                  width: 24.h,
                                 ),
+                                SizedBox(width: 8),
+                                Text(
+                                  "Watch ADS",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "SF Pro Display",
+                                    fontSize: 18.h,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                color: Colors.black,
+                                thickness: 1,
+                                endIndent: 7,
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              color: Colors.black,
-                              thickness: 1,
-                              endIndent: 7,
                             ),
-                          ),
-                          Text(
-                            "or",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14.fSize,
-                              fontFamily: "SF Pro Display",
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              color: Colors.black,
-                              thickness: 1,
-                              indent: 7,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.circular(13.h),
-                        ),
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const PaywallScreen(),
+                            Text(
+                              "or",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14.fSize,
+                                fontFamily: "SF Pro Display",
+                                fontWeight: FontWeight.w500,
                               ),
-                            );
-                          },
-                          icon: CustomImageView(
-                            imagePath: "assets/images/crown.svg",
-                            height: 24.h,
-                            width: 24.h,
-                          ),
-                          label: Text(
-                            "Go Premium",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.fSize,
-                              fontFamily: "SF Pro Display",
-                              fontWeight: FontWeight.w700,
                             ),
+                            Expanded(
+                              child: Divider(
+                                color: Colors.black,
+                                thickness: 1,
+                                indent: 7,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFFFBC40), Color(0xFFFA7D2A)],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                            borderRadius: BorderRadius.circular(13.h),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            minimumSize: Size(double.infinity, 48),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.h),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PaywallScreen(),
+                                ),
+                              );
+                            },
+                            icon: CustomImageView(
+                              imagePath: "assets/images/crown.svg",
+                              height: 24.h,
+                              width: 24.h,
+                            ),
+                            label: Text(
+                              "Go Premium",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.fSize,
+                                fontFamily: "SF Pro Display",
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              minimumSize: Size(double.infinity, 48),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13.h),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                  ],
+                ),
               ),
             ),
           );
@@ -342,7 +388,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     if (currentIndex + 1 < widget.wallpapers.length) {
       setState(() {
         currentIndex++;
-        _showAdIfNeeded();
+        //_showAdIfNeeded();
         _isPremium = (widget.wallpapers.indexOf(widget.wallpapers[currentIndex]) + 1) % 4 == 0;
       });
     }
@@ -352,7 +398,7 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
     if (currentIndex - 1 >= 0) {
       setState(() {
         currentIndex--;
-        _showAdIfNeeded();
+        //_showAdIfNeeded();
         _isPremium = (widget.wallpapers.indexOf(widget.wallpapers[currentIndex]) + 1) % 4 == 0;
       });
     }
@@ -590,18 +636,126 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
   }
 
   @override
+  // Widget build(BuildContext context) {
+  //   final wallpaper = widget.wallpapers[currentIndex];
+  //   final isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
+  //   return Scaffold(
+  //     body: GestureDetector(
+  //       onHorizontalDragEnd: (details) {
+  //         // Detect swipe direction
+  //         if (details.primaryVelocity! > 0) {
+  //           // Swiped Right -> go to the previous image
+  //           goToPreviousImage();
+  //         } else if (details.primaryVelocity! < 0) {
+  //           // Swiped Left -> go to the next image
+  //           goToNextImage();
+  //         }
+  //       },
+  //       child: Container(
+  //         color: Colors.black,
+  //         child: Stack(
+  //           children: [
+  //             // Image.network(
+  //             //   wallpaper['download_url'],
+  //             //   fit: BoxFit.cover,
+  //             //   width: double.infinity,
+  //             //   height: double.infinity,
+  //             // ),
+  //             CachedNetworkImage(
+  //                 imageUrl: wallpaper['download_url'],
+  //               fit: BoxFit.cover,
+  //               width: double.infinity,
+  //               height: double.infinity,
+  //             ),
+  //             PremiumIcon(isPremium: isCurrentWallpaperPremium),
+  //             Align(
+  //               alignment: Alignment.topLeft,
+  //               child: Padding(
+  //                 padding: const EdgeInsets.only(top: 70.0, left: 20.0),
+  //                 child: Container(
+  //                   decoration: BoxDecoration(
+  //                     color: Colors.white.withOpacity(0.2),
+  //                     borderRadius: BorderRadius.circular(12),
+  //                   ),
+  //                   child: IconButton(
+  //                     padding: EdgeInsets.zero,
+  //                     icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+  //                     onPressed: () {
+  //                       Navigator.pop(context);
+  //                     },
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //             Align(
+  //               alignment: Alignment.bottomCenter,
+  //               child: Container(
+  //                 height: 210,
+  //                 decoration: BoxDecoration(
+  //                   gradient: LinearGradient(
+  //                     begin: Alignment.topCenter,
+  //                     end: Alignment.bottomCenter,
+  //                     colors: [
+  //                       Colors.transparent,
+  //                       Colors.black.withOpacity(0.2),
+  //                     ],
+  //                   ),
+  //                   borderRadius: const BorderRadius.only(
+  //                     topLeft: Radius.circular(20),
+  //                     topRight: Radius.circular(20),
+  //                   ),
+  //                 ),
+  //                 child: Column(
+  //                   mainAxisAlignment: MainAxisAlignment.center,
+  //                   children: [
+  //                    BottomControls(
+  //                        onPrevious: goToPreviousImage,
+  //                        onNext: goToNextImage,
+  //                        onSwipeUp: _checkAndShowPremiumAlert,
+  //                        animationController: _animationController, // Pass the controller
+  //                        opacityAnimation: _opacityAnimation, // Pass the opacity animation
+  //                        positionAnimation: _positionAnimation, // Pass the position animation
+  //                    ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget build(BuildContext context) {
-    final wallpaper = widget.wallpapers[currentIndex];
-    final isCurrentWallpaperPremium = ((currentIndex + 1) % 4 == 0);
+    final isAdPosition = modifiedWallpapers[currentIndex]["isAd"] == true;
+    final adIndex = _adPositions.indexOf(currentIndex);
+    final isValidAdIndex = adIndex != -1 && _nativeAds.isNotEmpty && _nativeAds.length > adIndex;
+
+    // ✅ Ad index ke hisaab se actual wallpaper index calculate karein
+    int actualWallpaperIndex = currentIndex;
+    for (int pos in _adPositions) {
+      if (currentIndex > pos) {
+        actualWallpaperIndex--; // Ad se pehle ke wallpapers ke index adjust karo
+      }
+    }
+
+    // ✅ Wallpaper safe check
+    final wallpaper = isAdPosition ? null : widget.wallpapers[actualWallpaperIndex];
+    //final isCurrentWallpaperPremium = !isAdPosition && ((actualWallpaperIndex + 1) % 4 == 0);
+    final isCurrentWallpaperPremium = modifiedPremiumList[currentIndex]; // ✅ Maintain correct premium flag
+
+    // ✅ Null check aur fallback image
+    final String imageUrl = (!isAdPosition && modifiedWallpapers[currentIndex].containsKey('download_url'))
+        ? modifiedWallpapers[currentIndex]['download_url'] ?? ''
+        : ''; // ✅ Default empty string to avoid null errors
+
     return Scaffold(
       body: GestureDetector(
         onHorizontalDragEnd: (details) {
-          // Detect swipe direction
           if (details.primaryVelocity! > 0) {
-            // Swiped Right -> go to the previous image
             goToPreviousImage();
           } else if (details.primaryVelocity! < 0) {
-            // Swiped Left -> go to the next image
             goToNextImage();
           }
         },
@@ -609,75 +763,86 @@ class _FullScreenWallpaperPageState extends State<FullScreenWallpaperPage> with 
           color: Colors.black,
           child: Stack(
             children: [
-              // Image.network(
-              //   wallpaper['download_url'],
-              //   fit: BoxFit.cover,
-              //   width: double.infinity,
-              //   height: double.infinity,
-              // ),
-              CachedNetworkImage(
-                  imageUrl: wallpaper['download_url'],
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              PremiumIcon(isPremium: isCurrentWallpaperPremium),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 70.0, left: 20.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+              // **Ad ko ek normal wallpaper ki tarah dikhao**
+              // if (isAdPosition && _isAdLoaded && adIndex != -1 && _nativeAds[adIndex] != null)
+              //   Center(child: AdWidget(ad: _nativeAds[adIndex]!))
+              if (isAdPosition && isValidAdIndex)
+                Center(child: AdWidget(ad: _nativeAds[adIndex]!))
+                //Center(child: AdWidget(ad: _nativeAds[_adPositions.indexOf(currentIndex)]!))
+              else
+                CachedNetworkImage(
+                  //imageUrl: wallpaper['download_url'],
+                  //imageUrl: modifiedWallpapers[currentIndex]['download_url'],
+                  imageUrl: imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+
+              // **Ad par Premium Icon aur BottomControls na dikhaye**
+              if (!isAdPosition) ...[
+                PremiumIcon(isPremium: isCurrentWallpaperPremium),
+
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 70.0, left: 20.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 210,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withOpacity(0.2),
+
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 210,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.2),
+                        ],
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BottomControls(
+                          onPrevious: goToPreviousImage,
+                          onNext: goToNextImage,
+                          onSwipeUp: _checkAndShowPremiumAlert,
+                          animationController: _animationController,
+                          opacityAnimation: _opacityAnimation,
+                          positionAnimation: _positionAnimation,
+                        ),
                       ],
                     ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                     BottomControls(
-                         onPrevious: goToPreviousImage,
-                         onNext: goToNextImage,
-                         onSwipeUp: _checkAndShowPremiumAlert,
-                         animationController: _animationController, // Pass the controller
-                         opacityAnimation: _opacityAnimation, // Pass the opacity animation
-                         positionAnimation: _positionAnimation, // Pass the position animation
-                     ),
-                    ],
                   ),
                 ),
-              ),
+              ],
             ],
           ),
         ),
       ),
     );
   }
+
+
 }

@@ -18,17 +18,20 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -41,8 +44,10 @@ class S {
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -52,72 +57,37 @@ class S {
 
   /// `हिंदी`
   String get lbl {
-    return Intl.message(
-      'हिंदी',
-      name: 'lbl',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('हिंदी', name: 'lbl', desc: '', args: []);
   }
 
   /// `मराठी`
   String get lbl2 {
-    return Intl.message(
-      'मराठी',
-      name: 'lbl2',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('मराठी', name: 'lbl2', desc: '', args: []);
   }
 
   /// `ગુજરાતી`
   String get lbl3 {
-    return Intl.message(
-      'ગુજરાતી',
-      name: 'lbl3',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('ગુજરાતી', name: 'lbl3', desc: '', args: []);
   }
 
   /// `اردو`
   String get lbl4 {
-    return Intl.message(
-      'اردو',
-      name: 'lbl4',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('اردو', name: 'lbl4', desc: '', args: []);
   }
 
   /// `বাংলা`
   String get lbl5 {
-    return Intl.message(
-      'বাংলা',
-      name: 'lbl5',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('বাংলা', name: 'lbl5', desc: '', args: []);
   }
 
   /// `ລີໂອ`
   String get lbl6 {
-    return Intl.message(
-      'ລີໂອ',
-      name: 'lbl6',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('ລີໂອ', name: 'lbl6', desc: '', args: []);
   }
 
   /// `Best`
   String get lbl_best {
-    return Intl.message(
-      'Best',
-      name: 'lbl_best',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Best', name: 'lbl_best', desc: '', args: []);
   }
 
   /// `Categories`
@@ -132,82 +102,42 @@ class S {
 
   /// `Choose`
   String get lbl_choose {
-    return Intl.message(
-      'Choose',
-      name: 'lbl_choose',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Choose', name: 'lbl_choose', desc: '', args: []);
   }
 
   /// `Crono`
   String get lbl_crono {
-    return Intl.message(
-      'Crono',
-      name: 'lbl_crono',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Crono', name: 'lbl_crono', desc: '', args: []);
   }
 
   /// `Emoji`
   String get lbl_emoji {
-    return Intl.message(
-      'Emoji',
-      name: 'lbl_emoji',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Emoji', name: 'lbl_emoji', desc: '', args: []);
   }
 
   /// `English`
   String get lbl_english {
-    return Intl.message(
-      'English',
-      name: 'lbl_english',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('English', name: 'lbl_english', desc: '', args: []);
   }
 
   /// `Featured`
   String get lbl_featured {
-    return Intl.message(
-      'Featured',
-      name: 'lbl_featured',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Featured', name: 'lbl_featured', desc: '', args: []);
   }
 
   /// `Galaxy`
   String get lbl_galaxy {
-    return Intl.message(
-      'Galaxy',
-      name: 'lbl_galaxy',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Galaxy', name: 'lbl_galaxy', desc: '', args: []);
   }
 
   /// `Get a Pro`
   String get lbl_get_a_pro {
-    return Intl.message(
-      'Get a Pro',
-      name: 'lbl_get_a_pro',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Get a Pro', name: 'lbl_get_a_pro', desc: '', args: []);
   }
 
   /// `Home`
   String get lbl_home {
-    return Intl.message(
-      'Home',
-      name: 'lbl_home',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Home', name: 'lbl_home', desc: '', args: []);
   }
 
   /// `Live Photo`
@@ -222,22 +152,12 @@ class S {
 
   /// `More >`
   String get lbl_more {
-    return Intl.message(
-      'More >',
-      name: 'lbl_more',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('More >', name: 'lbl_more', desc: '', args: []);
   }
 
   /// `People`
   String get lbl_people {
-    return Intl.message(
-      'People',
-      name: 'lbl_people',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('People', name: 'lbl_people', desc: '', args: []);
   }
 
   /// `Photo Shuffle`
@@ -252,82 +172,42 @@ class S {
 
   /// `Color`
   String get lbl_color {
-    return Intl.message(
-      'Color',
-      name: 'lbl_color',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Color', name: 'lbl_color', desc: '', args: []);
   }
 
   /// `Astronomy`
   String get lbl_astro {
-    return Intl.message(
-      'Astronomy',
-      name: 'lbl_astro',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Astronomy', name: 'lbl_astro', desc: '', args: []);
   }
 
   /// `Weather`
   String get lbl_weather {
-    return Intl.message(
-      'Weather',
-      name: 'lbl_weather',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Weather', name: 'lbl_weather', desc: '', args: []);
   }
 
   /// `Photos`
   String get lbl_photos {
-    return Intl.message(
-      'Photos',
-      name: 'lbl_photos',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Photos', name: 'lbl_photos', desc: '', args: []);
   }
 
   /// `Premium`
   String get lbl_premium {
-    return Intl.message(
-      'Premium',
-      name: 'lbl_premium',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Premium', name: 'lbl_premium', desc: '', args: []);
   }
 
   /// `Setting`
   String get lbl_settings {
-    return Intl.message(
-      'Setting',
-      name: 'lbl_settings',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Setting', name: 'lbl_settings', desc: '', args: []);
   }
 
   /// `Skip`
   String get lbl_skip {
-    return Intl.message(
-      'Skip',
-      name: 'lbl_skip',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Skip', name: 'lbl_skip', desc: '', args: []);
   }
 
   /// `Wallpaper`
   String get lbl_wallpaper {
-    return Intl.message(
-      'Wallpaper',
-      name: 'lbl_wallpaper',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Wallpaper', name: 'lbl_wallpaper', desc: '', args: []);
   }
 
   /// `Help us know your\npreferred Language`

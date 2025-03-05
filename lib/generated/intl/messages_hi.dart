@@ -22,43 +22,45 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "lbl": MessageLookupByLibrary.simpleMessage("हिंदी"),
-        "lbl2": MessageLookupByLibrary.simpleMessage("मराठी"),
-        "lbl3": MessageLookupByLibrary.simpleMessage("ગુજરાતી"),
-        "lbl4": MessageLookupByLibrary.simpleMessage("اردو"),
-        "lbl5": MessageLookupByLibrary.simpleMessage("বাংলা"),
-        "lbl6": MessageLookupByLibrary.simpleMessage("ລີໂອ"),
-        "lbl_astro": MessageLookupByLibrary.simpleMessage("अंतरिक्ष"),
-        "lbl_best": MessageLookupByLibrary.simpleMessage("श्रेष्ठ"),
-        "lbl_categories": MessageLookupByLibrary.simpleMessage("वर्गीकरण"),
-        "lbl_choose": MessageLookupByLibrary.simpleMessage("Choose / चुनें"),
-        "lbl_color": MessageLookupByLibrary.simpleMessage("रंग"),
-        "lbl_crono": MessageLookupByLibrary.simpleMessage("क्रोनो"),
-        "lbl_emoji": MessageLookupByLibrary.simpleMessage("इमोजी"),
-        "lbl_english": MessageLookupByLibrary.simpleMessage("English"),
-        "lbl_featured":
-            MessageLookupByLibrary.simpleMessage("विशेष रूप से प्रदर्शित"),
-        "lbl_galaxy": MessageLookupByLibrary.simpleMessage("गैलेक्सी"),
-        "lbl_get_a_pro":
-            MessageLookupByLibrary.simpleMessage("प्रो प्राप्त करें"),
-        "lbl_home": MessageLookupByLibrary.simpleMessage("होम"),
-        "lbl_live_photo": MessageLookupByLibrary.simpleMessage("लाइव फोटो"),
-        "lbl_more": MessageLookupByLibrary.simpleMessage("More >"),
-        "lbl_people": MessageLookupByLibrary.simpleMessage("लोग"),
-        "lbl_photo_shuffle": MessageLookupByLibrary.simpleMessage("फोटो शफल"),
-        "lbl_photos": MessageLookupByLibrary.simpleMessage("फोटो"),
-        "lbl_premium": MessageLookupByLibrary.simpleMessage("प्रीमियम"),
-        "lbl_settings": MessageLookupByLibrary.simpleMessage("सेटिंग"),
-        "lbl_skip": MessageLookupByLibrary.simpleMessage("Skip"),
-        "lbl_wallpaper": MessageLookupByLibrary.simpleMessage("वॉलपेपर"),
-        "lbl_weather": MessageLookupByLibrary.simpleMessage("मौसम"),
-        "msg_help_us_know_your_preferred": MessageLookupByLibrary.simpleMessage(
-            "Help us know your\n preferred Language"),
-        "msg_network_err":
-            MessageLookupByLibrary.simpleMessage("Network Error"),
-        "msg_something_went_wrong":
-            MessageLookupByLibrary.simpleMessage("Something Went Wrong!"),
-        "msg_suggested_wallpapers":
-            MessageLookupByLibrary.simpleMessage("सुझाए गए वॉलपेपर")
-      };
+    "lbl": MessageLookupByLibrary.simpleMessage("हिंदी"),
+    "lbl2": MessageLookupByLibrary.simpleMessage("मराठी"),
+    "lbl3": MessageLookupByLibrary.simpleMessage("ગુજરાતી"),
+    "lbl4": MessageLookupByLibrary.simpleMessage("اردو"),
+    "lbl5": MessageLookupByLibrary.simpleMessage("বাংলা"),
+    "lbl6": MessageLookupByLibrary.simpleMessage("ລີໂອ"),
+    "lbl_astro": MessageLookupByLibrary.simpleMessage("अंतरिक्ष"),
+    "lbl_best": MessageLookupByLibrary.simpleMessage("श्रेष्ठ"),
+    "lbl_categories": MessageLookupByLibrary.simpleMessage("वर्गीकरण"),
+    "lbl_choose": MessageLookupByLibrary.simpleMessage("Choose / चुनें"),
+    "lbl_color": MessageLookupByLibrary.simpleMessage("रंग"),
+    "lbl_crono": MessageLookupByLibrary.simpleMessage("क्रोनो"),
+    "lbl_emoji": MessageLookupByLibrary.simpleMessage("इमोजी"),
+    "lbl_english": MessageLookupByLibrary.simpleMessage("English"),
+    "lbl_featured": MessageLookupByLibrary.simpleMessage(
+      "विशेष रूप से प्रदर्शित",
+    ),
+    "lbl_galaxy": MessageLookupByLibrary.simpleMessage("गैलेक्सी"),
+    "lbl_get_a_pro": MessageLookupByLibrary.simpleMessage("प्रो प्राप्त करें"),
+    "lbl_home": MessageLookupByLibrary.simpleMessage("होम"),
+    "lbl_live_photo": MessageLookupByLibrary.simpleMessage("लाइव फोटो"),
+    "lbl_more": MessageLookupByLibrary.simpleMessage("More >"),
+    "lbl_people": MessageLookupByLibrary.simpleMessage("लोग"),
+    "lbl_photo_shuffle": MessageLookupByLibrary.simpleMessage("फोटो शफल"),
+    "lbl_photos": MessageLookupByLibrary.simpleMessage("फोटो"),
+    "lbl_premium": MessageLookupByLibrary.simpleMessage("प्रीमियम"),
+    "lbl_settings": MessageLookupByLibrary.simpleMessage("सेटिंग"),
+    "lbl_skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "lbl_wallpaper": MessageLookupByLibrary.simpleMessage("वॉलपेपर"),
+    "lbl_weather": MessageLookupByLibrary.simpleMessage("मौसम"),
+    "msg_help_us_know_your_preferred": MessageLookupByLibrary.simpleMessage(
+      "Help us know your\n preferred Language",
+    ),
+    "msg_network_err": MessageLookupByLibrary.simpleMessage("Network Error"),
+    "msg_something_went_wrong": MessageLookupByLibrary.simpleMessage(
+      "Something Went Wrong!",
+    ),
+    "msg_suggested_wallpapers": MessageLookupByLibrary.simpleMessage(
+      "सुझाए गए वॉलपेपर",
+    ),
+  };
 }

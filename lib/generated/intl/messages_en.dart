@@ -22,42 +22,43 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "lbl": MessageLookupByLibrary.simpleMessage("हिंदी"),
-        "lbl2": MessageLookupByLibrary.simpleMessage("मराठी"),
-        "lbl3": MessageLookupByLibrary.simpleMessage("ગુજરાતી"),
-        "lbl4": MessageLookupByLibrary.simpleMessage("اردو"),
-        "lbl5": MessageLookupByLibrary.simpleMessage("বাংলা"),
-        "lbl6": MessageLookupByLibrary.simpleMessage("ລີໂອ"),
-        "lbl_astro": MessageLookupByLibrary.simpleMessage("Astronomy"),
-        "lbl_best": MessageLookupByLibrary.simpleMessage("Best"),
-        "lbl_categories": MessageLookupByLibrary.simpleMessage("Categories"),
-        "lbl_choose": MessageLookupByLibrary.simpleMessage("Choose"),
-        "lbl_color": MessageLookupByLibrary.simpleMessage("Color"),
-        "lbl_crono": MessageLookupByLibrary.simpleMessage("Crono"),
-        "lbl_emoji": MessageLookupByLibrary.simpleMessage("Emoji"),
-        "lbl_english": MessageLookupByLibrary.simpleMessage("English"),
-        "lbl_featured": MessageLookupByLibrary.simpleMessage("Featured"),
-        "lbl_galaxy": MessageLookupByLibrary.simpleMessage("Galaxy"),
-        "lbl_get_a_pro": MessageLookupByLibrary.simpleMessage("Get a Pro"),
-        "lbl_home": MessageLookupByLibrary.simpleMessage("Home"),
-        "lbl_live_photo": MessageLookupByLibrary.simpleMessage("Live Photo"),
-        "lbl_more": MessageLookupByLibrary.simpleMessage("More >"),
-        "lbl_people": MessageLookupByLibrary.simpleMessage("People"),
-        "lbl_photo_shuffle":
-            MessageLookupByLibrary.simpleMessage("Photo Shuffle"),
-        "lbl_photos": MessageLookupByLibrary.simpleMessage("Photos"),
-        "lbl_premium": MessageLookupByLibrary.simpleMessage("Premium"),
-        "lbl_settings": MessageLookupByLibrary.simpleMessage("Setting"),
-        "lbl_skip": MessageLookupByLibrary.simpleMessage("Skip"),
-        "lbl_wallpaper": MessageLookupByLibrary.simpleMessage("Wallpaper"),
-        "lbl_weather": MessageLookupByLibrary.simpleMessage("Weather"),
-        "msg_help_us_know_your_preferred": MessageLookupByLibrary.simpleMessage(
-            "Help us know your\npreferred Language"),
-        "msg_network_err":
-            MessageLookupByLibrary.simpleMessage("Network Error"),
-        "msg_something_went_wrong":
-            MessageLookupByLibrary.simpleMessage("Something Went Wrong!"),
-        "msg_suggested_wallpapers":
-            MessageLookupByLibrary.simpleMessage("Suggested Wallpapers")
-      };
+    "lbl": MessageLookupByLibrary.simpleMessage("हिंदी"),
+    "lbl2": MessageLookupByLibrary.simpleMessage("मराठी"),
+    "lbl3": MessageLookupByLibrary.simpleMessage("ગુજરાતી"),
+    "lbl4": MessageLookupByLibrary.simpleMessage("اردو"),
+    "lbl5": MessageLookupByLibrary.simpleMessage("বাংলা"),
+    "lbl6": MessageLookupByLibrary.simpleMessage("ລີໂອ"),
+    "lbl_astro": MessageLookupByLibrary.simpleMessage("Astronomy"),
+    "lbl_best": MessageLookupByLibrary.simpleMessage("Best"),
+    "lbl_categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "lbl_choose": MessageLookupByLibrary.simpleMessage("Choose"),
+    "lbl_color": MessageLookupByLibrary.simpleMessage("Color"),
+    "lbl_crono": MessageLookupByLibrary.simpleMessage("Crono"),
+    "lbl_emoji": MessageLookupByLibrary.simpleMessage("Emoji"),
+    "lbl_english": MessageLookupByLibrary.simpleMessage("English"),
+    "lbl_featured": MessageLookupByLibrary.simpleMessage("Featured"),
+    "lbl_galaxy": MessageLookupByLibrary.simpleMessage("Galaxy"),
+    "lbl_get_a_pro": MessageLookupByLibrary.simpleMessage("Get a Pro"),
+    "lbl_home": MessageLookupByLibrary.simpleMessage("Home"),
+    "lbl_live_photo": MessageLookupByLibrary.simpleMessage("Live Photo"),
+    "lbl_more": MessageLookupByLibrary.simpleMessage("More >"),
+    "lbl_people": MessageLookupByLibrary.simpleMessage("People"),
+    "lbl_photo_shuffle": MessageLookupByLibrary.simpleMessage("Photo Shuffle"),
+    "lbl_photos": MessageLookupByLibrary.simpleMessage("Photos"),
+    "lbl_premium": MessageLookupByLibrary.simpleMessage("Premium"),
+    "lbl_settings": MessageLookupByLibrary.simpleMessage("Setting"),
+    "lbl_skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "lbl_wallpaper": MessageLookupByLibrary.simpleMessage("Wallpaper"),
+    "lbl_weather": MessageLookupByLibrary.simpleMessage("Weather"),
+    "msg_help_us_know_your_preferred": MessageLookupByLibrary.simpleMessage(
+      "Help us know your\npreferred Language",
+    ),
+    "msg_network_err": MessageLookupByLibrary.simpleMessage("Network Error"),
+    "msg_something_went_wrong": MessageLookupByLibrary.simpleMessage(
+      "Something Went Wrong!",
+    ),
+    "msg_suggested_wallpapers": MessageLookupByLibrary.simpleMessage(
+      "Suggested Wallpapers",
+    ),
+  };
 }

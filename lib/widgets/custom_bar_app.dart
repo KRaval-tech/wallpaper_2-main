@@ -170,6 +170,11 @@ class _CustomBottomBarAppState extends State<CustomBottomBarApp> {
                 shouldShowExitSheet = true;
               });
             },
+            onNoPressed: () {  // <-- Pass No button action
+              Future.delayed(Duration(milliseconds: 200), () {
+                showExitConfirmationBottomSheet(context);
+              });
+            },
           ),
         );
       },

@@ -683,12 +683,107 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
   }
 
 
+  // Widget _buildFeaturedWallpapers(List<dynamic> wallpapers) {
+  //   if (wallpapers.isEmpty) {
+  //     return const Padding(
+  //       padding: EdgeInsets.all(16),
+  //       child: Text('No featured wallpapers available.',
+  //           style: TextStyle(fontSize: 16)),
+  //     );
+  //   }
+  //
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Padding(
+  //         padding: EdgeInsets.only(left: 16.h),
+  //         child: Text(
+  //           S.current.lbl_featured,
+  //           style: theme.textTheme.titleLarge,
+  //         ),
+  //       ),
+  //       SingleChildScrollView(
+  //         scrollDirection: Axis.horizontal,
+  //         child: Row(
+  //           children: wallpapers.map((wallpaper) {
+  //             final imageUrl = wallpaper['download_url'] ??
+  //                 ""; // Fallback to empty string
+  //             final imageTitle = wallpaper['title'] ?? "Untitled"; // Title fallback
+  //             final index = wallpapers.indexOf(wallpaper);  // Get index of the current wallpaper
+  //             final isPremium = (index + 1) % 4 == 0; // Determine if the wallpaper is premium
+  //
+  //             return Padding(
+  //               padding: EdgeInsets.only(left: 16.h, top: 8.h,),
+  //               child: GestureDetector(
+  //                 onTap: () {
+  //                   if (imageUrl.isNotEmpty) {
+  //                     //final isPremium = (index + 1) % 4 == 0; // Determine if the wallpaper is premium
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(
+  //                         builder: (context) =>
+  //                             FullScreenWallpaperPage(
+  //                                 //imageUrl: imageUrl
+  //                               wallpapers: wallpapers,  // Pass the entire list
+  //                               initialIndex: wallpapers.indexOf(wallpaper),  // Pass the selected index
+  //                               isPremium: isPremium,
+  //                             ),
+  //                       ),
+  //                     );
+  //                   }
+  //                 },
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.center,
+  //                   children: [
+  //                     Stack(
+  //                       children:[ ClipRRect(
+  //                         borderRadius: BorderRadius.circular(14), // Rounded corners
+  //                         child: imageUrl.isNotEmpty
+  //                             ? CachedNetworkImage(
+  //                           imageUrl: imageUrl,
+  //                           width: 98.h,
+  //                           height: 207.h,
+  //                           fit: BoxFit.cover,
+  //                         )
+  //                             : const Placeholder(
+  //                           fallbackHeight: 207,
+  //                           fallbackWidth: 98,
+  //                         ),
+  //                       ),
+  //                         if(isPremium) Positioned(
+  //                           child: CustomImageView(
+  //                             imagePath: ImageConstant.imgPremium,
+  //                             height: 26.h,
+  //                             width: 26.h,
+  //                           ),
+  //                           //Icon(Icons.workspace_premium,color: Colors.amber,),
+  //                           top: 6.h,
+  //                           left: 66.h,
+  //                         ),
+  //                       ],
+  //                     ),
+  //                     SizedBox(height: 8.h), // Space between image and text
+  //                     Text(
+  //                       imageTitle,
+  //                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             );
+  //           }).toList(),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
   Widget _buildFeaturedWallpapers(List<dynamic> wallpapers) {
     if (wallpapers.isEmpty) {
       return const Padding(
         padding: EdgeInsets.all(16),
-        child: Text('No featured wallpapers available.',
-            style: TextStyle(fontSize: 16)),
+        child: Text('No featured wallpapers available.', style: TextStyle(fontSize: 16)),
       );
     }
 
@@ -705,29 +800,26 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: wallpapers.map((wallpaper) {
-              final imageUrl = wallpaper['download_url'] ??
-                  ""; // Fallback to empty string
-              final imageTitle = wallpaper['title'] ?? "Untitled"; // Title fallback
-              final index = wallpapers.indexOf(wallpaper);  // Get index of the current wallpaper
-              final isPremium = (index + 1) % 4 == 0; // Determine if the wallpaper is premium
+            children: wallpapers.asMap().entries.map((entry) {
+              final int index = entry.key;
+              final wallpaper = entry.value;
+              final imageUrl = wallpaper['download_url'] ?? "";
+              final imageTitle = wallpaper['title'] ?? "Untitled";
+              final bool isPremium = (index + 1) % 4 == 0; // ✅ Ensure correct premium wallpaper check
 
               return Padding(
-                padding: EdgeInsets.only(left: 16.h, top: 8.h,),
+                padding: EdgeInsets.only(left: 16.h, top: 8.h),
                 child: GestureDetector(
                   onTap: () {
                     if (imageUrl.isNotEmpty) {
-                      //final isPremium = (index + 1) % 4 == 0; // Determine if the wallpaper is premium
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              FullScreenWallpaperPage(
-                                  //imageUrl: imageUrl
-                                wallpapers: wallpapers,  // Pass the entire list
-                                initialIndex: wallpapers.indexOf(wallpaper),  // Pass the selected index
-                                isPremium: isPremium,
-                              ),
+                          builder: (context) => FullScreenWallpaperPage(
+                            wallpapers: wallpapers,
+                            initialIndex: index, // ✅ Pass the correct index
+                            isPremiumList: wallpapers.asMap().entries.map((entry) => (entry.key + 1) % 4 == 0).toList().cast<bool>(),
+                          ),
                         ),
                       );
                     }
@@ -736,33 +828,31 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Stack(
-                        children:[ ClipRRect(
-                          borderRadius: BorderRadius.circular(14), // Rounded corners
-                          child: imageUrl.isNotEmpty
-                              ? CachedNetworkImage(
-                            imageUrl: imageUrl,
-                            width: 98.h,
-                            height: 207.h,
-                            fit: BoxFit.cover,
-                          )
-                              : const Placeholder(
-                            fallbackHeight: 207,
-                            fallbackWidth: 98,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: imageUrl.isNotEmpty
+                                ? CachedNetworkImage(
+                              imageUrl: imageUrl,
+                              width: 98.h,
+                              height: 207.h,
+                              fit: BoxFit.cover,
+                            )
+                                : const Placeholder(fallbackHeight: 207, fallbackWidth: 98),
                           ),
-                        ),
-                          if(isPremium) Positioned(
-                            child: CustomImageView(
-                              imagePath: ImageConstant.imgPremium,
-                              height: 26.h,
-                              width: 26.h,
+                          if (isPremium)
+                            Positioned(
+                              child: CustomImageView(
+                                imagePath: ImageConstant.imgPremium,
+                                height: 26.h,
+                                width: 26.h,
+                              ),
+                              top: 6.h,
+                              left: 66.h,
                             ),
-                            //Icon(Icons.workspace_premium,color: Colors.amber,),
-                            top: 6.h,
-                            left: 66.h,
-                          ),
                         ],
                       ),
-                      SizedBox(height: 8.h), // Space between image and text
+                      SizedBox(height: 8.h),
                       Text(
                         imageTitle,
                         style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
@@ -824,7 +914,7 @@ class _HomeOneScreenState extends State<HomeOneScreen> {
                               //imageUrl: imageUrl
                             wallpapers: wallpapers,  // Pass the entire list
                             initialIndex: wallpapers.indexOf(wallpaper),  // Pass the selected index
-                            isPremium: isPremium,
+                            isPremiumList: wallpapers.asMap().entries.map((entry) => (entry.key + 1) % 4 == 0).toList().cast<bool>(),
                           ),
                         ),
                       );
